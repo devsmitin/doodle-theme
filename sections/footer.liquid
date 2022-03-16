@@ -1,0 +1,146 @@
+{% assign _s = section.settings %}
+
+
+<!-- Footer Section -->
+<div class="w-full bg-gray-100 border-b-2 border-black">
+  <div class="container mx-auto px-4 md:px-6 py-16 flex flex-col flex-wrap content-center justify-center">
+    <h2 class="text-2xl font-bold leading-none text-center md:text-4xl">Get Latest Updates</h2>
+    <p class="pt-2 pb-8 text-xl text-center">Sign up for our newsletter to stay up to date.</p>
+    <div class="flex flex-row border-2 border-black rounded-lg overflow-hidden">
+      <input type="text" placeholder="example@email.com" class="w-3/5 p-3 sm:w-2/3">
+      <button type="button" class="w-2/5 p-3 font-semibold sm:w-1/3 bg-theme text-white">
+        Subscribe
+      </button>
+    </div>
+  </div>
+</div>
+
+<footer class="py-8 md:py-12 border-t">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="flex flex-wrap">
+      <div class="w-full lg:w-3/12 px-4">
+        <div class="w-full mb-10">
+          <a href="{{ routes.root_url }}" class="flex h-20 mb-4">
+            <span class="self-center text-lg font-semibold whitespace-nowrap">
+            {% if _s.logo != blank %}
+              {{ _s.logo | image_url: width: 300 | image_tag: alt: shop.name, class: 'w-32 md:w-36' }}
+            {% else %}
+              {{ shop.name }}
+            {% endif %}
+            </span>
+          </a>
+      
+          {% if _s.text != blank %}
+          <p class="text-base text-body-color mb-7">
+            {{ _s.text }}
+          </p>
+          {% endif %}
+
+          {% if _s.phone != blank %}
+          <p class="flex items-center text-sm text-dark font-medium">
+            <span class="text-primary mr-3">
+              {% render 'icons', icon: "phone" %}
+            </span>
+            <span>{{ _s.phone }}</span>
+          </p>
+          {% endif %}
+        </div>
+      </div>
+
+      {% for block in section.blocks %}
+      {% if block.type == 'footer_menu' %}
+      {% assign _b = block.settings %}
+      <div class="w-2/4 lg:w-3/12 px-4">
+        <div class="w-full mb-10">
+          <h3 class="text-dark text-lg font-semibold mb-9">
+            {{ _b.title }}
+          </h3>
+          <ul>
+            {% for link in _b.menu.links %}
+            <li>
+              <a class="inline-block text-base text-body-color hover:text-primary leading-loose mb-2"
+                href="{{ link.url }}">{{ link.title }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+
+      <div class="w-full md:w-2/4 lg:w-3/12 px-4">
+        <div class="w-full mb-10">
+          <h4 class="text-dark text-lg font-semibold mb-9">
+            Follow Us On
+          </h4>
+          <div class="flex items-center mb-6">
+            <a class="w-8 h-8 flex items-center justify-center rounded-full border text-dark hover:text-white hover:bg-theme hover:border-theme mr-3 sm:mr-4 lg:mr-3 xl:mr-4"
+              href={navigation.social.facebook.href}>
+              {% render 'icons', icon: 'facebook' %}
+            </a>
+            <a class="w-8 h-8 flex items-center justify-center rounded-full border text-dark hover:text-white hover:bg-theme hover:border-theme mr-3 sm:mr-4 lg:mr-3 xl:mr-4"
+              href={navigation.social.twitter.href}>
+              {% render 'icons', icon: 'twitter' %}
+            </a>
+            <a class="w-8 h-8 flex items-center justify-center rounded-full border text-dark hover:text-white hover:bg-theme hover:border-theme mr-3 sm:mr-4 lg:mr-3 xl:mr-4"
+              href={navigation.social.youtube.href}>
+              {% render 'icons', icon: 'youtube' %}
+            </a>
+            <a class="w-8 h-8 flex items-center justify-center rounded-full border text-dark hover:text-white hover:bg-theme hover:border-theme mr-3 sm:mr-4 lg:mr-3 xl:mr-4"
+              href={navigation.social.linkedin.href}>
+              {% render 'icons', icon: 'linkedin' %}
+            </a>
+          </div>
+          <p class="text-base text-body-color">
+            &copy; {{ 'now' | date: "%Y" }}
+            <a href="{{ routes.root_url }}" target="_blank" class="hover:underline">{{ shop.name }}</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "section",
+  "class": "section-footer",
+  "blocks": [
+    {
+      "type": "footer_menu",
+      "name": "Footer navigation",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Navigation title"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Select navigation"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text content"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Contact no. (optional)"
+    }
+  ]
+}
+{% endschema %}

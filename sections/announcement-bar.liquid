@@ -1,0 +1,23 @@
+{% assign _s = section.settings %}
+
+{% unless _s.text == blank %}
+  <p class="bg-theme h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+    {{ _s.text }}
+  </p>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "tag": "section",
+  "class": "section-announcement",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Get free delivery on orders over $100"
+    }
+  ]
+}
+{% endschema %}

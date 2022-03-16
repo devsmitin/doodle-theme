@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/stacked-bracelets.jpg",
+        "img_stacked": false,
+        "img_pos": "below",
+        "title": "About Your Brand",
+        "text": "Give customers details about the banner image(s) or content on the template.",
+        "link_text": "Shop all",
+        "link_url": "",
+        "box_alignment": "left"
+      }
+    },
+    "categories": {
+      "type": "section-list-categories",
+      "blocks": {
+        "block-1": {
+          "type": "collection"
+        },
+        "block-2": {
+          "type": "collection"
+        },
+        "block-3": {
+          "type": "collection"
+        }
+      },
+      "block_order": [
+        "block-1",
+        "block-2",
+        "block-3"
+      ],
+      "settings": {
+        "title": "Collections"
+      }
+    },
+    "products": {
+      "type": "section-list-products"
+    }
+  },
+  "order": [
+    "hero",
+    "categories",
+    "products"
+  ]
+}

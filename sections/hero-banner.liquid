@@ -1,0 +1,130 @@
+{% assign _s = section.settings %}
+
+
+<!-- Hero Section -->
+<div class="hero-section relative overflow-hidden flex flex-col border-b-2 border-black">
+  {% liquid
+    assign imgClassList = "absolute inset-0 h-full w-full object-cover"
+    assign textColor = " text-white"
+    if _s.img_stacked and _s.img_pos == "above"
+      assign imgClassList = "md:absolute inset-0 h-full w-full object-cover order-1 md:order-none"
+      assign textColor = " md:text-white"
+    elsif _s.img_stacked and _s.img_pos == "below"
+      assign imgClassList = "md:absolute inset-0 h-full w-full object-cover"
+      assign textColor = " md:text-white"
+    endif
+
+    assign box_alignment = " px-6 md:px-16 py-10"
+    if _s.box_alignment == "center"
+      assign box_alignment = " px-4 py-10 mx-auto text-center"
+    elsif _s.box_alignment == "right"
+      assign box_alignment = " px-6 md:px-16 py-10 ml-auto "
+    endif
+  %}
+
+  {% if _s.image != blank %}
+    {{ _s.image | image_url: width: 2000, format: 'pjpg' | image_tag: class: imgClassList }}
+  {% else %}
+    {{ 'lifestyle-2' | placeholder_svg_tag: imgClassList }}
+  {% endif %}
+
+  
+  <div class="{% if _s.img_stacked %}md:bg-black/40{% else %}bg-black/40{% endif %} relative">
+    <div class="container mx-auto px-4 md:px-6 flex content-center">
+      <div class="md:my-16 lg:my-24 xl:my-36 md:max-w-2xl xl:max-w-6xl{{ box_alignment }}{{ textColor }}">
+        <h2 class="text-4xl md:text-5xl xl:text-6xl font-semibold font-serif mb-6">{{ _s.title }}</h2>
+        <p class="text-lg md:text-xl xl:text-2xl lg:mb-6">{{ _s.text }}</p>
+        <a href="{{ _s.link_url }}" class="inline-block px-10 py-3 bg-theme text-lg text-white font-semibold mb-2">
+          {{ _s.link_text }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "img_stacked",
+      "label": "Show image stacked in mobile",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "img_pos",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "above",
+          "label": "Above"
+        },
+        {
+          "value": "below",
+          "label": "Below"
+        }
+      ],
+      "default": "above",
+      "info": "Image will appear on selected position when stacked on mobile"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "About Your Brand"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text content",
+      "default": "Give customers details about the banner image(s) or content on the template."
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "Shop all"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link url"
+    },
+    {
+      "type": "select",
+      "id": "box_alignment",
+      "label": "Box alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "info": "For left and right, text will remain left aligned. For center text will also be center aligned."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero section"
+    }
+  ]
+}
+{% endschema %}

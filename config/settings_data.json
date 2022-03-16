@@ -1,0 +1,50 @@
+{
+  "current": {
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "text": "Get free delivery on orders over $100"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/Droppler-logos_transparent.png",
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "36043bc7-18be-4339-9e13-9b5e8864d074": {
+            "type": "footer_menu",
+            "settings": {
+              "title": "Shop",
+              "menu": "footer"
+            }
+          },
+          "a10f73d0-3a09-4c46-9c4a-3f33025fa9db": {
+            "type": "footer_menu",
+            "settings": {
+              "title": "About",
+              "menu": "customer-services"
+            }
+          }
+        },
+        "block_order": [
+          "36043bc7-18be-4339-9e13-9b5e8864d074",
+          "a10f73d0-3a09-4c46-9c4a-3f33025fa9db"
+        ],
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/Droppler-logos_transparent.png",
+          "text": "Sed ut perspiciatis undmnis is iste natus error sit amet voluptatem totam rem aperiam.",
+          "phone": "+012 (345) 678 99"
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  }
+}

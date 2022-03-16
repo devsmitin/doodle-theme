@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "cart-items": {
+      "type": "main-cart-items",
+      "settings": {}
+    },
+    "cart-footer": {
+      "type": "main-cart-footer",
+      "settings": {}
+    },
+    "featured-products": {
+      "type": "featured-collection",
+      "settings": {}
+    }
+  },
+  "order": [
+    "cart-items",
+    "cart-footer",
+    "featured-products"
+  ]
+}

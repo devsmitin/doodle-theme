@@ -1,0 +1,28 @@
+{% comment %} product-card {% endcomment %}
+
+{% liquid 
+  if add_collection_url
+    assign product_url = product.url | within: collection
+  else 
+    assign product_url = product.url
+  endif
+%}
+
+<div class="product-card group relative">
+  <a href="{{ product_url }}" class="group">
+    <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-2xl overflow-hidden border-2 border-black">
+      {% assign classList = "w-full h-full object-center object-cover" %}
+      {% if product.featured_image != blank %}
+        {{ product.featured_image | image_url: width: 500, format: 'pjpg' | image_tag: alt: product.title, class: classList }}
+      {% else %}
+        {{ 'product-2' | placeholder_svg_tag: classList }}
+      {% endif %}
+    </div>
+    <div class="px-2">
+      <h3 class="mt-3 font-medium">{{ product.title }}</h3>
+      <p class="mt-1 text-xl font-medium">
+        {{ product.price | money_with_currency }}
+      </p>
+    </div>
+  </a>
+</div>
