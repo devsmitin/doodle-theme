@@ -1,3 +1,5 @@
+{%- assign product_form_id = 'product-form-' | append: section.id -%}
+
 <div class="bg-white border-b-2 border-black">
   <div class="container mx-auto px-4 md:px-6 py-9 md:py-12 lg:py-16">
     <p class="mb-5">
@@ -32,26 +34,56 @@
           <span class="text-2xl lg:text-3xl font-bold">{{ product.price | money_with_currency }}</span>
         </p>
   
-        <div class="lg:mt-11 mt-10">
-          <div class="flex flex-row justify-between">
-            <p class="font-medium text-base leading-4 text-gray-600 ">Select quantity</p>
-            <div class="flex">
-              <span 
-                data-counter
-                data-action="minus"
-                class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-r-0 w-7 h-7 flex items-center justify-center pb-1">-</span>
-              <input id="counter" aria-label="input" class="border border-gray-300 h-full text-center w-14 pb-1" type="text" value="1" />
-              <span 
-                data-counter
-                data-action="plus"
-                class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-l-0 w-7 h-7 flex items-center justify-center pb-1">+</span>
+        {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <script type="application/json">
+            {{ product.variants | json }}
+          </script>
+
+          <div class="mt-6 lg:mt-8">
+            <label class="form__label" for="Variants-{{ section.id }}">Select variant</label>
+            <div class="select">
+              <select name="id" id="Variants-{{ section.id }}" 
+                class="form-select block w-full px-3 py-1.5 bg-white bg-clip-padding bg-no-repeat border rounded m-0" form="{{ product_form_id }}">
+                {%- for variant in product.variants -%}
+                  <option
+                    {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                    {% if variant.available == false %}disabled{% endif %}
+                    value="{{ variant.id }}"
+                  >
+                    {{ variant.title }}
+                    {%- if variant.available == false %} - Sold out!{% endif %}
+                    - {{ variant.price | money | strip_html }}
+                  </option>
+                {%- endfor -%}
+              </select>
+            </div>
+          </div>
+
+          <div class="mt-6 lg:mt-8">
+            <div class="flex flex-row justify-between mt-4">
+              <p class="font-medium text-base leading-4 text-gray-600 ">Select quantity</p>
+              <div class="flex">
+                <span 
+                  data-counter
+                  data-action="minus"
+                  class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-r-0 w-7 h-7 flex items-center justify-center pb-1">-</span>
+                <input name="quantity" id="counter" aria-label="input" class="border border-gray-300 h-full text-center w-14 pb-1" type="text" value="1" />
+                <span 
+                  data-counter
+                  data-action="plus"
+                  class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-l-0 w-7 h-7 flex items-center justify-center pb-1">+</span>
+              </div>
             </div>
           </div>
           
           <hr class="bg-gray-200 w-full mt-4" />
+
+          <button type="submit" class="submit-btn w-full mb-2 mt-6 lg:mt-12 px-10 py-5 bg-theme text-lg text-white font-semibold">Add to shopping bag</button>
+
         </div>
+
+        {%- endform -%}
         
-        <button class="w-full mb-2 mt-6 lg:mt-12 px-10 py-5 bg-theme text-lg text-white font-semibold">Add to shopping bag</button>
       </div>
     </div>
   </div>

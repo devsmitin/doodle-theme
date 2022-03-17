@@ -267,5 +267,10 @@
         playSlideshow: `Play slideshow`,
       }
     </script>
+
+    {% if template.name == 'product' %}
+      {% render 'sticky-add-btn' %}
+    {% endif %}
+  
   </body>
 </html>
