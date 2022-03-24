@@ -43,7 +43,7 @@
             <label class="form__label" for="Variants-{{ section.id }}">Select variant</label>
             <div class="select">
               <select name="id" id="Variants-{{ section.id }}" 
-                class="form-select block w-full px-3 py-1.5 bg-white bg-clip-padding bg-no-repeat border rounded m-0" form="{{ product_form_id }}">
+                class="form-select block w-full px-3 py-1.5 bg-white bg-clip-padding bg-no-repeat border border-black rounded m-0" form="{{ product_form_id }}">
                 {%- for variant in product.variants -%}
                   <option
                     {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
@@ -61,18 +61,8 @@
 
           <div class="mt-6 lg:mt-8">
             <div class="flex flex-row justify-between mt-4">
-              <p class="font-medium text-base leading-4 text-gray-600 ">Select quantity</p>
-              <div class="flex">
-                <span 
-                  data-counter
-                  data-action="minus"
-                  class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-r-0 w-7 h-7 flex items-center justify-center pb-1">-</span>
-                <input name="quantity" id="counter" aria-label="input" class="border border-gray-300 h-full text-center w-14 pb-1" type="text" value="1" />
-                <span 
-                  data-counter
-                  data-action="plus"
-                  class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-l-0 w-7 h-7 flex items-center justify-center pb-1">+</span>
-              </div>
+              <p class="font-medium text-base leading-4 text-gray-600 flex items-center">Select quantity</p>
+              {% render 'quantity-spinner' %}
             </div>
           </div>
           

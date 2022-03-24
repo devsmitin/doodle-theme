@@ -20,21 +20,7 @@
 
 <style>
   html {scroll-behavior: smooth;}
-  .ds-fixed-btn-wrapper.isfixed {position: fixed;bottom: 0;left: 0;width: 100%;background: #fff;z-index: 9;box-shadow: 0 0 2px 1px rgba(0,0,0,0.1); padding: 20px; text-align: center;}
-  .ds-fixed-btn-wrapper.isfixed > .submit-btn {max-width: 400px; width: 100%; margin: 0 auto;}
-  
-  {% comment %}
-  /* update */
-  .ds-fixed-btn-wrapper:not(.isfixed) > .shg-btn {width: 100% !important;}
-  .ds-fixed-btn-wrapper.isfixed > .shg-btn {font-size: 0px; width: auto !important;/*max-width: none;*/}
-  .ds-fixed-btn-wrapper.isfixed > .shg-btn:before {content:"CUSTOMIZE MY LEAF";font-size: 1.6rem;}
-
-  [action="/cart/add"] {margin-bottom: 20px}
-  [action="/cart/add"] .shg-btn {background-color: #F9354B; border: none; border-radius: 6px; color: #fff;padding:14px 20px!important; font-weight: bold;}
-  [action="/cart/add"], #bcpo.bcpo {text-align: left !important;}
-
-  #bcpo .bcpo-title {font-weight: 600;}
-  #bcpo .bcpo-images .bcpo-medium-swatches div.bcpo-image-parent {width: 96px;margin: 0 10px 10px 0;}
-  #bcpo .bcpo-medium-swatches label.bcpo-front-image-label {height: 90px;}
-  {% endcomment %}
+  .ds-fixed-btn-wrapper {position: fixed;bottom: 0;left: 0;width: 100%;background: #fff;z-index: 9;box-shadow: 0 0 2px 2px rgba(0,0,0,0.1); padding: 20px; text-align: center; transform: translate3d(0, 100%, 0); transition: 0.2s all;}
+  .ds-fixed-btn-wrapper > .submit-btn {max-width: 400px; width: 100%; margin: 0 auto;}
+  .ds-fixed-btn-wrapper.isfixed {transform: translate3d(0, 0, 0);}
 </style>

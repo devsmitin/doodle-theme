@@ -60,8 +60,9 @@ class customScripts {
 
     // create placeholder and wrapper elements
     let cartWrapper_placeholder = document.createElement("span");
-    let cartWrapper = document.createElement("span");
     cartWrapper_placeholder.setAttribute("class", "ds-btn-placeholder");
+    
+    let cartWrapper = document.createElement("span");
     cartWrapper.setAttribute("class", "ds-fixed-btn-wrapper");
 
     // append wrapper to the placeholder
@@ -70,24 +71,16 @@ class customScripts {
     // insert placeholder before a2c button
     this._insertBefore(cartWrapper_placeholder, a2cbtn);
 
+    // cloned a2cbtn
+    const cloned_a2c = a2cbtn.cloneNode(true);
+    this._insertBefore(cloned_a2c, a2cbtn);
+
     // move a2c button inside our wrapper
-    cartWrapper.appendChild(a2cbtn);
+    cartWrapper.appendChild(cloned_a2c);
 
     // get style of a2c btn
     let btn_style = a2cbtn.currentStyle || window.getComputedStyle(a2cbtn);
 
-    this._addStyles(cartWrapper_placeholder, {
-      height: `calc(${btn_style.height} + ${btn_style.marginTop} + ${btn_style.marginTop}`,
-      display: `block`,
-      width: `100%`,
-      border: `1px solid transparent`,
-    });
-
-    // cloned a2cbtn
-    const cloned_a2c = a2cbtn.cloneNode(true);
-    cloned_a2c.style.display = "none";
-    this._insertBefore(cloned_a2c, a2cbtn);
-    
     if (window.ds_storage.scrollTop) {
       cloned_a2c.setAttribute("type", "button");
       cloned_a2c.addEventListener("click", function () {
@@ -103,13 +96,9 @@ class customScripts {
       if (!inScreen) {
         cartWrapper.classList.add("isfixed");
         window.ds_storage.btn_inscreen = false;
-        a2cbtn.style.display = "none";
-        cloned_a2c.style.display = "inline-block";
       } else {
         cartWrapper.classList.remove("isfixed");
         window.ds_storage.btn_inscreen = true;
-        a2cbtn.style.display = "inline-block";
-        cloned_a2c.style.display = "none";
       }
     };
 
