@@ -83,7 +83,8 @@ class customScripts {
 
     if (window.ds_storage.scrollTop) {
       cloned_a2c.setAttribute("type", "button");
-      cloned_a2c.addEventListener("click", function () {
+      cloned_a2c.addEventListener("click", function (e) {
+        e.preventDefault();
         form.parentNode.scrollIntoView();
       });
     }
