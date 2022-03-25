@@ -1,7 +1,8 @@
 {
   "settings_schema": {
     "global": {
-      "settings": {}
+      "settings": {
+      }
     }
   }
 }
