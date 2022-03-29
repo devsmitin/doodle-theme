@@ -1,38 +1,40 @@
 <div class="bg-white border-b-2 border-black">
   <div class="container mx-auto px-4 md:px-6 py-9 md:py-12 lg:py-16">
-    {% for item in cart.items %}
-      {% assign product = item.product %}
-      <div class="flex py-6">
-        <div class="h-20 w-20 sm:h-24 sm:w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-          {% assign classList = "h-full w-full object-cover object-center" %}
-          {{ product.featured_image | image_url: width: 200, format: 'pjpg' | image_tag: class: classList, loading: 'lazy' }}
-        </div>
+    <h1 class="text-2xl mb-6 font-bold text-center">Your Bag</h1>
+    {% if cart.items.size != 0 %}
+      {% for item in cart.items %}
+        {% assign product = item.product %}
+        <div class="flex p-4 mb-5 border rounded-xl border-black shadow-md">
+          <div class="h-20 w-20 sm:h-24 sm:w-24 flex-shrink-0 overflow-hidden rounded-md border-2 border-black">
+            {% assign classList = "h-full w-full object-cover object-center" %}
+            {{ product.featured_image | image_url: width: 200, format: 'pjpg' | image_tag: class: classList, loading: 'lazy' }}
+          </div>
 
-        <div class="ml-4 flex flex-1 flex-col">
-          <div>
-            <div class="flex justify-between text-base font-medium text-gray-900">
-              <h3>
-                <a href="{{ item.url }}">{{ item.title }}</a>
-              </h3>
-              <p class="ml-4 whitespace-nowrap">{{ item.price | money_with_currency }}</p>
-            </div>
-            {% if item.variant_title %}
-            <p class="mt-1 text-sm text-gray-500">{{ item.variant_title }}</p>
-            {% endif %}
+          <div class="ml-4 flex flex-1 flex-col">
+            <div>
+              <div class="flex justify-between text-base font-medium text-gray-900">
+                <h3>
+                  <a href="{{ item.url }}">{{ item.title }}</a>
+                </h3>
+                <p class="ml-4 whitespace-nowrap">{{ item.price | money_with_currency }}</p>
+              </div>
+              {% if item.variant_title %}
+              <p class="mt-1 text-sm text-gray-500">{{ item.variant_title }}</p>
+              {% endif %}
               
-          </div>
-          <div class="flex flex-1 items-end justify-between">
-            {% render 'quantity-spinner' %}
-            <div class="flex">
-              <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+            </div>
+            <div class="flex flex-1 items-end justify-between">
+              {% render 'quantity-spinner', quantity: item.quantity %}
+              <div class="flex">
+                <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    {% else %}
+    <p class="text-center">Is empty... </p>
+    {% endif %}
+
   </div>
 </div>
-
-
-
-

@@ -4,3 +4,4 @@ import "./styles.scss";
 
 // JavaScript modules import
 require("./theme");
+require("./product");

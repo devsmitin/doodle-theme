@@ -1,4 +1,11 @@
 {%- assign product_form_id = 'product-form-' | append: section.id -%}
+{%- assign default_variant = product.selected_or_first_available_variant -%}
+<script type="application/json">
+  {{ product.variants | json }}
+</script>
+<script>
+  window._product_data = {{ product | json }};
+</script>
 
 <div class="bg-white border-b-2 border-black">
   <div class="container mx-auto px-4 md:px-6 py-9 md:py-12 lg:py-16">
@@ -35,15 +42,35 @@
         </p>
   
         {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-          <script type="application/json">
-            {{ product.variants | json }}
-          </script>
-
+          {% if product.has_only_default_variant %}
+          <input name="id" value="{{ default_variant.id }}" type="hidden">
+          {% else %}
           <div class="mt-6 lg:mt-8">
-            <label class="form__label" for="Variants-{{ section.id }}">Select variant</label>
-            <div class="select">
-              <select name="id" id="Variants-{{ section.id }}" 
-                class="form-select block w-full px-3 py-1.5 bg-white bg-clip-padding bg-no-repeat border border-black rounded m-0" form="{{ product_form_id }}">
+            <label class="form__label block mb-3" for="Variants-{{ section.id }}">Select variant</label>
+            <div class="flex gap-x-6">
+              {% for product_option in product.options_with_values %}
+                <div class="flex-grow">
+                  <label>
+                    {{ product_option.name }}
+                    <select 
+                      id="option{{ forloop.index }}"
+                      class="variant-option-select block w-full mt-3 px-3 py-1.5 bg-white bg-clip-padding bg-no-repeat border border-black rounded m-0"
+                      data-option="{{ product_option.name | handleize }}"
+                      form="{{ product_form_id }}"
+                    >
+                      {% for value in product_option.values %}
+                        <option {% if product_option.selected_value == value %}selected{% endif %}>
+                          {{ value }}
+                        </option>
+                      {% endfor %}
+                    </select>
+                  </label>
+                </div>
+              {% endfor %}
+            </div>
+
+            <div class="select hidden">
+              <select name="id" id="variants-{{ section.id }}" form="{{ product_form_id }}">
                 {%- for variant in product.variants -%}
                   <option
                     {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
@@ -58,6 +85,7 @@
               </select>
             </div>
           </div>
+          {% endif %}
 
           <div class="mt-6 lg:mt-8">
             <div class="flex flex-row justify-between mt-4">
