@@ -16,7 +16,7 @@
       {%- else -%}
         {{ "All products" | link_to: routes.all_products_collection_url }} /
       {% endif %}
-      <span>{{ product.title }}</span>
+      <span class="text-theme">{{ product.title }}</span>
     </p>
   
     <div class="flex flex-col lg:flex-row gap-8">
@@ -30,7 +30,7 @@
   
       <!-- Description -->
       <div class="w-full lg:w-3/6">
-        <h2 class="text-3xl md:text-5xl font-semibold font-serif mb-5">{{ product.title }}</h2>
+        <h2 class="text-3xl md:text-5xl font-semibold font-serif mb-5 text-theme">{{ product.title }}</h2>
   
         <div class="mb-5">{{ product.description }}</div>
   
@@ -54,7 +54,7 @@
                     {{ product_option.name }}
                     <select 
                       id="option{{ forloop.index }}"
-                      class="variant-option-select block w-full mt-3 px-3 py-1.5 bg-white bg-clip-padding bg-no-repeat border border-black rounded m-0"
+                      class="variant-option-select block w-full mt-3 px-3 py-1.5 bg-white bg-clip-padding bg-no-repeat border border-black m-0"
                       data-option="{{ product_option.name | handleize }}"
                       form="{{ product_form_id }}"
                     >
@@ -96,7 +96,9 @@
           
           <hr class="bg-gray-200 w-full mt-4" />
 
-          <button type="submit" class="submit-btn w-full mb-2 mt-6 lg:mt-12 px-10 py-5 bg-theme text-lg text-white font-semibold">Add to shopping bag</button>
+          <button type="submit" class="submit-btn w-full mb-2 mt-6 lg:mt-12 px-10 py-4 bg-theme border-2 border-black text-lg text-white font-semibold">
+            Add to shopping bag
+          </button>
 
         </div>
 

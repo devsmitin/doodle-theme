@@ -17,23 +17,16 @@
       "footer": {
         "type": "footer",
         "blocks": {
-          "36043bc7-18be-4339-9e13-9b5e8864d074": {
+          "footer1": {
             "type": "footer_menu",
             "settings": {
               "title": "Shop",
               "menu": "footer"
             }
-          },
-          "a10f73d0-3a09-4c46-9c4a-3f33025fa9db": {
-            "type": "footer_menu",
-            "settings": {
-              "title": "About",
-              "menu": "customer-services"
-            }
           }
         },
         "block_order": [
-          "36043bc7-18be-4339-9e13-9b5e8864d074",
+          "footer1",
           "a10f73d0-3a09-4c46-9c4a-3f33025fa9db"
         ],
         "settings": {

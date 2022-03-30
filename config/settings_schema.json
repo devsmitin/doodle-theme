@@ -2,9 +2,24 @@
   {
     "name": "theme_info",
     "theme_name": "Doodle",
-    "theme_version": "0.22.03.17",
+    "theme_version": "0.30.03.17",
     "theme_author": "Smit",
     "theme_documentation_url": "https:\/\/devsmit.in\/",
     "theme_support_url": "https:\/\/devsmit.in\/"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Theme color"
+      },
+      {
+        "type": "color",
+        "id": "theme_color",
+        "default": "#121212",
+        "label": "Primary theme color"
+      }
+    ]
   }
 ]

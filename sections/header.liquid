@@ -5,7 +5,7 @@
 <nav class="relative bg-white border-b-2 border-black z-40">
   <div class="container mx-auto px-4 md:px-6 flex flex-wrap items-center justify-between md:justify-start">
     <a href="{{ routes.root_url }}" class="flex p-2 mx-2 h-20 order-1 md:order-none">
-      <span class="self-center text-lg font-semibold whitespace-nowrap">
+      <span class="self-center text-lg font-bold whitespace-nowrap text-theme">
       {% if _s.logo != blank %}
         {{ _s.logo | image_url: width: 300 | image_tag: alt: shop.name, class: 'w-32 md:w-36' }}
       {% else %}
@@ -23,10 +23,10 @@
     </button>
     <ul class="flex flex-col md:flex-row md:space-x-8 md:text-sm md:font-medium order-1 md:ml-auto">
       <li class="mx-3">
-        <a class="flex items-center my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform hover:text-theme md:mx-4 md:my-0" 
+        <a class="relative flex items-center my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform hover:text-theme md:mx-4 md:my-0" 
           href="{{ routes.cart_url }}">
           {% render 'icons', icon: "cart" %}
-          <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{{ cart.count }}</span>
+          <span class="h-6 w-6 leading-6 rounded-full text-xs font-medium bg-theme text-white text-center outline outline-1 absolute -top-2 -right-4">{{ cart.item_count }}</span>
         </a>
       </li>
     </ul>

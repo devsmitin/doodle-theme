@@ -36,6 +36,14 @@
     {% comment %} <script src="{{ 'bundle.js' | asset_url }}" defer="defer"></script> {% endcomment %}
     {{ content_for_header }}
 
+    {% style %}
+      :root {
+        /* --color-primary: 243, 22, 233; */
+        --color-primary: {{ settings.theme_color.red }}, {{ settings.theme_color.green }}, {{ settings.theme_color.blue }};
+      }
+    {% endstyle %}
+
+
     {%- comment -%}
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'

@@ -20,8 +20,8 @@
     <div class="flex flex-wrap">
       <div class="w-full lg:w-3/12 px-4">
         <div class="w-full mb-10">
-          <a href="{{ routes.root_url }}" class="flex h-20 mb-4">
-            <span class="self-center text-lg font-semibold whitespace-nowrap">
+          <a href="{{ routes.root_url }}" class="flex mb-4">
+            <span class="self-center text-lg font-bold whitespace-nowrap text-theme">
             {% if _s.logo != blank %}
               {{ _s.logo | image_url: width: 300 | image_tag: alt: shop.name, class: 'w-32 md:w-36' }}
             {% else %}
@@ -52,7 +52,7 @@
       {% assign _b = block.settings %}
       <div class="w-2/4 lg:w-3/12 px-4">
         <div class="w-full mb-10">
-          <h3 class="text-dark text-lg font-semibold mb-9">
+          <h3 class="text-dark text-lg font-semibold mb-9 text-theme">
             {{ _b.title }}
           </h3>
           <ul>
@@ -69,9 +69,9 @@
       {% endif %}
       {% endfor %}
 
-      <div class="w-full md:w-2/4 lg:w-3/12 px-4">
+      <div class="w-full md:w-2/4 lg:w-3/12 px-4 ml-auto">
         <div class="w-full mb-10">
-          <h4 class="text-dark text-lg font-semibold mb-9">
+          <h4 class="text-dark text-lg font-semibold mb-9 text-theme">
             Follow Us On
           </h4>
           <div class="flex items-center mb-6">

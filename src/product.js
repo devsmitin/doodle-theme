@@ -51,5 +51,5 @@ class ProductPage {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.body.classList.contains("product") && new ProductPage();
+  document.body.classList.contains("template-product") && new ProductPage();
 });
