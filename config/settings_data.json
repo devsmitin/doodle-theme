@@ -1,5 +1,6 @@
 {
   "current": {
+    "theme_color": "#227971",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
@@ -10,7 +11,6 @@
       "header": {
         "type": "header",
         "settings": {
-          "logo": "shopify:\/\/shop_images\/Droppler-logos_transparent.png",
           "menu": "main-menu"
         }
       },
@@ -26,11 +26,9 @@
           }
         },
         "block_order": [
-          "footer1",
-          "a10f73d0-3a09-4c46-9c4a-3f33025fa9db"
+          "footer1"
         ],
         "settings": {
-          "logo": "shopify:\/\/shop_images\/Droppler-logos_transparent.png",
           "text": "Sed ut perspiciatis undmnis is iste natus error sit amet voluptatem totam rem aperiam.",
           "phone": "+012 (345) 678 99"
         }
