@@ -1,3 +1,5 @@
 {% layout none %}
-
-{{ product | json }}
+{ 
+	product: {{ product | json }},
+	options: {{ product.options_with_values | json }}
+}
