@@ -28,12 +28,14 @@
       {
         "type": "font_picker",
         "id": "type_body_font",
-        "label": "Heading font"
+        "label": "Heading font",
+        "default": "Abel"
       },
       {
         "type": "font_picker",
-        "id": "type_body_font",
-        "label": "Body font"
+        "id": "type_header_font",
+        "label": "Body font",
+        "default": "assistant_n4"
       }
     ]
   }
