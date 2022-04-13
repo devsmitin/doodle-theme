@@ -13,8 +13,8 @@ class TWTheme {
     fetch("https://ipinfo.io/json")
       .then((data) => data.json())
       .then((res) => {
-        let { postal, city, region, country } = res;
-        console.log(`You're browsing from ${city, country}. 😈`);
+        let { city, country } = res;
+        console.log(`You're browsing from ${city}, ${country}. 😈`);
       });
   };
 
