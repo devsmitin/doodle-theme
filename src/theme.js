@@ -14,7 +14,7 @@ class TWTheme {
       .then((data) => data.json())
       .then((res) => {
         let { postal, city, region, country } = res;
-        console.log(postal, city, region, country);
+        console.log(`You're browsing from ${city, country}. 😈`);
       });
   };
 
