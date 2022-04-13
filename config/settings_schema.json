@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "Doodle",
-    "theme_version": "0.30.03.17",
+    "theme_version": "0.01.0413",
     "theme_author": "Smit",
     "theme_documentation_url": "https:\/\/devsmit.in\/",
     "theme_support_url": "https:\/\/devsmit.in\/"
@@ -27,13 +27,13 @@
     "settings": [
       {
         "type": "font_picker",
-        "id": "type_body_font",
+        "id": "type_header_font",
         "label": "Heading font",
         "default": "assistant_n4"
       },
       {
         "type": "font_picker",
-        "id": "type_header_font",
+        "id": "type_body_font",
         "label": "Body font",
         "default": "assistant_n4"
       }
