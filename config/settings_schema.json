@@ -21,5 +21,20 @@
         "label": "Primary theme color"
       }
     ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Heading font"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body font"
+      }
+    ]
   }
 ]
