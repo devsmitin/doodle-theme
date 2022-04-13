@@ -6,7 +6,17 @@ class TWTheme {
 
   initEvents() {
     this.clickHandler();
+    this.logCountry();
   }
+
+  logCountry = () => {
+    fetch("https://ipinfo.io/json")
+      .then((data) => data.json())
+      .then((res) => {
+        let { postal, city, region, country } = res;
+        console.log(postal, city, region, country);
+      });
+  };
 
   clickHandler = () => {
     let that = this;
