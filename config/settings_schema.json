@@ -29,7 +29,7 @@
         "type": "font_picker",
         "id": "type_body_font",
         "label": "Heading font",
-        "default": "Abel"
+        "default": "assistant_n4"
       },
       {
         "type": "font_picker",
