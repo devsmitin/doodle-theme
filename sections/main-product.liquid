@@ -21,24 +21,39 @@
   
     <div class="flex flex-col lg:flex-row gap-8">
       <!-- Preview Images -->
-      <div class="w-full lg:w-3/6">
-        <div class="w-full aspect-w-7 aspect-h-8 bg-gray-200 border-2 border-black rounded-lg overflow-hidden">
+      <div class="w-full lg:w-1/2">
+
+        <div class="w-full aspect-w-7 aspect-h-8 bg-gray-200 border-2 border-black rounded-lg overflow-hidden mb-2">
           {% assign classList = "w-full h-full object-center object-cover" %}
           {{ product.featured_image | image_url: width: 2000, format: 'pjpg' | image_tag: class: classList, loading: 'lazy' }}
         </div>
+        
+        {% if product.media.size > 1 %}
+          <div class="grid grid-cols-4 gap-2 thumbnail-gallery" id="thumbnail-gallery">
+            {% for media in product.media %}
+              {% if media.media_type == 'image' %}
+                <div class="aspect-w-6 aspect-h-8 bg-gray-200 border-2 border-black rounded-lg overflow-hidden"
+                  data-image-id="{{ media.id }}" data-slide-index="{{ forloop.index0 }}">
+                  {% assign classList = "w-full h-full object-center object-cover" %}
+                  {{ media | image_url: width: 2000, format: 'pjpg' | image_tag: class: classList, loading: 'lazy' }}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
       </div>
-  
+
       <!-- Description -->
-      <div class="w-full lg:w-3/6">
+      <div class="w-full lg:w-1/2 product-details" id="product-details">
         <h2 class="text-3xl md:text-5xl font-semibold font-serif mb-5 text-theme">{{ product.title }}</h2>
   
         <div class="mb-5">{{ product.description }}</div>
   
         <p class="font-serif mb-5">
           {% if product.compare_at_price %}
-            <s class="text-2xl lg:text-3xl font-light mr-3">{{ product.compare_at_price | money_with_currency }}</s>
+            <s class="text-2xl lg:text-3xl font-light mr-3 price-item--compare">{{ product.compare_at_price | money_with_currency }}</s>
           {% endif %}
-          <span class="text-2xl lg:text-3xl font-bold">{{ product.price | money_with_currency }}</span>
+          <span class="text-2xl lg:text-3xl font-bold price-item--regular">{{ product.price | money_with_currency }}</span>
         </p>
   
         {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
@@ -47,7 +62,7 @@
           {% else %}
           <div class="mt-6 lg:mt-8">
             <label class="form__label block mb-3" for="Variants-{{ section.id }}">Select variant</label>
-            <div class="flex gap-x-6">
+            <div class="option-selectors flex gap-x-6" id="option-selectors">
               {% for product_option in product.options_with_values %}
                 <div class="flex-grow">
                   <label>
@@ -145,3 +160,25 @@
     ]
   }
 </script>
+
+
+
+<script>
+  window.ds_scripts = window.ds_scripts || {};
+  ds_scripts.main_product = {
+    "product": {{ product | json }}, 
+    "options": {{ product.options_with_values | json }}
+  };
+  ds_scripts.related_product = {
+    "product": {{ all_products[relative] | json }}, 
+    "options": {{ all_products[relative].options_with_values | json }}
+  };
+  ds_scripts.current_value = {{ product.selected_or_first_available_variant.id }};
+  ds_scripts.selectors = ds_scripts.selectors || {
+    form_id : "#{{ product_form_id }}",
+    details : "#product-details",
+    thumbnails : "#thumbnail-gallery",
+    variants: "#option-selectors"
+  };
+</script>
+<script src="{{ 'product-merge.js' | asset_url }}" defer="defer"></script>

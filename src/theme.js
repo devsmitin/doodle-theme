@@ -6,7 +6,9 @@ class TWTheme {
 
   initEvents() {
     this.clickHandler();
-    this.logCountry();
+    if (location.protocol === "https:") {
+      this.logCountry();
+    }
   }
 
   logCountry = () => {

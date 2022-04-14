@@ -1,3 +1,7 @@
+window.cn = function (o) {
+  return "undefined" == typeof o || null == o || "" == o.toString().trim();
+};
+
 class ProductMerge {
   constructor() {
     this.final_options = [];
@@ -5,21 +9,38 @@ class ProductMerge {
     this.activeOptions = [];
     this.activeVariant = null;
     this.dontMerge = false;
-    this.form = document.getElementById("AddToCartForm");
-    this.a2cButton = this.form.querySelector('[type="submit"]');
+    this.elements = this.getElements();
     this.variantInput;
     this.init();
   }
 
+  getElements = () => {
+    const form = document.querySelector(ds_scripts.selectors.form_id);
+    return form
+      ? {
+          form,
+          a2cButton: form.querySelector('[type="submit"]'),
+          details: document.querySelector(ds_scripts.selectors.details),
+          oldOptions: document.querySelector(ds_scripts.selectors.variants),
+          thumbs: document.querySelector(ds_scripts.selectors.thumbnails),
+        }
+      : false;
+  };
+
   init = () => {
-    console.log("ProductMerge init.", "dontMerge is set " + this.dontMerge);
+    console.log(
+      "ProductMerge init.",
+      "dontMerge is set to " + this.dontMerge + "."
+    );
 
     if (this.dontMerge) {
       return false;
     }
 
-    this.a2cButton.dataset.value = this.a2cButton.value;
-    this.activeVariant = window.ds_scripts.current_value;
+    let { a2cButton } = this.elements;
+    a2cButton.dataset.value =
+      a2cButton.value.trim() || a2cButton.textContent.trim();
+    this.activeVariant = ds_scripts.current_value;
 
     if (location.search) {
       let urlParams = location.search.slice(1).split("&");
@@ -41,7 +62,7 @@ class ProductMerge {
   };
 
   cssColor = (str) => {
-    return !str.indexOf(" ") ? str : str.split(" ")[1];
+    return str.split(" ").length > 1 ? str.split(" ")[1] : str;
   };
 
   handleize = (str) => {
@@ -87,7 +108,7 @@ class ProductMerge {
           style="background-color: ${cssColor}; background-image: url(//cdn.shopify.com/s/files/1/2262/5757/files/${this.handleize(
         value
       )}.png?v=1); background-size: contain;"
-          tabindex="0">
+          tabindex="0">${value}
         </label>
       </div>`;
     }
@@ -100,8 +121,8 @@ class ProductMerge {
   };
 
   variantsMerge = () => {
-    let main_variants = window.ds_scripts.main_product.product.variants;
-    let merge_variants = window.ds_scripts.related_product.product.variants;
+    let main_variants = ds_scripts.main_product.product.variants || [];
+    let merge_variants = ds_scripts.related_product.product.variants || [];
 
     this.all_variants = main_variants.concat(merge_variants);
 
@@ -109,13 +130,14 @@ class ProductMerge {
       this.all_variants = main_variants;
     }
 
+    console.log("this.all_variants", this.all_variants);
     // get initial options in activeOptions
     this.getOptFromVariant();
   };
 
   optionsMerge = () => {
-    let main_options = window.ds_scripts.main_product.options;
-    let merge_options = window.ds_scripts.related_product.options;
+    let main_options = ds_scripts.main_product.options || [];
+    let merge_options = ds_scripts.related_product.options || [];
 
     let final_options = [];
 
@@ -123,7 +145,10 @@ class ProductMerge {
       let matching_option = merge_options.find(
         (opt) => opt.name == option.name
       );
-      let updated_values = option.values.concat(matching_option.values);
+      let updated_values = matching_option
+        ? option.values.concat(matching_option.values)
+        : option.values;
+
       final_options.push({
         name: option.name,
         values: updated_values,
@@ -136,6 +161,8 @@ class ProductMerge {
     } else {
       this.splitNeonOptions(final_options);
     }
+
+    console.log("final_options", final_options);
   };
 
   splitNeonOptions = (all_options) => {
@@ -144,7 +171,7 @@ class ProductMerge {
     all_options.forEach((option) => {
       if (option.name.toLowerCase() == "color") {
         let classic_colors = {
-          name: "Classic colors",
+          name: "Core colors",
           type: option.name.toLowerCase(),
           position: option.position,
           values: option.values.filter(
@@ -154,7 +181,7 @@ class ProductMerge {
         final_options.push(classic_colors);
 
         let neon_colors = {
-          name: "Neon colors",
+          name: "Seasonal colors",
           type: option.name.toLowerCase(),
           position: option.position,
           values: option.values.filter((value) =>
@@ -179,12 +206,16 @@ class ProductMerge {
 
   addToForm = () => {
     // remove default VariantID
-    let oldVariants = this.form.querySelector(".variants");
-    this.form
+    this.elements.form
       .querySelectorAll('[name="id"]')
       .forEach((input) => input.remove());
-    oldVariants.style.display = "none";
-    oldVariants.innerHTML = "";
+
+    let { oldOptions } = this.elements;
+    if (!oldOptions) {
+      return false;
+    }
+    oldOptions.style.display = "none";
+    oldOptions.innerHTML = "";
 
     // createVariantID
     this.variantInput = this.createHtml("input", {
@@ -192,18 +223,21 @@ class ProductMerge {
       value: this.activeVariant,
       name: "id",
     });
-    this.insertAfter(this.variantInput, oldVariants);
+    this.insertAfter(this.variantInput, oldOptions);
 
     let new_variants = this.createHtml("div", { class: "new-variants" });
 
     // create Swatch inputs
     this.final_options.forEach((option, index) => {
+      if (!option.values.length) {
+        return false;
+      }
       let label = this.createHtml(
         "p",
-        {
-          class: "option-label",
-        },
-        `<span>${option.name}:</span> <span class='selected-option'></span>`
+        { class: "option-label" },
+        `<span>${option.name}:</span>
+          <span class="selected-option" data-value-for="${option.type}">
+          </span>`
       );
 
       let wrapper = this.createHtml("div", {
@@ -222,7 +256,12 @@ class ProductMerge {
     });
 
     // append everything to form
-    this.insertAfter(new_variants, oldVariants);
+    this.insertAfter(new_variants, oldOptions);
+
+    // add active labels
+    new_variants
+      .querySelectorAll("input[type=radio]:checked")
+      .forEach((radio) => this.changeLabel(radio));
 
     // on change event
     new_variants.querySelectorAll("input[type=radio]").forEach((radio) =>
@@ -230,8 +269,23 @@ class ProductMerge {
         this.activeOptions[radio.dataset.position - 1] = radio.value;
         this.getVariantFromOpt();
         this.setSwatchSoldout();
+        this.changeLabel(radio);
       })
     );
+  };
+
+  changeLabel = (elm) => {
+    let opt_name = elm.name;
+    let { details } = this.elements;
+    console.log("opt_name", opt_name);
+    details
+      .querySelectorAll('[data-value-for="' + opt_name + '"]')
+      .forEach((label) => {
+        label.textContent = "";
+      });
+
+    elm.closest(".swatch").querySelector("[data-value-for]").textContent =
+      elm.value;
   };
 
   getOptFromVariant = () => {
@@ -257,26 +311,37 @@ class ProductMerge {
       if (e !== false) current_variant = variant;
     });
 
-    let priceSpan = document.querySelector(
-      ".product-blocks .price-item--regular"
-    );
+    let priceSpan = this.elements.details.querySelector(".price-item--regular");
+    let { a2cButton } = this.elements;
 
     if (current_variant) {
       this.activeVariant = current_variant.id;
-      let price = current_variant.available
-        ? Shopify.formatMoney(current_variant.price)
+      // let price = current_variant.available
+      //   ? Shopify.formatMoney(current_variant.price)
+      //   : "Unavailable";
+      priceSpan.textContent = Shopify.formatMoney(current_variant.price);
+      a2cButton.disabled = !current_variant.available;
+      a2cButton.value = current_variant.available
+        ? a2cButton.dataset.value
         : "Unavailable";
-      priceSpan.textContent = price;
-      this.a2cButton.disabled = false;
-      this.a2cButton.value = this.a2cButton.dataset.value;
+      a2cButton.textContent = current_variant.available
+        ? a2cButton.dataset.value
+        : "Unavailable";
       this.variantInput.value = current_variant.id;
+
+      console.log(
+        current_variant.available,
+        a2cButton.textContent,
+        a2cButton.dataset.value
+      );
 
       this.setVariantImage(current_variant.id);
     } else {
       this.activeVariant = null;
-      priceSpan.textContent = "Unavailable";
-      this.a2cButton.disabled = true;
-      this.a2cButton.value = "Unavailable";
+      // priceSpan.textContent = "Unavailable";
+      a2cButton.disabled = true;
+      a2cButton.value = "Unavailable";
+      a2cButton.textContent = "Unavailable";
     }
     this.updateDetails();
   };
@@ -341,15 +406,22 @@ class ProductMerge {
   setVariantImage = (v_id) => {
     let variant = this.all_variants.find((variant) => variant.id == v_id);
     if (cn(variant.featured_media)) return false;
-    
+
     let id = variant.featured_media.id;
-    let main = document.querySelector(".js-carousel-main");
-    let el = main.querySelector("[data-image-id='" + id + "']");
+    let { thumbs } = this.elements;
+    let image = thumbs.querySelector("[data-image-id='" + id + "']");
 
-    let index = [...el.parentElement.children].indexOf(el);
+    let index = [...image.parentElement.children].indexOf(image);
 
-    let curFlkty = Flickity.data(main);
-    curFlkty.select(index);
+    try {
+      let curFlkty = Flickity.data(thumbs);
+      curFlkty.select(index);
+    } catch (error) {
+      console.log(
+        "Something went wrong : Flickity. Trying to click on thumbnail image instead."
+      );
+      image.parentElement.click();
+    }
   };
 }
 

@@ -219,13 +219,60 @@
       {%- endif -%}
     {%- endcomment -%}
 
-    <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-    if (Shopify.designMode) {
-      document.documentElement.classList.add('shopify-design-mode');
-    }
-    window.cn = function (o) {
-      return "undefined" == typeof o || null == o || "" == o.toString().trim();
-    };
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      if (Shopify.designMode) {
+        document.documentElement.classList.add('shopify-design-mode');
+      }
+      window.cn = function (o) {
+        return "undefined" == typeof o || null == o || "" == o.toString().trim();
+      };
+      Shopify.money_format = "{{ shop.money_format }}";
+      Shopify.formatMoney = function(t, e) {
+        function o(t, e) {
+          return void 0 === t ? e : t
+        }
+        function i(t, e, i, r) {
+          if (e = o(e, 2),
+            i = o(i, ","),
+            r = o(r, "."),
+            isNaN(t) || null == t)
+            return 0;
+          t = (t / 100).toFixed(e);
+          var n = t.split(".");
+          return n[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + i) + (n[1] ? r + n[1] : "")
+        }
+        "string" == typeof t && (t = t.replace(".", ""));
+        var r = ""
+        , n = /\{\{\s*(\w+)\s*\}\}/
+        , a = e || this.money_format;
+        switch (a.match(n)[1]) {
+          case "amount":
+          r = i(t, 2);
+          break;
+          case "amount_no_decimals":
+          r = i(t, 0);
+          break;
+          case "amount_with_comma_separator":
+          r = i(t, 2, ".", ",");
+          break;
+          case "amount_with_space_separator":
+          r = i(t, 2, " ", ",");
+          break;
+          case "amount_with_period_and_space_separator":
+          r = i(t, 2, " ", ".");
+          break;
+          case "amount_no_decimals_with_comma_separator":
+          r = i(t, 0, ".", ",");
+          break;
+          case "amount_no_decimals_with_space_separator":
+          r = i(t, 0, " ");
+          break;
+          case "amount_with_apostrophe_separator":
+          r = i(t, 2, "'", ".")
+        }
+        return a.replace(n, r)
+      };
     </script>
 
   </head>
