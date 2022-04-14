@@ -174,6 +174,7 @@
     "options": {{ all_products[relative].options_with_values | json }}
   };
   ds_scripts.current_value = {{ product.selected_or_first_available_variant.id }};
+  ds_scripts.asset_url = "{{ 'test' | file_img_url: 'medium' }}";
   ds_scripts.selectors = ds_scripts.selectors || {
     form_id : "#{{ product_form_id }}",
     details : "#product-details",

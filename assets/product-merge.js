@@ -130,7 +130,7 @@ class ProductMerge {
       this.all_variants = main_variants;
     }
 
-    console.log("this.all_variants", this.all_variants);
+    // console.log("this.all_variants", this.all_variants);
     // get initial options in activeOptions
     this.getOptFromVariant();
   };
@@ -162,7 +162,7 @@ class ProductMerge {
       this.splitNeonOptions(final_options);
     }
 
-    console.log("final_options", final_options);
+    // console.log("final_options", final_options);
   };
 
   splitNeonOptions = (all_options) => {
@@ -277,7 +277,7 @@ class ProductMerge {
   changeLabel = (elm) => {
     let opt_name = elm.name;
     let { details } = this.elements;
-    console.log("opt_name", opt_name);
+    // console.log("opt_name", opt_name);
     details
       .querySelectorAll('[data-value-for="' + opt_name + '"]')
       .forEach((label) => {
@@ -329,11 +329,11 @@ class ProductMerge {
         : "Unavailable";
       this.variantInput.value = current_variant.id;
 
-      console.log(
-        current_variant.available,
-        a2cButton.textContent,
-        a2cButton.dataset.value
-      );
+      // console.log(
+      //   current_variant.available,
+      //   a2cButton.textContent,
+      //   a2cButton.dataset.value
+      // );
 
       this.setVariantImage(current_variant.id);
     } else {
