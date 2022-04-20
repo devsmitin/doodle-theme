@@ -62,30 +62,13 @@
           {% else %}
           <div class="mt-6 lg:mt-8">
             <label class="form__label block mb-3" for="Variants-{{ section.id }}">Select variant</label>
-            <div class="option-selectors flex gap-x-6" id="option-selectors">
-              {% for product_option in product.options_with_values %}
-                <div class="flex-grow">
-                  <label>
-                    {{ product_option.name }}
-                    <select 
-                      id="option{{ forloop.index }}"
-                      class="variant-option-select block w-full mt-3 px-3 py-1.5 bg-white bg-clip-padding bg-no-repeat border border-black m-0"
-                      data-option="{{ product_option.name | handleize }}"
-                      form="{{ product_form_id }}"
-                    >
-                      {% for value in product_option.values %}
-                        <option {% if product_option.selected_value == value %}selected{% endif %}>
-                          {{ value }}
-                        </option>
-                      {% endfor %}
-                    </select>
-                  </label>
-                </div>
-              {% endfor %}
-            </div>
-
-            <div class="select hidden">
-              <select name="id" id="variants-{{ section.id }}" form="{{ product_form_id }}">
+            <div class="select">
+              <select 
+                id="variants-{{ section.id }}" 
+                class="variant-option-select block w-full mt-3 px-3 py-1.5 bg-white bg-clip-padding bg-no-repeat border border-black m-0"
+                name="id" 
+                form="{{ product_form_id }}"
+              >
                 {%- for variant in product.variants -%}
                   <option
                     {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
@@ -183,3 +166,7 @@
   };
 </script>
 <script src="{{ 'product-merge.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  .swatch{display:flex;flex-wrap:wrap;gap:1rem}.swatch+.swatch{margin-top:1rem}.swatch .option-label{font-weight:700;width:100%}.swatch .swatch-element .swatches__form--label{align-items:center;border:1px solid;border-radius:2px;cursor:pointer;display:flex;height:40px;justify-content:center;transition:all .25s;width:60px}.swatch .swatch-element .swatches__form--input{height:0;opacity:0;position:absolute;width:0}.swatch .swatch-element .swatches__form--input:checked+label{box-shadow:0 0 2px 1px rgba(0,0,0,.2),0 0 4px 2px rgba(0,0,0,.4)}.swatch .swatch-element.color .swatches__form--label{border-radius:50%;font-size:0;width:40px}.swatch .swatch-element:not(.color) .swatches__form--input:checked+label{background-color:#000;color:#fff}.swatch .swatch-element.soldout .swatches__form--label{cursor:not-allowed}.swatch .swatch-element.soldout:not(.color) .swatches__form--label{opacity:.6}
+</style>

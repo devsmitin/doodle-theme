@@ -21,7 +21,9 @@ class ProductMerge {
           form,
           a2cButton: form.querySelector('[type="submit"]'),
           details: document.querySelector(ds_scripts.selectors.details),
-          oldOptions: document.querySelector(ds_scripts.selectors.variants),
+          oldOptions:
+            document.querySelector(ds_scripts.selectors.variants) ||
+            form.querySelector('[name="id"]').parentElement,
           thumbs: document.querySelector(ds_scripts.selectors.thumbnails),
         }
       : false;
@@ -188,7 +190,10 @@ class ProductMerge {
             value.toLowerCase().includes("neon")
           ),
         };
-        final_options.push(neon_colors);
+
+        if (neon_colors.values.size) {
+          final_options.push(neon_colors);
+        }
       } else if (option.name.toLowerCase() == "size") {
         let all_sizes = {
           name: "Size",
@@ -212,6 +217,9 @@ class ProductMerge {
 
     let { oldOptions } = this.elements;
     if (!oldOptions) {
+      console.error(
+        "Product merge will not work with this theme. Please connect with developer."
+      );
       return false;
     }
     oldOptions.style.display = "none";

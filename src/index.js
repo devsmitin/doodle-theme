@@ -1,8 +1,7 @@
-// Style import
+// Style
 import "./styles.css";
 import "./styles.scss";
 
-// JavaScript modules import
+// JavaScript modules
 require("./theme");
-require("./product");
 require("./namelog");
