@@ -38,7 +38,6 @@
 
     {% style %}
       :root {
-        /* --color-primary: 243, 22, 233; */
         --color-primary: {{ settings.theme_color.red }}, {{ settings.theme_color.green }}, {{ settings.theme_color.blue }};
       }
     {% endstyle %}
@@ -272,6 +271,13 @@
           r = i(t, 2, "'", ".")
         }
         return a.replace(n, r)
+      };
+    </script>
+
+    <script>
+      window.ds_scripts = window.ds_scripts || {};
+      ds_scripts.cn = function (o) {
+        return "undefined" == typeof o || null == o || "" == o.toString().trim();
       };
     </script>
 

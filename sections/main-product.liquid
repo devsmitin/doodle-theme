@@ -1,107 +1,92 @@
-{%- assign product_form_id = 'product-form-' | append: section.id -%}
-{%- assign default_variant = product.selected_or_first_available_variant -%}
-<script type="application/json">
-  {{ product.variants | json }}
-</script>
+{% liquid 
+  assign product_form_id = 'product-form-' | append: section.id
+  assign default_variant = product.selected_or_first_available_variant
+  assign grid_view = false
+%}
+
 <script>
   window._product_data = {{ product | json }};
 </script>
 
 <div class="bg-white border-b-2 border-black">
   <div class="container mx-auto px-4 md:px-6 py-9 md:py-12 lg:py-16">
-    <p class="mb-5">
-      {{ "Home" | link_to: routes.root_url }} /
-      {% if collection.url %}
-        {{ collection.title | link_to: collection.url }} /
-      {%- else -%}
-        {{ "All products" | link_to: routes.all_products_collection_url }} /
-      {% endif %}
-      <span class="text-theme">{{ product.title }}</span>
-    </p>
+
+    {% render 'breadcrumb', 
+      collection: collection, 
+      product: product 
+    %}
+    
   
     <div class="flex flex-col lg:flex-row gap-8">
-      <!-- Preview Images -->
+      <!-- Media -->
       <div class="w-full lg:w-1/2">
 
-        <div class="w-full aspect-w-7 aspect-h-8 bg-gray-200 border-2 border-black rounded-lg overflow-hidden mb-2">
-          {% assign classList = "w-full h-full object-center object-cover" %}
-          {{ product.featured_image | image_url: width: 2000, format: 'pjpg' | image_tag: class: classList, loading: 'lazy' }}
-        </div>
-        
-        {% if product.media.size > 1 %}
-          <div class="grid grid-cols-4 gap-2 thumbnail-gallery" id="thumbnail-gallery">
-            {% for media in product.media %}
-              {% if media.media_type == 'image' %}
-                <div class="aspect-w-6 aspect-h-8 bg-gray-200 border-2 border-black rounded-lg overflow-hidden"
-                  data-image-id="{{ media.id }}" data-slide-index="{{ forloop.index0 }}">
-                  {% assign classList = "w-full h-full object-center object-cover" %}
-                  {{ media | image_url: width: 2000, format: 'pjpg' | image_tag: class: classList, loading: 'lazy' }}
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        {% endif %}
+        {% render 'product-media', 
+          product: product,
+          grid_view: grid_view
+        %}
+
       </div>
 
       <!-- Description -->
       <div class="w-full lg:w-1/2 product-details" id="product-details">
-        <h2 class="text-3xl md:text-5xl font-semibold font-serif mb-5 text-theme">{{ product.title }}</h2>
-  
-        <div class="mb-5">{{ product.description }}</div>
-  
-        <p class="font-serif mb-5">
-          {% if product.compare_at_price %}
-            <s class="text-2xl lg:text-3xl font-light mr-3 price-item--compare">{{ product.compare_at_price | money_with_currency }}</s>
-          {% endif %}
-          <span class="text-2xl lg:text-3xl font-bold price-item--regular">{{ product.price | money_with_currency }}</span>
-        </p>
-  
-        {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-          {% if product.has_only_default_variant %}
-          <input name="id" value="{{ default_variant.id }}" type="hidden">
-          {% else %}
-          <div class="mt-6 lg:mt-8">
-            <label class="form__label block mb-3" for="Variants-{{ section.id }}">Select variant</label>
-            <div class="select">
-              <select 
-                id="variants-{{ section.id }}" 
-                class="variant-option-select block w-full mt-3 px-3 py-1.5 bg-white bg-clip-padding bg-no-repeat border border-black m-0"
-                name="id" 
-                form="{{ product_form_id }}"
-              >
-                {%- for variant in product.variants -%}
-                  <option
-                    {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
-                    {% if variant.available == false %}disabled{% endif %}
-                    value="{{ variant.id }}"
-                  >
-                    {{ variant.title }}
-                    {%- if variant.available == false %} - Sold out!{% endif %}
-                    - {{ variant.price | money | strip_html }}
-                  </option>
-                {%- endfor -%}
-              </select>
-            </div>
-          </div>
-          {% endif %}
-
-          <div class="mt-6 lg:mt-8">
-            <div class="flex flex-row justify-between mt-4">
-              <p class="font-medium text-base leading-4 text-gray-600 flex items-center">Select quantity</p>
-              {% render 'quantity-spinner' %}
-            </div>
-          </div>
+        <div class="sticky top-0">
           
-          <hr class="bg-gray-200 w-full mt-4" />
-
-          <button type="submit" class="submit-btn w-full mb-2 mt-6 lg:mt-12 px-10 py-4 bg-theme border-2 border-black text-lg text-white font-semibold">
-            Add to shopping bag
-          </button>
-
+          <h2 class="text-3xl md:text-5xl font-semibold font-serif mb-5 text-theme">{{ product.title }}</h2>
+          <div class="mb-5">{{ product.description }}</div>
+    
+          <p class="font-serif mb-5">
+            {% if product.compare_at_price %}
+              <s class="text-2xl lg:text-3xl font-light mr-3 price-item--compare">{{ product.compare_at_price | money_with_currency }}</s>
+            {% endif %}
+            <span class="text-2xl lg:text-3xl font-bold price-item--regular">{{ product.price | money_with_currency }}</span>
+          </p>
+    
+          {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+            {% if product.has_only_default_variant %}
+              <input name="id" value="{{ default_variant.id }}" type="hidden">
+              {% else %}
+              <div class="mt-6 lg:mt-8">
+                <label class="form__label block mb-3" for="Variants-{{ section.id }}">Select variant</label>
+                <div class="select">
+                  <select 
+                    id="variants-{{ section.id }}" 
+                    class="variant-option-select block w-full mt-3 px-3 py-1.5 bg-white bg-clip-padding bg-no-repeat border border-black m-0"
+                    name="id" 
+                    form="{{ product_form_id }}"
+                  >
+                    {%- for variant in product.variants -%}
+                      <option
+                        {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                        {% if variant.available == false %}disabled{% endif %}
+                        value="{{ variant.id }}"
+                      >
+                        {{ variant.title }}
+                        {%- if variant.available == false %} - Sold out!{% endif %}
+                        - {{ variant.price | money | strip_html }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              </div>
+            {% endif %}
+  
+            <div class="mt-6 lg:mt-8">
+              <div class="flex flex-row justify-between mt-4">
+                <p class="font-medium text-base leading-4 text-gray-600 flex items-center">Select quantity</p>
+                {% render 'quantity-spinner' %}
+              </div>
+            </div>
+            
+            <hr class="bg-gray-200 w-full mt-4" />
+  
+            <button type="submit" class="submit-btn w-full mb-2 mt-6 lg:mt-12 px-10 py-4 bg-theme border-2 border-black text-lg text-white font-semibold">
+              Add to shopping bag
+            </button>
+            
+            {{ form | payment_button }}
+          {%- endform -%}
         </div>
-
-        {%- endform -%}
-        
       </div>
     </div>
   </div>
@@ -164,9 +149,6 @@
     thumbnails : "#thumbnail-gallery",
     variants: "#option-selectors"
   };
+  ds_scripts.img_url_path = "//cdn.shopify.com/s/files/1/0557/9541/7135/files/";
 </script>
 <script src="{{ 'product-merge.js' | asset_url }}" defer="defer"></script>
-
-<style>
-  .swatch{display:flex;flex-wrap:wrap;gap:1rem}.swatch+.swatch{margin-top:1rem}.swatch .option-label{font-weight:700;width:100%}.swatch .swatch-element .swatches__form--label{align-items:center;border:1px solid;border-radius:2px;cursor:pointer;display:flex;height:40px;justify-content:center;transition:all .25s;width:60px}.swatch .swatch-element .swatches__form--input{height:0;opacity:0;position:absolute;width:0}.swatch .swatch-element .swatches__form--input:checked+label{box-shadow:0 0 2px 1px rgba(0,0,0,.2),0 0 4px 2px rgba(0,0,0,.4)}.swatch .swatch-element.color .swatches__form--label{border-radius:50%;font-size:0;width:40px}.swatch .swatch-element:not(.color) .swatches__form--input:checked+label{background-color:#000;color:#fff}.swatch .swatch-element.soldout .swatches__form--label{cursor:not-allowed}.swatch .swatch-element.soldout:not(.color) .swatches__form--label{opacity:.6}
-</style>

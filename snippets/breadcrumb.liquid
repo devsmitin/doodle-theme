@@ -1,0 +1,11 @@
+{% comment %} breadcrumb {% endcomment %}
+
+<p class="mb-5">
+  {{ "Home" | link_to: routes.root_url }} /
+  {% if collection.url %}
+    {{ collection.title | link_to: collection.url }} /
+  {%- else -%}
+    {{ "All products" | link_to: routes.all_products_collection_url }} /
+  {% endif %}
+  <span class="text-theme">{{ product.title }}</span>
+</p>

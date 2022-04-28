@@ -85,35 +85,29 @@ class ProductMerge {
   };
 
   createSwatch = (type, value, position, index) => {
-    let swatch = `<div class="swatch-element ">
-        <input type="radio" class="swatches__form--input" 
-          id="main-swatch-${index}-${value}" name="${type}" value="${value}" data-position="${position}" ${
-      value === this.activeOptions[position - 1] ? "checked" : ""
-    }>
-        <label class="swatches__form--label" for="main-swatch-${index}-${value}" 
-          tabindex="0">${value}</label>
-      </div>`;
+    let label_style = "";
+    let { img_url_path } = ds_scripts;
     if (type === "color") {
       let cssColor = this.cssColor(value)
         ? this.cssColor(value).toLowerCase()
         : "";
-
-      swatch = `<div class="swatch-element color ">
-        <input type="radio" class="swatches__form--input" id="main-swatch-${index}-${this.handleize(
-        value
-      )}" name="${type}" value="${value}" data-position="${position}"  ${
-        value === this.activeOptions[position - 1] ? "checked" : ""
-      }>
-        <label class="swatches__form--label" for="main-swatch-${index}-${this.handleize(
-        value
-      )}" 
-          style="background-color: ${cssColor}; background-image: url(//cdn.shopify.com/s/files/1/2262/5757/files/${this.handleize(
-        value
-      )}.png?v=1); background-size: contain;"
-          tabindex="0">${value}
-        </label>
-      </div>`;
+      label_style = `style="background-color: ${cssColor}; background-image: url(${
+        img_url_path + "/" + this.handleize(value)
+      }.png?v=1); background-size: contain;"`;
     }
+
+    let swatch = `<div class="swatch-element ${
+      type === "color" ? "color" : ""
+    } ">
+        <input type="radio" class="swatches__form--input" 
+          id="main-swatch-${index}-${this.handleize(value)}" 
+          name="${type}" value="${value}" data-position="${position}" 
+          ${value === this.activeOptions[position - 1] ? "checked" : ""}
+        >
+        <label class="swatches__form--label" 
+          for="main-swatch-${index}-${this.handleize(value)}" ${label_style}
+          tabindex="0" title="${value}">${value}</label>
+      </div>`;
 
     return swatch;
   };

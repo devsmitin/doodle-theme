@@ -1,0 +1,24 @@
+{% comment %} product-media {% endcomment %}
+
+{% if product.media.size == 1 or grid_view == false %}
+  <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 border-2 border-black rounded-lg overflow-hidden mb-2">
+    {% assign classList = "w-full h-full object-center object-cover" %}
+    {{ product.featured_image | image_url: width: 2000, format: 'pjpg' | image_tag: class: classList, loading: 'lazy' }}
+  </div>
+{% endif %}
+
+{% if product.media.size > 1 %}
+  {% assign image_index = 1 %}
+  <div class="w-full grid grid-cols-4 gap-2 thumbnail-gallery" id="thumbnail-gallery">
+    {% for media in product.media %}
+      {% if media.media_type == 'image' %}
+        <div class="aspect-w-1 aspect-h-1 bg-gray-200 border-2 border-black rounded-lg overflow-hidden{% if image_index == 1 and grid_view == true %} col-span-3 row-span-3{% endif %}"
+          data-image-id="{{ media.id }}" data-slide-index="{{ forloop.index0 }}">
+          {% assign classList = "w-full h-full object-center object-cover" %}
+          {{ media | image_url: width: 2000, format: 'pjpg' | image_tag: class: classList, loading: 'lazy' }}
+        </div>
+        {% assign image_index = image_index | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

@@ -3,12 +3,24 @@
   <span 
     data-counter
     data-action="minus"
-    class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-black border-r-0 w-7 h-7 md:h-8 flex items-center justify-center">-</span>
-  <input name="quantity" id="counter" aria-label="input" 
-    class="border border-black h-7 md:h-8 text-center w-14 pb-1" 
+    class="w-8 h-8 lg:h-9 lg:w-9 flex justify-center items-center cursor-pointer border border-black border-r-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 ">
+    {% render 'icons', icon: "minus" %}
+  </span>
+  <input name="quantity" aria-label="input" 
+    class="counter border border-black text-center w-14 pb-1" 
     type="text" value="{{ quantity | default: 1 }}" />
   <span 
     data-counter
     data-action="plus"
-    class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-black border-l-0 w-7 h-7 md:h-8 flex items-center justify-center">+</span>
+    class="w-8 h-8 lg:h-9 lg:w-9 flex justify-center items-center cursor-pointer border border-black border-l-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 ">
+    {% render 'icons', icon: "plus" %}
+  </span>
+  {%- comment -%}
+  {% if index %}
+  <a href="/cart/change?line={{ index }}&quantity=0" 
+    class="w-8 h-8 lg:h-9 lg:w-9 flex justify-center items-center cursor-pointer border border-black border-l-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">
+    {% render 'icons', icon: "close" %}
+  </a>
+  {% endif %}
+  {%- endcomment -%}
 </div>
