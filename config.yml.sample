@@ -1,0 +1,63 @@
+# This file contains the information needed for Shopify to authenticate
+# requests and edit/update your remote theme files.
+#
+# SETUP:
+# --------------------
+# 1. PASSWORD TOKEN : Request developer token from Branded Online SRE team, one should be provided with most setup direction sets.
+#
+# 2. THEME :Go to Shopify Admin > Online Store > Themes
+#
+# 3. THEME : Duplicate theme and rename it to "Dev-YOUR FIRST NAME" (Ex: "Dev-Greg")
+#
+# 4. THEME ID : Select Actions > Edit Code and copy the ID from the ending portion of the URL on that page it loads (This is your Theme ID)
+#
+# 5. THEME ID : Paste your theme ID to the "THEME_ID_HERE" field below
+#
+# 6. STORE NAME : Copy the shopify base url's name to the STORE_NAME field below (Ex: "example.myshopify.com" )
+#
+#
+# DOCUMENTATION LINKS:
+# --------------------
+#   Config Variables | http://shopify.github.io/themekit/configuration
+#   Ignore Patterns  | http://shopify.github.io/themekit/ignores
+
+development:
+  password: shap_xxxxxxxxxxxxxxxxxxxxxxx  #example, password format can be different
+  theme_id: "12345678901" #Quotes needed here only
+  store: example.myshopify.com
+  ignore_files:
+    - README.md
+    - .gitignore
+    - "*.png"
+    - "*.jpg"
+    - "*.jpeg"
+    - "*.gif"
+    - "*.mp4"
+    - "*.woff"
+    - "*.js.map"
+    - "*.ttf"
+    - "*.eot"
+    # - config/settings_data.json
+    # - assets/bundle.js.map
+    # - locales/
+
+
+production:
+  password: shap_xxxxxxxxxxxxxxxxxxxxxxx  #example, password format can be different
+  theme_id: "12345678901" #Quotes needed here only
+  store: example.myshopify.com
+  ignore_files:
+    - README.md
+    - .gitignore
+    - "*.png"
+    - "*.jpg"
+    - "*.jpeg"
+    - "*.gif"
+    - "*.mp4"
+    - "*.woff"
+    - "*.js.map"
+    - "*.ttf"
+    - "*.eot"
+    # - config/settings_data.json
+    # - assets/bundle.js.map
+    # - locales/
