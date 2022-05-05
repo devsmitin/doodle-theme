@@ -16,3 +16,5 @@ ehthumbs.db
 Thumbs.db
 
 # Shopify config file and build outputs
+# bundle.css
+# bundle.js

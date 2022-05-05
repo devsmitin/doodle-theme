@@ -4,17 +4,6 @@ A tailwind css starter using webpack and postcss
 
 This is a boilerplate for using webpack, tailwind css, sass/scss and es6 with babel in your shopify theme. There is no need to make any changes in this structure itself.
 
-## Workflow
-
-A short description of this workflow:
-
-- Clone your Shopify theme to the `shopify` directory
-- Edit theme locally using the Shopify CLI, Tailwind and Webpack
-- Commit changes to the feature branch
-- Merge feature branch with main branch once development is done
-
-This template acts as a wrapper for Shopify theme. The `shopify` directory holds the Shopify theme files along with your source files, which makes it compatible with Shopify / GitHub integrtion. Source files are located within `shopify/src` directory and it is ignored by Shopify when pushing to the store.
-
 ## Getting started
 
 ### Prerequisites
@@ -22,36 +11,41 @@ This template acts as a wrapper for Shopify theme. The `shopify` directory holds
 - [Shopify CLI](https://shopify.dev/themes/getting-started/create#step-1-install-shopify-cli)
 - [Node.js](https://nodejs.org/)
 
-### Installation
+### Workflow
 
-1. Run the following commands:
+A short description of workflow:
 
-    ```bash
+1. Clone this project, run below commands:
+
+    ```sh
     git clone https://github.com/devsmitin/tw-shopify.git
-    mv tw-shopify your-awesome-project
-    cd your-awesome-project
-    npm install
-    rm -rf .git
+    rm -rf .git # remove git
     ```
 
-2. Clone your shopify theme in `root` directory and rename it to `shopify`, which will merge it with the `shopify` directory of template.
+2. Clone your `awesome-shopify-project` in same directory and run below commands. If you dont have one already, skip to step 3
 
-3. Make sure the output file (`shopify/assets/bundle.css`) is included in the `head` of your `shopify/layout/theme.liquid` file.
+    ```sh
+    mv tw-shopify awesome-shopify-project
+    cd your-awesome-project
+    npm install
+    ```
+
+3. Use below command to download latest version of your theme (assuming that you are already logged in to your store from _shopify-cli_)
+
+    ```sh
+    shopify theme pull # select your prefered theme from list - maybe the live theme forto sync latest changes?
+    ```
+
+    Once done you can now add git using `git init` command or continue using local source.
+
+4. Now you can add build files to your theme. Add it to your layout file to use globally (prefered) or to any specific section file (as required). You can also load JS file at bottom of you page.
 
     ```liquid
     {{ 'bundle.css' | asset_url | stylesheet_tag }}
-    ```
-    
-    The same holds for `bundle.js` file created by Webpack. Ideally, it is best practice to include this file just before the end of `body` tag in the same file, but you can put this anywhere as per requirement. You can do this with the following line of code:
-
-    ```liquid
     <script src="{{ 'bundle.js' | asset_url }}" defer="defer"></script>
     ```
 
-4. In the first step, we removed git from this template using last command as there is no need to make any changes to this perticular template. You are required to commit changes within the `shopify` directory only.
-
-
-### Development
+### Development commands
 
 You will need a terminal window. Here it is assumed that you are using bash or similar command language. To use this with Windows, you will need to change few commands in `package.json` file.
 
@@ -72,6 +66,7 @@ You will need a terminal window. Here it is assumed that you are using bash or s
     ```
 
 3. You can find and update additional commands in `package.json` file to match your workflow.
+
 
 
 ## Final notes
