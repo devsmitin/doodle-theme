@@ -49,19 +49,14 @@ A short description of workflow:
 
 You will need a terminal window. Here it is assumed that you are using bash or similar command language. To use this with Windows, you will need to change few commands in `package.json` file.
 
-1. Build your code and serve your Shopify theme
+1. Build your code and serve your local Shopify theme
     
-    - First, log in to your store if you was not logged in already.
-      ```bash
-      shopify login --store your-store-name.myshopify.com
-      ```
-    - Build your code in development mode and serve your theme to your development store
-      ```bash
-      npm run start
-      ```
+    ```sh
+    npm run start
+    ```
 
 2. Once done with development, push your code with production build to your desired theme
-    ```bash
+    ```sh
     npm run publish
     ```
 
