@@ -7,12 +7,12 @@ class customScripts {
 
   _getElements() {
     const form = document.querySelector(
-      window.ds_storage.selectors.productForm
+      ds_storage.selectors.productForm
     );
     return form
       ? {
           form,
-          a2cbtn: form.querySelector(window.ds_storage.selectors.a2cbtn),
+          a2cbtn: form.querySelector(ds_storage.selectors.a2cbtn),
         }
       : {};
   }
@@ -68,9 +68,11 @@ class customScripts {
     // append wrapper to the placeholder
     cartWrapper_placeholder.appendChild(cartWrapper);
 
+    console.log('a2cbtn', a2cbtn);
     // insert placeholder before a2c button
     this._insertBefore(cartWrapper_placeholder, a2cbtn);
 
+    console.log('cloned_a2c', cloned_a2c);
     // cloned a2cbtn
     const cloned_a2c = a2cbtn.cloneNode(true);
     this._insertBefore(cloned_a2c, a2cbtn);
@@ -81,7 +83,7 @@ class customScripts {
     // get style of a2c btn
     let btn_style = a2cbtn.currentStyle || window.getComputedStyle(a2cbtn);
 
-    if (window.ds_storage.scrollTop) {
+    if (ds_storage.scrollTop) {
       cloned_a2c.setAttribute("type", "button");
       cloned_a2c.addEventListener("click", function (e) {
         e.preventDefault();
@@ -96,18 +98,18 @@ class customScripts {
     const callback = (inScreen) => {
       if (!inScreen) {
         cartWrapper.classList.add("isfixed");
-        window.ds_storage.btn_inscreen = false;
+        ds_storage.btn_inscreen = false;
       } else {
         cartWrapper.classList.remove("isfixed");
-        window.ds_storage.btn_inscreen = true;
+        ds_storage.btn_inscreen = true;
       }
     };
 
     this._observer(
       [form],
       callback,
-      window.ds_storage.config.removeObserver,
-      window.ds_storage.config.threshold
+      ds_storage.config.removeObserver,
+      ds_storage.config.threshold
     );
   }
 }

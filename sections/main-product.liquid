@@ -17,7 +17,7 @@
     %}
     
   
-    <div class="flex flex-col lg:flex-row gap-8">
+    <div class="flex flex-col lg:flex-row gap-8 lg:gap-x-14">
       <!-- Media -->
       <div class="w-full lg:w-1/2">
 
@@ -44,7 +44,9 @@
     
           {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
             {% if product.has_only_default_variant %}
-              <input name="id" value="{{ default_variant.id }}" type="hidden">
+              <div class="mt-6 lg:mt-8">
+                <input name="id" value="{{ default_variant.id }}" type="hidden">
+              </div>
               {% else %}
               <div class="mt-6 lg:mt-8">
                 <label class="form__label block mb-3" for="Variants-{{ section.id }}">Select variant</label>
