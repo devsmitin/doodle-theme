@@ -17,7 +17,7 @@ class TWTheme {
       fetch("https://ipinfo.io/json")
         .then((data) => data.json())
         .then((res) => {
-          if (res.ok) {
+          if (!doodle.cn(res.country)) {
             doodle.setCookie("user_location", JSON.stringify(res), 3);
             ul = res;
           }
