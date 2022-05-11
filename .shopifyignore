@@ -1,0 +1,14 @@
+.vscode
+node_modules
+src
+.babelrc
+.gitignore
+.theme-check.yml
+config.*
+package-lock.json
+package.json
+postcss.config
+README.md
+tailwind.config.js
+webpack.config.js
+LICENSE

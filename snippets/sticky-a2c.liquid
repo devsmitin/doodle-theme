@@ -1,0 +1,25 @@
+{% comment %}
+    Usage:
+    {% render 'sticky-a2c' %}
+{% endcomment %}
+
+{% assign has_options = false %}
+{% unless product.has_only_default_variant %}
+  {% assign has_options = true %}
+{% endunless %}
+
+<script>
+  window.doodle = window.doodle || {};
+  doodle.scrollTop = {{ has_options }};
+
+  doodle.selectors = doodle.selectors || {};
+  doodle.selectors.productForm = 'form[action="/cart/add"]'; 
+  doodle.selectors.a2cbtn = ".submit-btn",
+
+  doodle.config = doodle.config || {};
+  doodle.config.threshold = 0;
+  doodle.config.removeObserver = false;
+  doodle.config.scrollTop = doodle.scrollTop;
+
+  doodle.sticky_a2c_enable = true;
+</script>

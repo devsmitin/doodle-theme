@@ -1,7 +1,3 @@
-window.cn = function (o) {
-  return "undefined" == typeof o || null == o || "" == o.toString().trim();
-};
-
 class ProductMerge {
   constructor() {
     this.final_options = [];
@@ -9,22 +5,22 @@ class ProductMerge {
     this.activeOptions = [];
     this.activeVariant = null;
     this.dontMerge = false;
-    this.elements = this.getElements();
     this.variantInput;
+    this.elements = this.getElements();
     this.init();
   }
 
   getElements = () => {
-    const form = document.querySelector(ds_scripts.selectors.form_id);
+    const form = document.querySelector(doodle.selectors.form_id);
     return form
       ? {
           form,
           a2cButton: form.querySelector('[type="submit"]'),
-          details: document.querySelector(ds_scripts.selectors.details),
+          details: document.querySelector(doodle.selectors.details),
           oldOptions:
-            document.querySelector(ds_scripts.selectors.variants) ||
+            document.querySelector(doodle.selectors.variants) ||
             form.querySelector('[name="id"]').parentElement,
-          thumbs: document.querySelector(ds_scripts.selectors.thumbnails),
+          thumbs: document.querySelector(doodle.selectors.thumbnails),
         }
       : false;
   };
@@ -42,13 +38,13 @@ class ProductMerge {
     let { a2cButton } = this.elements;
     a2cButton.dataset.value =
       a2cButton.value.trim() || a2cButton.textContent.trim();
-    this.activeVariant = ds_scripts.current_value;
+    this.activeVariant = doodle.current_value;
 
     if (location.search) {
       let urlParams = location.search.slice(1).split("&");
       let variantParam = urlParams.find((param) => param.includes("variant"));
       let variantId = variantParam.split("=")[1];
-      if (!cn(variantId)) {
+      if (!doodle.cn(variantId)) {
         this.activeVariant = variantId;
       }
     }
@@ -86,13 +82,13 @@ class ProductMerge {
 
   createSwatch = (type, value, position, index) => {
     let label_style = "";
-    let { img_url_path } = ds_scripts;
+    let { file_img_url } = doodle;
     if (type === "color") {
       let cssColor = this.cssColor(value)
         ? this.cssColor(value).toLowerCase()
         : "";
       label_style = `style="background-color: ${cssColor}; background-image: url(${
-        img_url_path + "/" + this.handleize(value)
+        file_img_url + "/" + this.handleize(value)
       }.png?v=1); background-size: contain;"`;
     }
 
@@ -117,8 +113,8 @@ class ProductMerge {
   };
 
   variantsMerge = () => {
-    let main_variants = ds_scripts.main_product.product.variants || [];
-    let merge_variants = ds_scripts.related_product.product.variants || [];
+    let main_variants = doodle.main_product.product.variants || [];
+    let merge_variants = doodle.related_product.product.variants || [];
 
     this.all_variants = main_variants.concat(merge_variants);
 
@@ -132,8 +128,8 @@ class ProductMerge {
   };
 
   optionsMerge = () => {
-    let main_options = ds_scripts.main_product.options || [];
-    let merge_options = ds_scripts.related_product.options || [];
+    let main_options = doodle.main_product.options || [];
+    let merge_options = doodle.related_product.options || [];
 
     let final_options = [];
 
@@ -243,7 +239,7 @@ class ProductMerge {
       );
 
       let wrapper = this.createHtml("div", {
-        class: "swatch clearfix",
+        class: "ds-swatch clearfix",
         "data-option-index": index,
       });
 
@@ -349,7 +345,7 @@ class ProductMerge {
   };
 
   updateDetails = () => {
-    let historyState = !cn(this.activeVariant)
+    let historyState = !doodle.cn(this.activeVariant)
       ? "?variant=" + this.activeVariant
       : location.origin + location.pathname;
 
@@ -359,7 +355,7 @@ class ProductMerge {
 
   setSwatchSoldout = () => {
     let newVariants = document.querySelector(".new-variants");
-    if (cn(newVariants)) {
+    if (doodle.cn(newVariants)) {
       return false;
     }
     let inputs = newVariants.querySelectorAll("[type=radio]");
@@ -407,7 +403,7 @@ class ProductMerge {
 
   setVariantImage = (v_id) => {
     let variant = this.all_variants.find((variant) => variant.id == v_id);
-    if (cn(variant.featured_media)) return false;
+    if (doodle.cn(variant.featured_media)) return false;
 
     let id = variant.featured_media.id;
     let { thumbs } = this.elements;
@@ -428,5 +424,5 @@ class ProductMerge {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  new ProductMerge();
+  doodle.product_merge_enabled && new ProductMerge();
 });

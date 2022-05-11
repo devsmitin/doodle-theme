@@ -1,0 +1,43 @@
+{
+  "name": "tw-project",
+  "version": "1.0.0",
+  "description": "A starting point for an Online Store 2.0 theme using Tailwind CSS",
+  "main": "index.js",
+  "keywords": [
+    "Shopify Theme",
+    "Online Store 2.0",
+    "shopify-cli",
+    "Tailwind CSS",
+    "Webpack"
+  ],
+  "author": "@devsmitin",
+  "license": "ISC",
+  "scripts": {
+    "dev": "webpack --mode=development",
+    "build": "webpack --mode=production",
+    "download": "shopify theme pull",
+    "start": "webpack --mode=development & shopify theme serve",
+    "publish": "webpack --mode=production && shopify theme push"
+  },
+  "dependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.0",
+    "tailwindcss": "^3.0.22"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.2",
+    "@babel/preset-env": "^7.16.11",
+    "autoprefixer": "^10.4.2",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.6.0",
+    "css-minimizer-webpack-plugin": "^3.4.1",
+    "mini-css-extract-plugin": "^2.5.3",
+    "node-sass": "^7.0.1",
+    "postcss-loader": "^6.2.1",
+    "sass-loader": "^12.4.0",
+    "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.1",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
+  }
+}

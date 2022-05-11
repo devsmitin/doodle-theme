@@ -1,0 +1,78 @@
+window.doodle = window.doodle || {};
+
+doodle.cn = function (o) {
+  return "undefined" == typeof o || null == o || "" == o.toString().trim();
+};
+
+doodle.setCookie = function (t, e, s) {
+  const i = new Date();
+  i.setTime(i.getTime() + 24 * s * 60 * 60 * 1e3);
+  let o = "expires=" + i.toUTCString();
+  document.cookie = t + "=" + e + ";" + o + ";path=/";
+};
+
+doodle.getCookie = function (t) {
+  let e = t + "=",
+    s = document.cookie.split(";");
+  for (let t = 0; t < s.length; t++) {
+    let i = s[t];
+    for (; " " == i.charAt(0); ) i = i.substring(1);
+    if (0 == i.indexOf(e)) return i.substring(e.length, i.length);
+  }
+  return "";
+};
+
+doodle.money_format = "{{ shop.money_format }}";
+
+doodle.formatMoney = function (t, e) {
+  function o(t, e) {
+    return void 0 === t ? e : t;
+  }
+  function i(t, e, i, r) {
+    if (
+      ((e = o(e, 2)), (i = o(i, ",")), (r = o(r, ".")), isNaN(t) || null == t)
+    )
+      return 0;
+    t = (t / 100).toFixed(e);
+    var n = t.split(".");
+    return (
+      n[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + i) +
+      (n[1] ? r + n[1] : "")
+    );
+  }
+  "string" == typeof t && (t = t.replace(".", ""));
+  var r = "",
+    n = /\{\{\s*(\w+)\s*\}\}/,
+    a = e || this.money_format;
+  switch (a.match(n)[1]) {
+    case "amount":
+      r = i(t, 2);
+      break;
+    case "amount_no_decimals":
+      r = i(t, 0);
+      break;
+    case "amount_with_comma_separator":
+      r = i(t, 2, ".", ",");
+      break;
+    case "amount_with_space_separator":
+      r = i(t, 2, " ", ",");
+      break;
+    case "amount_with_period_and_space_separator":
+      r = i(t, 2, " ", ".");
+      break;
+    case "amount_no_decimals_with_comma_separator":
+      r = i(t, 0, ".", ",");
+      break;
+    case "amount_no_decimals_with_space_separator":
+      r = i(t, 0, " ");
+      break;
+    case "amount_with_apostrophe_separator":
+      r = i(t, 2, "'", ".");
+  }
+  return a.replace(n, r);
+};
+
+doodle.randomizer = function (t, e) {
+  let s = Math.floor(Math.random() * e);
+  return Math.random() > 0.5 ? (t -= s) : (t += s), t;
+};
