@@ -3,7 +3,6 @@
  * Cteate section wise sass / scss and @import that to here
  */
 
-// Global css! All the @imoprt rules prior to this comment
 .bg-theme,
 .hover\:bg-theme:hover {
   background-color: rgba(var(--color-primary), 1);
@@ -25,5 +24,4 @@
   fill: rgba(var(--color-primary), 1);
 }
 
-
-@import '_swatches';
+@import "_swatches";

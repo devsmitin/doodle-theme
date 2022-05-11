@@ -32,10 +32,10 @@
       <div class="w-full lg:w-1/2 product-details" id="product-details">
         <div class="sticky top-0">
           
-          <h2 class="text-3xl md:text-5xl font-semibold font-serif mb-5 text-theme">{{ product.title }}</h2>
+          <h2 class="text-3xl md:text-5xl font-semibold font-heading mb-5 text-theme">{{ product.title }}</h2>
           <div class="mb-5">{{ product.description }}</div>
     
-          <p class="font-serif mb-5">
+          <p class="font-heading mb-5">
             {% if product.compare_at_price %}
               <s class="text-2xl lg:text-3xl font-light mr-3 price-item--compare">{{ product.compare_at_price | money_with_currency }}</s>
             {% endif %}
@@ -132,25 +132,5 @@
 </script>
 
 
-
-<script>
-  window.ds_scripts = window.ds_scripts || {};
-  ds_scripts.main_product = {
-    "product": {{ product | json }}, 
-    "options": {{ product.options_with_values | json }}
-  };
-  ds_scripts.related_product = {
-    "product": {{ all_products[relative] | json }}, 
-    "options": {{ all_products[relative].options_with_values | json }}
-  };
-  ds_scripts.current_value = {{ product.selected_or_first_available_variant.id }};
-  ds_scripts.asset_url = "{{ 'test' | file_img_url: 'medium' }}";
-  ds_scripts.selectors = ds_scripts.selectors || {
-    form_id : "#{{ product_form_id }}",
-    details : "#product-details",
-    thumbnails : "#thumbnail-gallery",
-    variants: "#option-selectors"
-  };
-  ds_scripts.img_url_path = "//cdn.shopify.com/s/files/1/0557/9541/7135/files/";
-</script>
-<script src="{{ 'product-merge.js' | asset_url }}" defer="defer"></script>
+{% render 'sticky-a2c' %}
+{% render 'product-merge', form_id: product_form_id %}

@@ -6,18 +6,25 @@ class TWTheme {
 
   initEvents() {
     this.clickHandler();
-    if (location.protocol === "https:") {
-      this.logCountry();
-    }
+    this.logCountry();
   }
 
   logCountry = () => {
-    fetch("https://ipinfo.io/json")
-      .then((data) => data.json())
-      .then((res) => {
-        let { city, country } = res;
-        console.log(`You're browsing from ${city}, ${country}. 😈`);
-      });
+    let ul = doodle.getCookie("user_location");
+    if (!doodle.cn(ul)) {
+      ul = JSON.parse(ul);
+    } else {
+      fetch("https://ipinfo.io/json")
+        .then((data) => data.json())
+        .then((res) => {
+          if (res.ok) {
+            doodle.setCookie("user_location", JSON.stringify(res), 3);
+            ul = res;
+          }
+        });
+    }
+    typeof ul === "object" &&
+      console.log(`You're browsing from ${ul.city}, ${ul.country}. 😈`);
   };
 
   clickHandler = () => {

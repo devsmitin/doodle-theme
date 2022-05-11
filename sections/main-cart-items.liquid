@@ -1,10 +1,12 @@
 {% comment %} main-cart-items {% endcomment %}
 <div class="bg-white border-b-2 border-black">
   <div class="container mx-auto px-4 md:px-6 py-9 md:py-12 lg:py-16">
-    <h1 class="text-3xl mb-3 font-bold text-center">Your Bag</h1>
+    <h1 class="text-3xl mb-10 font-bold text-center">Your Bag</h1>
 
     {% if cart.items.size != 0 %}
       <form action="/cart" method="post">
+      
+      <hr>
         
       <div class="cart-items mt-6">
         {% for item in cart.items %}
@@ -18,10 +20,11 @@
           {% endfor %}
           {% endcapture %}
 
-          <div class="flex p-2 md:p-4 mb-5 border border-black">
+          <div class="flex p-2 md:p-4 mb-5">
             <div class="h-20 w-20 sm:h-28 sm:w-28 lg:h-32 lg:w-32 flex-shrink-0 overflow-hidden border border-black">
               {% assign classList = "h-full w-full object-cover object-center" %}
-              {{ item.variant.featured_image | image_url: width: 200, format: 'pjpg' | image_tag: class: classList, loading: 'lazy' }}
+              {% assign item_image = item.variant.featured_image | default: product.featured_image %}
+              {{ item_image | image_url: width: 200, format: 'pjpg' | image_tag: class: classList, loading: 'lazy' }}
             </div> 
   
             <div class="ml-4 flex flex-1 flex-col md:flex-row">
@@ -54,10 +57,15 @@
 
       <hr>
 
-      <button type="submit" name="checkout" 
-        class="checkout-button submit-btn w-full mb-2 mt-6 lg:mt-12 px-10 py-4 bg-theme border-2 border-black text-lg text-white font-semibold">
-        Checkout
-      </button>
+      <div class="flex">
+        <div class="w-4/12 ml-auto mb-2 mt-6 lg:mt-12 p-4">
+          <button type="submit" name="checkout" 
+            class="checkout-button submit-btn w-full px-10 py-4 bg-theme border-2 border-black text-lg text-white font-semibold">
+            Checkout
+          </button>
+        </div>
+      </div>
+
     </form>
     {% else %}
     <p class="text-center">Is empty... </p>

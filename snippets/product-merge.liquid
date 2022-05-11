@@ -1,0 +1,29 @@
+{% comment %}
+    Usage:
+    {% render 'product-merge', form_id: product_form_id %}
+{% endcomment %}
+
+<script>
+  window.doodle = window.doodle || {};
+
+  doodle.file_img_url = "{{ "fake.png" | file_img_url: 'master' | split: 'fake.png' | first }}";
+
+  doodle.main_product = {
+    "product": {{ product | json }}, 
+    "options": {{ product.options_with_values | json }}
+  };
+  doodle.related_product = {
+    "product": {{ all_products[relative] | json }}, 
+    "options": {{ all_products[relative].options_with_values | json }}
+  };
+  doodle.current_value = {{ product.selected_or_first_available_variant.id }};
+  doodle.asset_url = "{{ 'test' | file_img_url: 'medium' }}";
+  
+  doodle.selectors = doodle.selectors || {};
+  doodle.selectors.form_id = "#{{ form_id }}";
+  doodle.selectors.details = "#product-details";
+  doodle.selectors.thumbnails = "#thumbnail-gallery";
+  doodle.selectors.variants= "#option-selectors";
+  
+  doodle.product_merge_enabled = true
+</script>
