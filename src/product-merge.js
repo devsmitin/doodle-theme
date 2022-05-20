@@ -43,8 +43,8 @@ class ProductMerge {
     if (location.search) {
       let urlParams = location.search.slice(1).split("&");
       let variantParam = urlParams.find((param) => param.includes("variant"));
-      let variantId = variantParam.split("=")[1];
-      if (!doodle.cn(variantId)) {
+      if (!doodle.cn(variantParam)) {
+        let variantId = variantParam.split("=")[1];
         this.activeVariant = variantId;
       }
     }
