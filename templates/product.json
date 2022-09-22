@@ -1,16 +1,114 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
-      "settings": {}
+      "type": "pt-main-product",
+      "blocks": {
+        "5b7f0b9e-ec3b-463a-a010-d2c5d6c64309": {
+          "type": "title",
+          "settings": {
+          }
+        },
+        "d8a09ba5-b040-4afb-b33b-12fb20a1c8cd": {
+          "type": "text",
+          "settings": {
+          }
+        },
+        "b293df95-52cb-460a-aec7-0c1eb6014a42": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "ba71d120-21e8-43b9-a8e3-45db328c8c54": {
+          "type": "form",
+          "settings": {
+          }
+        },
+        "91386ac5-9eb0-4909-8163-4cb74e89024f": {
+          "type": "wishlist",
+          "settings": {
+            "custom_css": ".wishlisthero-product-page-button-container {\n  background: white !important;\n  padding: 0 !important;\n  display: flex;\nborder: 1px solid #5F6237;\n}\n\n.wishlisthero-product-page-button-container:hover {\n  background: #5F6237 !important;\n  padding: 0 !important;\n  display: flex;\ncolor: #ffffff !important;\n}\n.wishlisthero-product-page-button-container button {\n  height: 64px !important;\n  width: 100%;\n}\n.wishlisthero-product-page-button-container button,\n.wishlisthero-product-page-button-container button svg {\n  color: #5F6237 !important;\n}\n\n.wishlisthero-product-page-button-container button,\n.wishlisthero-product-page-button-container button svg :hover {\n  color: #ffffff;\n}"
+          }
+        },
+        "315c216c-376f-46f7-8e4d-04e1326a649b": {
+          "type": "offers",
+          "settings": {
+            "offer1": "Get 10% off on your first order | Coupon Code \"FIRSTORDER\"",
+            "offer2": "",
+            "offer3": ""
+          }
+        },
+        "8f95b68a-12cb-4fe7-b412-d6eae8b740e6": {
+          "type": "tabs",
+          "settings": {
+          }
+        },
+        "4ffd614b-a408-42ab-af16-e0ba4994462e": {
+          "type": "shopify:\/\/apps\/product-reviews\/blocks\/reviews\/bae150af-8da8-48b2-9867-398188115e5f",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "5b7f0b9e-ec3b-463a-a010-d2c5d6c64309",
+        "d8a09ba5-b040-4afb-b33b-12fb20a1c8cd",
+        "b293df95-52cb-460a-aec7-0c1eb6014a42",
+        "ba71d120-21e8-43b9-a8e3-45db328c8c54",
+        "91386ac5-9eb0-4909-8163-4cb74e89024f",
+        "315c216c-376f-46f7-8e4d-04e1326a649b",
+        "8f95b68a-12cb-4fe7-b412-d6eae8b740e6",
+        "4ffd614b-a408-42ab-af16-e0ba4994462e"
+      ],
+      "settings": {
+      }
+    },
+    "text-with-image": {
+      "type": "pt-text-with-image",
+      "settings": {
+        "section_layout": "layout1",
+        "title": "Marvellous Planter",
+        "text": "Developed the concept of exclusivity, a Sol'ace features timeless furniture, with natural fabrics, curved lines, plenty of mirrors and classic design",
+        "link_text": "Shop now",
+        "link_url": "shopify:\/\/collections\/all",
+        "image": "shopify:\/\/shop_images\/product-showcase.jpg"
+      }
     },
     "product-recommendations": {
-      "type": "product-recommendations",
-      "settings": {}
+      "type": "pt-product-recommendations",
+      "settings": {
+        "collection": "frontpage"
+      }
+    },
+    "showcase-image": {
+      "type": "pt-showcase-image",
+      "blocks": {
+        "80fdaf8a-2e56-41bb-a572-995799e1286f": {
+          "type": "product",
+          "settings": {
+            "title": "Doge glass vase",
+            "description": "starting price ₹2499"
+          }
+        },
+        "32eabff8-08f7-42c9-b616-a8ada7bb191e": {
+          "type": "product",
+          "settings": {
+            "title": "Basic planter",
+            "description": "starting price ₹1499"
+          }
+        }
+      },
+      "block_order": [
+        "80fdaf8a-2e56-41bb-a572-995799e1286f",
+        "32eabff8-08f7-42c9-b616-a8ada7bb191e"
+      ],
+      "settings": {
+        "showcase_image": "shopify:\/\/shop_images\/home-bg.jpg"
+      }
     }
   },
   "order": [
     "main",
-    "product-recommendations"
+    "text-with-image",
+    "product-recommendations",
+    "showcase-image"
   ]
 }

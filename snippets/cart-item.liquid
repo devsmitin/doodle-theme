@@ -1,0 +1,31 @@
+{% comment %} cart-item {% endcomment %}
+<!--cart-item -->
+<div class="single-cart-item flex">
+  <div class="cart-img-image cover-image">
+    {% render 'image-tag', 
+      image: item, 
+      image_alt: item.title
+    %}
+  </div>
+
+  <div class="cart-desc" data-key="{{ item.key }}">
+    <div class="cart-product-details">
+      <a class="cart-product-link" href="{{ item.url }}">{{ item.title }}</a>
+      <p>{{ item.final_line_price | money_with_currency }}</p>
+    </div>
+
+    <div class="flex justify-content-between">
+      <div class="number-input">
+        <button type="button" data-cart-update="minus">
+          {% render 'icon', icon: "minus" %}
+        </button>
+        <input class="quantity" min="0" name="quantity" value="{{ item.quantity }}" type="number" />
+        <button type="button" data-cart-update="plus" class="plus">
+          {% render 'icon', icon: "plus" %}
+        </button>
+      </div>
+
+      <button type="button" data-cart-update="remove" class="button-unstyled cart-remove">Remove</button>
+    </div>
+  </div>
+</div>

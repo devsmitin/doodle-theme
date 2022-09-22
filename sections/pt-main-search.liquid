@@ -1,0 +1,49 @@
+{% comment %} pt-main-search {% endcomment %}
+
+{% assign _s = section.settings %}
+
+
+{% comment %} breadcrum {% endcomment %}
+{% render 'breadcrumb' %}
+
+{% comment %} header {% endcomment %}
+<section class="inner-banner-main">
+  <div class="container">
+    <h1>Results for “{{ search.terms }}”</h1>
+    {% unless search.results_count == 0 %}
+      <p>{{ search.results_count }} products found</p>
+    {% endunless %}
+  </div>
+</section>
+
+
+{% comment %} main-grid {% endcomment %}
+<section class="section-pad">
+  <div class="container">
+    <div class="row">
+
+      {% if search.results_count == 0 %}
+        <div class="col-12 text-center">
+          <p class="h4">No products found.</p>
+        </div>
+      {% else %}
+        {%- for product in search.results -%}
+        <div class="col-md-6 col-lg-4 col-6">
+          {% render 'product-card', product: product %}
+        </div>
+        {% endfor %}
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Search results page",
+  "settings": [
+
+  ]
+}
+{% endschema %}

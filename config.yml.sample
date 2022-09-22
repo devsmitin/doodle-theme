@@ -7,7 +7,7 @@
 #
 # 2. THEME :Go to Shopify Admin > Online Store > Themes
 #
-# 3. THEME : Duplicate theme and rename it to "Dev-YOUR FIRST NAME" (Ex: "Dev-Greg")
+# 3. THEME : Duplicate theme and rename it. Something like "Dev-YOUR NAME" (Ex: "Dev-Greg")
 #
 # 4. THEME ID : Select Actions > Edit Code and copy the ID from the ending portion of the URL on that page it loads (This is your Theme ID)
 #

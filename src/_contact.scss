@@ -1,0 +1,36 @@
+.contact-us-main {
+  padding: 40px 0 0;
+
+  @media (max-width: 767px) {
+    padding: 0;
+  }
+}
+.contact-details {
+  > p {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: $darkGreen;
+    margin-bottom: 32px;
+  }
+
+  .single-contact-detail {
+    padding-bottom: 30px;
+    h4 {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 16px;
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: $black;
+      font-weight: 500;
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    margin-top: 40px;
+  }
+}

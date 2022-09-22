@@ -1,0 +1,74 @@
+@import './variables';
+
+.about-hero {
+  background-image: var(--about-hero);
+  background-position: left center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  max-height: 900px;
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .about-hero-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+  }
+
+  h1 {
+    font-size: 72px;
+    line-height: 120%;
+    text-align: center;
+
+    margin: 0 auto 30px;
+  }
+
+  @media (max-width: 767px) {
+    height: 400px;
+    h1 {
+      font-size: 34px;
+    }
+  }
+}
+
+.about-img-bg {
+  background-image: var(--about-img-bg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .mid-abt-prod {
+    margin-bottom: 120px;
+  }
+}
+
+.login-content {
+  h1 {
+    font-size: 48px;
+    line-height: 120%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 50px;
+
+    a {
+      color: $black;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 767px) {
+    h1 {
+      font-size: 36px;
+    }
+  }
+}

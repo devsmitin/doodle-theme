@@ -1,18 +1,25 @@
 {
   "sections": {
-    "banner": {
-      "type": "main-collection-banner",
+    "product-grid": {
+      "type": "pt-product-grid",
       "settings": {
+        "description": "Developed the concept of exclusivity, a Sol'ace features timeless furniture, with natural fabrics"
       }
     },
-    "product-grid": {
-      "type": "main-collection-product-grid",
+    "text-with-image": {
+      "type": "pt-text-with-image",
       "settings": {
+        "section_layout": "layout1",
+        "title": "Marvellous Planter",
+        "text": "Developed the concept of exclusivity, a Sol'ace features timeless furniture, with natural fabrics, curved lines, plenty of mirrors and classic design",
+        "link_text": "Shop now",
+        "link_url": "shopify:\/\/collections\/all",
+        "image": "shopify:\/\/shop_images\/product-showcase.jpg"
       }
     }
   },
   "order": [
-    "banner",
-    "product-grid"
+    "product-grid",
+    "text-with-image"
   ]
 }

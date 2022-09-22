@@ -1,27 +1,20 @@
 /* 
  * Do not write css / scss here
  * Cteate section wise sass / scss and @import that to here
- */
+*/
 
-.bg-theme,
-.hover\:bg-theme:hover {
-  background-color: rgba(var(--color-primary), 1);
-}
+// bootstrap source
+// @import "~bootstrap/scss/bootstrap";
 
-.text-theme {
-  color: rgba(var(--color-primary), 1);
-}
-.hover\:text-theme:hover {
-  color: rgba(var(--color-primary), 0.7);
-}
-
-.border-theme,
-.hover\:border-theme:hover {
-  border-color: rgba(var(--color-primary), 1);
-}
-
-[fill="#6c63ff"] {
-  fill: rgba(var(--color-primary), 1);
-}
-
-@import "_swatches";
+// custom files
+@import 'global';
+@import 'header';
+@import 'footer';
+@import 'homepage';
+@import 'collection';
+@import 'product';
+@import 'contact';
+@import 'content-pages';
+@import 'blogs';
+@import 'account';
+@import 'custom';

@@ -1,0 +1,92 @@
+{% comment %} pt-blog-header {% endcomment %}
+
+{% assign _s = section.settings %}
+
+{% assign pos = _s.featured_blog_pos %}
+{% if blog.articles.size < pos %}
+  {% assign pos = blog.articles.size %}
+{% endif %}
+
+<section class="section-gap">
+  <div class="container">
+    <h2 class="heading-small">{{ _s.title | default: blog.title }}</h2>
+
+    <div class="blog-listing-main">
+      <div class="row">
+        {% for article in blog.articles %}
+          <div class="col-md-6">
+            <a href="{{ article.url }}" class="blog-listing-single">
+              <div class="blog-listing-thumb cover-image">
+                {% render 'image-tag', 
+                  image: article, 
+                  image_alt: article.title, 
+                %}
+              </div>
+
+              <div class="blog-listing-desc">
+                <h4>{{ article.title | truncatewords: 10 }}</h4>
+
+                {% capture article_excerpt %}
+                  {%- if article.excerpt.size > 0 -%}
+                    {{ article.excerpt | strip_html | truncatewords: 20 }}
+                  {%- else -%}
+                    {{ article.content | strip_html | truncatewords: 20 }}
+                  {%- endif -%}
+                {% endcapture %}
+
+                <p>{{ article_excerpt }}</p>
+
+                <p class="listing-date">{{ article.published_at | time_tag: format: 'date' }}</p>
+              </div>
+            </a>
+          </div>
+
+          {% if forloop.index == pos and _s.featured_blog != blank %}
+      </div> 
+    </div>
+  </div>
+</section>
+
+{% render 'pt-featured-article', article: _s.featured_blog %}
+
+<section class="section-gap">
+  <div class="container">
+    <h2 class="heading-small">More Stories</h2>
+
+    <div class="blog-listing-main">
+      <div class="row">
+          {% endif %}
+        
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main blog list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Recent Stories"
+    },
+    {
+      "type": "article",
+      "id": "featured_blog",
+      "label": "Featured blog"
+    },
+    {
+      "type": "range",
+      "id": "featured_blog_pos",
+      "min": 2,
+      "max": 6,
+      "step": 2,
+      "label": "Featured blog position",
+      "default": 2
+    }
+  ]
+}
+{% endschema %}

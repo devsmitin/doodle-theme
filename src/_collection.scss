@@ -1,0 +1,115 @@
+@import 'variables';
+
+.product-filter-sort-block {
+  .button-unstyled {
+    font-size: 16px;
+    line-height: 140%;
+  }
+}
+
+.filter-main {
+  .filter-head {
+    font-weight: 500;
+    position: relative;
+    margin-bottom: 40px;
+    &:after {
+      width: 30px;
+      top: 0;
+      background-color: $black;
+      height: 1px;
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 12px;
+      transition: 0.4s ease;
+      transform-origin: left center;
+    }
+  }
+
+  .filter-category {
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba($black, 0.2);
+
+    .single-filter:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .single-filter {
+    margin-bottom: 25px;
+    input {
+      display: none;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0;
+      cursor: pointer;
+      color: $black;
+      opacity: 0.5;
+      transition: 0.3s ease;
+
+      svg {
+        transition: 0.3s ease;
+        transform: rotate(0);
+      }
+    }
+
+    input:checked + label {
+      opacity: 1;
+      font-weight: 500;
+
+      svg {
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  .filter-footer {
+    position: relative;
+    margin: 10px 48px 30px;
+    padding: 0;
+    height: 60px;
+    &.filters-active {
+      .button-full {
+        width: 60%;
+      }
+      .reset-button {
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: 0.2s;
+      }
+    }
+    .button {
+      position: absolute;
+      inset: 0;
+    }
+    .reset-button {
+      background-color: transparent;
+      width: 120px;
+      margin-left: 25px;
+      // padding: 19px 10px;
+      min-width: 0;
+      transform: translateY(30px);
+      opacity: 0;
+      transition: 0.6s ease-out;
+      inset: 0 0 0 auto;
+
+      .link-text:before,
+      .link-text:after {
+        color: $black;
+      }
+    }
+
+    @media (max-width: 767px) {
+      margin: 20px;
+      padding: 0;
+
+      .reset-button {
+        color: $black;
+      }
+    }
+  }
+}

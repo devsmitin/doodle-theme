@@ -8,21 +8,55 @@
   endif
 %}
 
-<div class="product-card group relative">
-  <a href="{{ product_url }}" class="group">
-    <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-2xl overflow-hidden border-2 border-black">
-      {% assign classList = "w-full h-full object-center object-cover" %}
-      {% if product.featured_image != blank %}
-        {{ product.featured_image | image_url: width: 500, format: 'pjpg' | image_tag: alt: product.title, class: classList }}
-      {% else %}
-        {{ 'product-2' | placeholder_svg_tag: classList }}
-      {% endif %}
+
+<div class="single-product-listing">
+  <!-- Add class "PRODUCT-MESSAGE" to show action button stauts like added to cart, added to wishlist -->
+  <div class="long-product-img cover-image product-image product-message-">
+    <a href="{{ product_url }}">
+      {% render 'image-tag', 
+        image: product.featured_media, 
+        image_alt: product.featured_media.alt, 
+      %}
+      <p class="product-hover-text">View Product</p>
+    </a>
+
+    <div class="product-action-button">
+      <span data-toggle="tooltip" data-bs-placement="left" title="Add to wishlist" aria-label="Add to wishlist">
+        {% render 'wishlisthero-collection-product', product: product %}
+      </span>
+      {% comment %} 
+      <button class="button-unstyled" type="button" data-toggle="tooltip" data-bs-placement="left" title="Add to wishlist" aria-label="Add to wishlist">
+        {% render 'icon', icon: "heart" %}
+      </button>
+      {% endcomment %}
+      {%- comment -%}
+      <button class="button-unstyled" type="button" data-toggle="tooltip" data-bs-placement="left" title="Add to cart" aria-label="Add to cart">
+        {% render 'icon', icon: "cart" %}
+      </button>
+      {%- endcomment -%}
+      <button class="button-unstyled share_button" type="button" 
+        data-toggle="tooltip" 
+        data-bs-placement="left" 
+        title="Share product" 
+        aria-label="share product"
+        data-product="{{ product.title }}"
+        data-productlink="{{ product.url | prepend: shop.url }}"
+      >
+        {% render 'icon', icon: "share" %}
+      </button>
     </div>
-    <div class="px-2">
-      <h3 class="mt-3 font-medium">{{ product.title }}</h3>
-      <p class="mt-1 text-xl font-medium">
-        {{ product.price | money_with_currency }}
-      </p>
+
+    <div class="product-rating rating-tag">
+      4.5 {% render 'icon', icon: "star" %}
     </div>
-  </a>
+  </div>
+
+  <div class="product-listing-desc">
+    <p>{{ product.title }}</p>
+    {% if product.price_varies %}
+    <p class="text-end">{{ product.price_min | money_without_trailing_zeros }} - {{ product.price_max | money_without_trailing_zeros }}</p>
+    {% else %}
+    <p class="text-end">{{ product.price | money_without_trailing_zeros }}</p>
+    {% endif %}
+  </div>
 </div>

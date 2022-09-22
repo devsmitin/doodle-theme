@@ -1,0 +1,76 @@
+{% comment %} pt-collection-list {% endcomment %}
+
+{% assign _s = section.settings %}
+
+{% comment %} breadcrum {% endcomment %}
+{% render 'breadcrumb' %}
+
+{% comment %} header {% endcomment %}
+<section class="inner-banner-main">
+  <div class="container">
+    <h1>{{ _s.title }}</h1>
+    {% unless _s.description == blank %}
+      <p>{{ _s.description }}</p>
+    {% endunless %}
+  </div>
+</section>
+
+{% comment %} main-grid {% endcomment %}
+<section class="section-pads">
+  <div class="container">
+    <ul class="list-unstyled row" role="list">
+      {%- for collection in collections -%}
+        <li class="col-md-6 col-lg-4 col-6 mb-5">
+          {% comment %} {% render 'card-collection', card_collection: collection, media_aspect_ratio: section.settings.image_ratio, columns: 3 %} {% endcomment %}
+
+          <div class="item">
+            <div class="single-blog-item">
+              <a href="{{ collection.url }}" class="long-product-img mb-3">
+                {% unless collection.featured_image == nil %}
+                  {% render 'image-tag', 
+                    image: collection.featured_image.src, 
+                    image_alt: collection.featured_image.alt
+                  %}
+                {% else %}
+                  
+                  {{ 'product-6' | placeholder_svg_tag: "border" }}  
+                {% endunless %}
+              </a>
+
+              <h3 class="single-blog-item-title font-body mb-3">{{ collection.title }}</h3>
+
+              <a class="line-button" href="{{ collection.url }}">
+                <span class="link-text" data-text="View collection">View collection</span>
+              </a>
+            </div>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collections"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "info": "Text to show when no description is available. This will remain same on all collections."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products grid"
+    }
+  ]
+}
+{% endschema %}

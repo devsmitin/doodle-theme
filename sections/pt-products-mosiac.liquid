@@ -1,0 +1,137 @@
+{% comment %} pt-product-mosiac {% endcomment %}
+
+{% assign _s = section.settings %}
+
+
+<section class="section-pad bg-lightgrey">
+  <div class="mosiac-product-listing d-flex">
+    <div class="mosiac-col-35">
+
+      {% assign left_count = 0 %}
+      {% for block in section.blocks %}
+        {% if block.type == "left_products" %}
+          {% assign _b = block.settings %}
+          <div class="single-mosiac-product relative{% if left_count == 1 or left_count == 2 %} big-mosiac-product{% endif %}">
+            {% unless _b.product == blank %}
+            {% render 'image-tag', 
+              image: _b.product.featured_image, 
+              image_alt: _b.product.featured_image.alt, 
+            %}  
+    
+            <div class="mosiac-product-hover">
+              <h3>{{ _b.product.title }}</h3>
+              <a class="line-button white" href="{{ _b.product.url }}">
+                <span class="link-text" data-text="Shop now">Shop now</span>
+              </a>
+            </div>
+            {% endunless %}
+          </div>
+          {% assign left_count = left_count | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="mosiac-col-center">
+      {% for block in section.blocks %}
+        {% if block.type == "center_product" %}
+          {% assign _b = block.settings %}
+          <div class="single-mosiac-product relative">
+            {% unless _b.product == blank %}
+            {% render 'image-tag', 
+              image: _b.product.featured_image, 
+              image_alt: _b.product.featured_image.alt, 
+            %}  
+    
+            <div class="mosiac-product-hover">
+              <h3>{{ _b.product.title }}</h3>
+              <a class="line-button white" href="{{ _b.product.url }}">
+                <span class="link-text" data-text="Shop now">Shop now</span>
+              </a>
+            </div>
+            {% endunless %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="mosiac-col-35">
+
+      {% assign right_count = 0 %}
+      {% for block in section.blocks %}
+        {% if block.type == "right_products" %}
+          {% assign _b = block.settings %}
+          <div class="single-mosiac-product relative{% if right_count == 1 or right_count == 2 %} big-mosiac-product{% endif %}">
+            {% unless _b.product == blank %}
+            {% render 'image-tag', 
+              image: _b.product.featured_image, 
+              image_alt: _b.product.featured_image.alt, 
+            %}  
+    
+            <div class="mosiac-product-hover">
+              <h3>{{ _b.product.title }}</h3>
+              <a class="line-button white" href="{{ _b.product.url }}">
+                <span class="link-text" data-text="Shop now">Shop now</span>
+              </a>
+            </div>
+            {% endunless %}
+          </div>
+          {% assign right_count = right_count | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Products mosiac",
+  "settings": [
+
+  ],
+  "blocks": [
+    {
+      "type": "left_products",
+      "name": "Left side products",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    },
+    {
+      "type": "right_products",
+      "name": "Right side products",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    },
+    {
+      "type": "center_product",
+      "name": "Center product",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products mosiac"
+    }
+  ]
+}
+{% endschema %}
+

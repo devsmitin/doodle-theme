@@ -1,0 +1,232 @@
+{% comment %} pt-product-grid {% endcomment %}
+
+{% assign _s = section.settings %}
+
+{% comment %} breadcrum {% endcomment %}
+{% render 'breadcrumb' %}
+
+{% comment %} header {% endcomment %}
+<section class="inner-banner-main">
+  <div class="container">
+    <h1>{{ collection.title }}</h1>
+    <p>{{ collection.description | default: _s.description }}</p>
+  </div>
+</section>
+
+{% comment %} filter bar and sort by {% endcomment %}
+<div class="product-filter-sort-block py-3 top-bottom-border">
+  <div class="container">
+    <div class="row">
+      <div class="col-5 col-sm-6">
+        <button class="button-unstyled filter-toggle">Filter</button>
+      </div>
+      <div class="col-7 col-sm-6 text-end">
+        <button class="button-unstyled dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Sort By: <span id="sort-by-text">{{ collection.default_sort_by }}</span>
+        </button>
+
+        <ul class="dropdown-menu sort-menu">
+          <li class="d-none"><button type="button" class="dropdown-item" data-sort="manual">Featured</button></li>
+          <li><button type="button" class="dropdown-item" data-sort="created-descending">New</button></li>
+          <li class="d-none"><button type="button" class="dropdown-item" data-sort="created-ascending">Older first</button></li>
+          <li><button type="button" class="dropdown-item" data-sort="best-selling">Popularity</button></li>
+          <li class="d-none"><button type="button" class="dropdown-item" data-sort="title-ascending">Alphabetically</button></li>
+          <li class="d-none"><button type="button" class="dropdown-item" data-sort="title-descending">Alphabetically, descending</button></li>
+          <li><button type="button" class="dropdown-item" data-sort="price-descending">Price high to low</button></li>
+          <li><button type="button" class="dropdown-item" data-sort="price-ascending">Price low to high</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} main filters {% endcomment %}
+<div class="filter-main side-popup-main openable">
+  <button class="button-unstyled filter-toggle close-overlay-button"></button>
+  <form class="filter-form">
+    <div class="side-popup-block side-popup-right">
+      <div class="side-popup-head justify-content-between">
+        <h2 class="heading mb-0">Filters</h2>
+
+        <button type="button" class="filter-toggle button-unstyled">
+          {% render 'icon', icon: 'close' %}
+        </button>
+      </div>
+
+      <div class="side-popup-body">
+        {%- for filter in collection.filters -%}
+          <div class="filter-category">
+            <p class="filter-head">{{ filter.label }}</p>
+            {%- case filter.type -%}
+              {%- when 'boolean' or 'list' -%}
+                {% assign other_filter_active = true %}
+                {% assign other_filter_active_count = 0 %}
+
+                {%- for filter_value in filter.values -%}
+                <div class="single-filter">
+                  <input type="checkbox" class="filter-checkbox" 
+                    name="{{ filter_value.param_name }}"
+                    value="{{ filter_value.value }}"
+                    {% if filter_value.active -%}checked{%- endif %}
+                    id="Filter-{{ filter.param_name }}-{{ forloop.index }}" />
+                  
+                  <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                    {{ filter_value.label }}
+                    {% render 'icon', icon: 'filter-close' %}
+                  </label>
+
+                  {% if filter_value.active -%}
+                    {% assign other_filter_active_count = other_filter_active_count | plus: 1 %}
+                  {%- endif %}
+
+                </div>
+                {%- endfor -%}
+
+                {% liquid 
+                  if other_filter_active_count == 0
+                    assign other_filter_active = false
+                  endif 
+                %}
+              
+              {%- when 'price_range' -%}
+                {% liquid 
+                  assign price_filter_active = true
+                  if filter.min_value.value == blank and filter.max_value.value == blank
+                    assign price_filter_active = false
+                  endif
+                %}
+              
+                <div class="d-nones">
+                  <div class="single-filters mb-4">
+                    <label for="Filter-{{ filter.min_value.param_name }}">From</label>
+                    <input name="{{ filter.min_value.param_name }}"
+                      id="Filter-{{ filter.min_value.param_name }}"
+                      {% if filter.min_value.value -%}
+                      value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                      {%- endif %}
+                      type="number"
+                      placeholder="{{ cart.currency.symbol }} 0"
+                      min="0"
+                      class="form-control border"
+                    >
+                  </div>
+                  <div class="single-filters mb-4">
+                    <label for="Filter-{{ filter.max_value.param_name }}">To</label>
+                    <input name="{{ filter.max_value.param_name }}"
+                      id="Filter-{{ filter.max_value.param_name }}"
+                      {% if filter.max_value.value -%}
+                      value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                      {%- endif %}
+                      type="number"
+                      placeholder="{{ cart.currency.symbol }} {{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      min="0"
+                      class="form-control border"
+                    >
+                  </div>
+                </div>
+
+                {%- comment -%}
+                <div class="d-none">
+                  <div class="single-filter">
+                    <input type="checkbox" id="filter-price-sub-1000" value="sub1000" />
+                    <label for="filter-price-sub-1000">
+                      Below ₹1000
+                      {% render 'icon', icon: 'filter-close' %}
+                    </label>
+                  </div>
+                  <div class="single-filter">
+                    <input type="checkbox" id="filter-price-1000-1500" value="sub1500" />
+                    <label for="filter-price-1000-1500">
+                      ₹1000 - ₹1500
+                      {% render 'icon', icon: 'filter-close' %}
+                    </label>
+                  </div>
+                  <div class="single-filter">
+                    <input type="checkbox" id="filter-price-1500-2000" value="sub2000" />
+                    <label for="filter-price-1500-2000">
+                      ₹1500 - ₹2000
+                      {% render 'icon', icon: 'filter-close' %}
+                    </label>
+                  </div>
+                  <div class="single-filter">
+                    <input type="checkbox" id="filter-price-above-2000" value="abv2000" />
+                    <label for="filter-price-above-2000">
+                      Above ₹2000
+                      {% render 'icon', icon: 'filter-close' %}
+                    </label>
+                  </div>
+                </div>
+                {%- endcomment -%}
+            {%- endcase -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="side-popup-footer filter-footer flex{% if other_filter_active or price_filter_active %} filters-active{% endif %}">
+        <button type="submit" class="button button-full">
+          <span>
+            <span class="link-text" data-text="Apply Filter">Apply
+              Filter</span>
+          </span>
+        </button>
+
+        {% if other_filter_active or price_filter_active %}
+        <a href="{{ collection.url }}" class="button reset-button filter-reset">
+          <span>
+            <span class="link-text" data-text="Reset">Reset</span>
+          </span>
+        </a>
+        {% else %}
+        <button type="button" class="button reset-button filter-reset">
+          <span>
+            <span class="link-text" data-text="Reset">Reset</span>
+          </span>
+        </button>  
+        {% endif %}
+      </div>
+    </div>
+  </form>
+</div>
+
+{% comment %} main-grid {% endcomment %}
+<section class="section-pad">
+  <div class="container">
+    <div class="row">
+
+      {% if collection.products.size == 0 %}
+        <div class="col-12 text-center">
+          <p class="h4">No products found <br> Use fewer filters or <a href="{{ collection.url }}">clear all</a></p>
+        </div>
+      {% else %}
+        {% for product in collection.products %}
+        <div class="col-md-6 col-lg-4 col-6">
+          {% render 'product-card', product: product, add_collection_url: true %}
+        </div>
+        {% endfor %}
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": "Products grid",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "info": "Text to show when no description is available. This will remain same on all collections."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products grid"
+    }
+  ]
+}
+{% endschema %}
+

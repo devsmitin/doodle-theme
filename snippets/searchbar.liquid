@@ -1,0 +1,32 @@
+{% comment %} searchbar {% endcomment %}
+<!--searchbar-->
+<div class="search-bar-main openable">
+  <button class="search-toggle button-unstyled close-overlay-button" type="button">
+    &nbsp;
+  </button>
+  <div class="search-wrapper">
+    <div class="container relative">
+      <div class="flex justify-content-between mb-4">
+        <h3>Search</h3>
+        <button class="button-unstyled search-close search-toggle">
+          {% render 'icon', icon: "cart-close" %}
+        </button>
+      </div>
+
+      <div class="search-block">
+        <form action="{{ routes.search_url }}">
+        <div class="mb-5">
+          <input type="text" placeholder="Type a keyword" name="q" value="{{ search.terms | escape }}" />
+          <p>e.g. Planters, grow lights, Vases</p>
+        </div>
+
+        <button type="submit" class="button">
+          <span>
+            <span class="link-text" data-text="Search">Search</span>
+          </span>
+        </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+{% comment %} pt-home-faq-section {% endcomment %}
+
+{% assign _s = section.settings %}
+
+
+<section class="section-pad">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 offset-md-1">
+        <h2 class="heading">{{ _s.title }}</h2>
+      </div>
+
+      <div class="col-md-6">
+        <div class="faq-block">
+          <div class="accordion" id="faqblock">
+
+            {% for block in section.blocks %}
+              {% if block.type == "faq" %}
+                {% assign _b = block.settings %}
+                <div class="accordion-item">
+                  <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse_{{ block.id }}"
+                    aria-expanded="true"
+                    aria-controls="collapse_{{ block.id }}"
+                  >
+                    {{ _b.title }}
+                  </button>
+    
+                  <div
+                    id="collapse_{{ block.id }}"
+                    class="accordion-collapse collapse{% if forloop.index == 1 %} show{% endif %}"
+                    data-bs-parent="#faqblock"
+                  >
+                    <div class="accordion-body">
+                      {{ _b.answer }}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "FAQ section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p></p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ section"
+    }
+  ]
+}
+{% endschema %}
+

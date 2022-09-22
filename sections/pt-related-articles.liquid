@@ -1,0 +1,94 @@
+{% comment %} pt-related-articles {% endcomment %}
+
+{% assign _s = section.settings %}
+
+<section class="section-gap bg-lightgrey">
+  <div class="container">
+    <h2 class="heading">{{ _s.title }}</h2>
+
+    <div class="related-blog-slider pt-3">
+      {% assign r_articles = 0 %}
+
+      {% for r_article in blog.articles %}
+        {% unless r_article == article %}
+          <div class="item">
+            <div class="single-related-blog">
+              <div class="related-blog-img cover-image">
+                <a href="{{ r_article.url }}">
+                  {% render 'image-tag', 
+                    image: r_article, 
+                    image_alt: r_article.title, 
+                  %}
+                </a>
+              </div>
+              <div class="related-blog-desc">
+                <a href="{{ r_article.url }}">
+                  <h3>{{ r_article.title }}</h3>
+                </a>
+    
+                {% capture article_excerpt %}
+                  {%- if r_article.excerpt.size > 0 -%}
+                    {{ r_article.excerpt | strip_html | truncatewords: 20 }}
+                  {%- else -%}
+                    {{ r_article.content | strip_html | truncatewords: 20 }}
+                  {%- endif -%}
+                {% endcapture %}
+    
+                <p>{{ article_excerpt }}</p>
+              </div>
+            </div>
+          </div>
+          {% assign r_articles = r_articles | plus: 1 %}
+          {% if r_articles == 5 %}
+            {% break %}
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const relatedBlogSlider_{{ blog.id }} = document.querySelector('.related-blog-slider');
+    if (relatedBlogSlider_{{ blog.id }}) {
+      let arrowLeft = `{%- render 'icon', icon: "arrowLeft" -%}`;
+      let arrowRight = `{%- render 'icon', icon: "arrowRight" -%}`;
+      plantastic.slider_{{ section.id | replace: '-', '_' }} = tns({
+        container: relatedBlogSlider_{{ blog.id }},
+        items: 1.2,
+        gutter: 20,
+        loop: false,
+        controls: false,
+        controlsText: [arrowLeft, arrowRight],
+        nav: true,
+        navPosition: 'bottom',
+        responsive: {
+          640: {
+            items: 1.2,
+          },
+          700: {
+            items: 3,
+          },
+        },
+      });
+    }
+  });
+  
+</script>
+
+{% schema %}
+{
+  "name": "Related articles",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Related Blogs"
+    }
+  ]
+}
+{% endschema %}

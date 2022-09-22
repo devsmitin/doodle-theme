@@ -1,0 +1,60 @@
+{% comment %} pt-showcase-image {% endcomment %}
+
+{% assign _s = section.settings %}
+
+<section class="product-home-showcase relative showcase-home">
+  {% for block in section.blocks %}
+    {% if block.type == "product" %}
+      {% assign _b = block.settings %}
+      <div class="single-showcase-text absolute">
+        <h3 class="white-text">{{ _b.title }}</h3>
+        <p class="white-text">{{ _b.description }}</p>
+      </div>
+    {% endif %}
+  {% endfor %}
+  
+  {% unless _s.showcase_image == blank %}
+  {% render 'image-tag', 
+    image: _s.showcase_image, 
+    image_alt: _s.showcase_image.alt
+  %}
+  {% endunless %}
+</section>
+
+
+{% schema %}
+{
+  "name": "Showcase image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "showcase_image",
+      "label": "Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Details"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Showcase image"
+    }
+  ]
+}
+{% endschema %}

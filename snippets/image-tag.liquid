@@ -1,0 +1,65 @@
+{% comment %} image-tag {% endcomment %}
+
+
+{% liquid
+  assign img_width = width | default: 8
+  assign image_alt = image_alt | escape
+  assign src_widths = '200, 400, 600, 800, 1000, 1200, 1400, 1600, 2000' | split: ','
+  assign widths = ""
+  for width in src_widths
+    assign width_num = width | times: 1
+
+    if width_num < image.width
+      assign widths = widths | append: ',' | append: width_num
+    else
+      assign widths = widths | append: ',' | append: image.width
+      break
+    endif
+  endfor
+
+  if settings.lazy_images 
+    assign lazyclass = ' zload'
+    if class_list == nil
+      assign lazyclass = 'zload'
+    endif
+    
+    assign class_list = class_list | append: lazyclass
+  endif
+
+  assign widths = widths | remove_first: ','
+  assign master_img = image | image_url: width: image.width
+%}
+
+{% if settings.lazy_images %}
+  {{ image 
+    | image_url: width: img_width, format: 'pjpg'
+    | image_tag: width: image.width, height: image.height, widths: widths, class: class_list, alt: image_alt, loading: 'lazy', data-src: master_img }}
+{% else %}
+  {% comment %} <img
+    src="{{ image | image_url: width: '2000x' }}"
+    class="{{ class_list }}" alt="{{ image_alt | escape }}"
+    data-src= "{{ image | image_url: width: image.width, format: 'pjpg' }}"
+    loading="lazy"
+    width="{{ image.width }}"
+    height="{{ image.height }}"
+    data-test="{{ image.id }}"
+  > {% endcomment %}
+
+  {% assign media_width = 0.65 %}
+
+  <img data-t="{{ image.width }}" srcset="
+    {% if image.width >= 54 %}{{ image | image_url: width: 54 }} 54w,{% endif %}
+    {% if image.width >= 74 %}{{ image | image_url: width: 74 }} 74w,{% endif %}
+    {% if image.width >= 104 %}{{ image | image_url: width: 104 }} 104w,{% endif %}
+    {% if image.width >= 162 %}{{ image | image_url: width: 162 }} 162w,{% endif %}
+    {% if image.width >= 208 %}{{ image | image_url: width: 208 }} 208w,{% endif %}
+    {% if image.width >= 324 %}{{ image | image_url: width: 324 }} 324w,{% endif %}
+    {% if image.width >= 416 %}{{ image | image_url: width: 416 }} 416w,{% endif %},
+    {{ image | image_url }} {{ image.width }}w"
+    src="{{ image | image_url: width: 416 }}"
+    class="{{ class_list }}" alt="{{ image_alt | escape }}"
+    height="208"
+    width="208"
+    loading="lazy"
+  >
+{% endif %}

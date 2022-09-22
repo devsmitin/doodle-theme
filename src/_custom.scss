@@ -1,0 +1,157 @@
+img {
+  height: auto;
+}
+
+button,
+.button {
+  * {
+    pointer-events: none;
+  }
+}
+
+.nav-main .nav-featured .featured-prod-desc {
+  p,
+  h3 {
+    color: #ffffff;
+    mix-blend-mode: difference;
+  }
+}
+
+.opac-text {
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.filter-toggle {
+  svg {
+    path {
+      stroke: #000;
+    }
+  }
+}
+
+.bg-darkgreen {
+  .link-text {
+    &:after,
+    &:before {
+      color: #fff;
+    }
+  }
+}
+
+.fw-medium {
+  font-weight: 500;
+}
+
+[data-cart-update] svg {
+  pointer-events: none;
+}
+
+.cart-items {
+  &.cart-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .product-description-wrapper {
+    position: sticky;
+    top: 100px;
+  }
+}
+
+#recover,
+#recover + div {
+  display: none;
+}
+
+#recover:target,
+#recover:target + div {
+  display: block;
+}
+
+#recover:target ~ #login,
+#recover:target ~ #login + div {
+  display: none;
+}
+#recover,
+#login {
+  scroll-margin-top: 20rem;
+}
+
+.template-cart {
+  .side-popup-head {
+    display: none;
+  }
+  .side-popup-footer {
+    display: flex;
+    .button.button-full {
+      margin-top: 2rem;
+      max-width: 400px;
+      margin-left: auto;
+    }
+  }
+  .single-cart-item {
+    @media (min-width: 750px) {
+      .cart-desc,
+      .cart-product-details {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    .cart-desc {
+      flex-direction: column;
+    }
+  }
+  .cart-empty {
+    * {
+      font-size: 24px;
+    }
+  }
+}
+
+.template-login {
+  .errors ul {
+    padding-left: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.account-header-link {
+  font-size: 1rem;
+}
+
+.shopify-challenge {
+  &__container {
+    margin: 7rem auto;
+  }
+}
+
+.zload {
+  box-shadow: inset 0 0 200px #000000;
+  transition: 0.25s all;
+}
+
+@media (max-width: 767px) {
+  .product-slider {
+    &:not(.tns-slider) {
+      .item {
+        &:not(:first-child) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.long-product-img {
+  a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+  }
+}

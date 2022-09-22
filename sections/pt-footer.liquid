@@ -1,0 +1,224 @@
+{% comment %} pt-footer {% endcomment %}
+
+{% assign _s = section.settings %}
+
+
+<section class="leave-message section-pad">
+  <div class="container">
+    <div class="col-md-6 offset-md-3">
+      <h2 class="heading text-center mb-3">Leave a message</h2>
+      <p class="text-center mb-5">We're happy to answer your questions</p>
+      
+      {% capture footer_form %}
+      <div class="mb-4">
+        <!-- add "error" class to input to show error design -->
+        <textarea type="text" 
+          placeholder="Type here..." 
+          class="bottom-border-input"
+          id="ContactForm-body"
+          name="contact[Comment]"
+        >
+          {{- form.body -}}
+        </textarea>
+        <p class="error-message footer-error-message text-center d-none">Please login to share your message.</p>
+      </div>
+
+      <div class="mb-4 text-center">
+        <button class="button" {% if customer %}type="submit"{% else %}type="button"{% endif %} id="footer_form">
+          <span>
+            <span class="link-text" data-text="Send message">Send message</span>
+          </span>
+        </button>
+      </div>
+      {% endcapture %}
+
+      {% if customer %}
+        {%- form 'contact', id: 'FooterContactForm', class: 'isolate' -%}
+          <input 
+            type="hidden" 
+            id="ContactForm-email"
+            name="contact[email]"
+            spellcheck="false"
+            autocapitalize="off"
+            value="{% if customer %}{{ customer.email }}{% endif %}"
+          >
+          {{ footer_form }}
+
+          {%- if form.posted_successfully? -%}
+            <div class="mb-4 text-success form-status form-status-list form__message text-center" tabindex="-1" autofocus>Thanks for contacting us. We'll get back to you as soon as possible.</div>
+          {%- endif -%}
+        {%- endform -%}
+      {% else %}
+        {{ footer_form }}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-main black-bg section-gap">
+    <div class="container">
+      <div class="single-footer-block">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="footer-logo">
+              <a href="{{ routes.root_url }}" aria-label="Home">
+                {% unless _s.footer_logo == blank %}
+                {% render 'image-tag', 
+                  image: _s.footer_logo, 
+                  image_alt: _s.footer_logo.alt
+                %}
+                {% else %}
+                <img src="{{ 'plantastic-logo-white-full.svg' | asset_url }}" alt="Plantastic" loading="lazy" height="200" width="200" class="img-fluid" />
+                {% endunless %}
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <div class="footer-contact-area">
+              <div class="single-footer-contact col">
+                <h3>Email</h3>
+                <a href="mailto:{{ _s.email }}">{{ _s.email }}</a>
+              </div>
+              <div class="single-footer-contact col">
+                <h3>Contact</h3>
+                <a href="tel:{{ _s.mobile }}">{{ _s.mobile }}</a>
+              </div>
+              <div class="single-footer-contact col">
+                <h3>Address</h3>
+                <p>{{ _s.address }}</p>
+              </div>
+              <div class="single-footer-contact col">
+                <h3>Social Media</h3>
+                {%- if settings.social_twitter_link != blank -%}
+                  <a href="{{ settings.social_twitter_link }}" class="mb-3 d-block">Twitter</a>
+                {%- endif -%}
+                {%- if settings.social_facebook_link != blank -%}
+                  <a href="{{ settings.social_facebook_link }}" class="mb-3 d-block">Facebook</a>
+                {%- endif -%}
+                {%- if settings.social_pinterest_link != blank -%}
+                  <a href="{{ settings.social_pinterest_link }}" class="mb-3 d-block">Pinterest</a>
+                {%- endif -%}
+                {%- if settings.social_instagram_link != blank -%}
+                  <a href="{{ settings.social_instagram_link }}" class="mb-3 d-block">Instagram</a>
+                {%- endif -%}
+                {%- if settings.social_tiktok_link != blank -%}
+                  <a href="{{ settings.social_tiktok_link }}" class="mb-3 d-block">TikTok</a>
+                {%- endif -%}
+                {%- if settings.social_tumblr_link != blank -%}
+                  <a href="{{ settings.social_tumblr_link }}" class="mb-3 d-block">Tumblr</a>
+                {%- endif -%}
+                {%- if settings.social_snapchat_link != blank -%}
+                  <a href="{{ settings.social_snapchat_link }}" class="mb-3 d-block">Snapchat</a>
+                {%- endif -%}
+                {%- if settings.social_youtube_link != blank -%}
+                  <a href="{{ settings.social_youtube_link }}" class="mb-3 d-block">Youtube</a>
+                {%- endif -%}
+                {%- if settings.social_vimeo_link != blank -%}
+                  <a href="{{ settings.social_vimeo_link }}" class="mb-3 d-block">Vimeo</a>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-nav-links single-footer-block">
+        {%- for link in _s.menu.links -%}
+          <a href="{{ link.url }}" aria-label="{{ link.title }}">{{ link.title }}</a>
+        {%- endfor -%}
+      </div>
+
+      {% unless _s.search_menu == blank %}
+      <div class="single-footer-block">
+        <h4 class="font-body footer-head">Popular searches</h4>
+
+        <div class="popular-searches-links">
+          {%- for link in _s.search_menu.links -%}
+            <a href="{{ link.url }}" aria-label="{{ link.title }}">{{ link.title }}</a> |
+          {%- endfor -%}
+        </div>
+      </div>
+      {% endunless %}
+
+      <div class="single-footer-block">
+        <h4 class="font-body footer-head">{{ _s.footer_title }}</h4>
+
+        <p class="opac-text">{{ _s.footer_text }}</p>
+      </div>
+
+      <div class="footer-store-feature">
+        <p>
+          {% render 'icon', icon: "quality" %}
+          Premium Quality
+        </p>
+        <p>
+          {% render 'icon', icon: "secure" %}
+          Secure Payment
+        </p>
+        <p>
+          {% render 'icon', icon: "delivery" %}
+          Safe Delivery
+        </p>
+        <p>
+          {% render 'icon', icon: "love" %}
+          Curated with Love
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Footer menu",
+      "info": "This location supports menu of 1st level. 2nd and 3rd level links will be ignored."
+    },
+    {
+      "type": "link_list",
+      "id": "search_menu",
+      "label": "Popular searches",
+      "info": "This location supports menu of 1st level. 2nd and 3rd level links will be ignored."
+    },
+    {
+      "type": "text",
+      "id": "footer_title",
+      "label": "Footer content title"
+    },
+    {
+      "type": "textarea",
+      "id": "footer_text",
+      "label": "Footer content text"
+    },
+    {
+      "type": "header",
+      "content": "Contact details"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email"
+    },
+    {
+      "type": "text",
+      "id": "mobile",
+      "label": "Contact no."
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Address"
+    }
+  ]
+}
+{% endschema %}

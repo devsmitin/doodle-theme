@@ -1,0 +1,23 @@
+{% comment %} pt-only-content {% endcomment %}
+
+<div class="only-page-content">
+  {% unless page.content contains "<h1" %}
+    <div class="container">
+      <h1 class="main-page-title">
+        {{ page.title | escape }}
+      </h1>
+    </div>
+  {% endunless %}
+  <div class="rte">
+    {{ page.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Only content",
+  "settings": [
+
+  ]
+}
+{% endschema %}

@@ -1,0 +1,17 @@
+<div class="top-bar">
+  {{ section.settings.announcement_text }}
+</div>
+{% schema %}
+{
+  "name": "t:sections.announcement-bar.name",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "announcement_text",
+      "label": "Text",
+      "default": "<p>Free shipping PAN India on all orders | use coupon <strong>“FirstOrder”</strong> and get 10% off on your first order.</p>",
+      "info": "Multilines will be wrapped to single line."
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,45 @@
+{% comment %} pt-main-404 {% endcomment %}
+
+{% assign _s = section.settings %}
+
+{% comment %} breadcrum {% endcomment %}
+{% render 'breadcrumb' %}
+
+<section class="section-pad border-bottom text-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        {% unless _s.image == blank %}
+          {% render 'image-tag', 
+            image: _s.image, 
+            image_alt: _s.image.alt, 
+            class_list: "img-fluid mb-5" 
+          %}
+        {% endunless %}
+        <h1 class="title mb-5">
+          {{ 'templates.404.title' | t }}
+        </h1>
+        <a href="{{ routes.all_products_collection_url }}" class="button">
+          <span>
+            <span class="link-text" data-text="{{ 'general.continue_shopping' | t }}">{{ 'general.continue_shopping' | t }}</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "404 page",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Representative image"
+    }
+  ]
+}
+{% endschema %}
+

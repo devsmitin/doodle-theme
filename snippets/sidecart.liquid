@@ -1,0 +1,12 @@
+{% comment %} sidecart {% endcomment %}
+<!--sidecart-->
+<div class="side-popup-main cart-main openable">
+  <button class="cart-toggle button-unstyled close-overlay-button" type="button">
+    &nbsp;
+  </button>
+  <form action="/cart" method="post">
+    <div class="side-popup-block" id="cart-items-ajax">
+      {% render 'sidecart-content', cart: cart %}
+    </div>
+  </form>
+</div>

@@ -1,11 +1,16 @@
 {
   "sections": {
     "main": {
-      "type": "main-article",
-      "settings": {}
+      "type": "pt-main-article",
+      "settings": {
+      }
+    },
+    "related-artilces": {
+      "type": "pt-related-articles"
     }
   },
   "order": [
-    "main"
+    "main",
+    "related-artilces"
   ]
 }

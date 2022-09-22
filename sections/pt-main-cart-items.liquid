@@ -1,0 +1,36 @@
+{% comment %} pt-main-cart-items {% endcomment %}
+
+{% assign _s = section.settings %}
+
+{% comment %} breadcrum {% endcomment %}
+{% render 'breadcrumb' %}
+
+{% comment %} header {% endcomment %}
+<section class="inner-banner-main">
+  <div class="container">
+    <h1>Your cart</h1>
+  </div>
+</section>
+
+
+<section class="section-pad pt-0 border-bottom">
+  <div class="container">
+
+    <form action="/cart" method="post">
+      <div class="side-popup-block" id="cart-items-ajax">
+        {% render 'sidecart-content', cart: cart %}
+      </div>
+    </form>
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Cart page",
+  "settings": [
+
+  ]
+}
+{% endschema %}

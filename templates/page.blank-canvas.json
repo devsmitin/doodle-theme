@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "content": {
+      "type": "pt-only-content",
+      "settings": {
+      }
+    }
+ },
+  "order": [
+    "content"
+  ]
+}

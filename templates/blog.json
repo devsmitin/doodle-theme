@@ -1,12 +1,22 @@
 {
   "sections": {
-    "main": {
-      "type": "main-blog",
+    "blog-header": {
+      "type": "pt-blog-header",
       "settings": {
+        "article": "news\/how-to-keep-plants-alive-in-bedroom"
+      }
+    },
+    "main": {
+      "type": "pt-main-blog",
+      "settings": {
+        "title": "Recent Stories",
+        "featured_blog": "news\/how-to-use-decorative-planter",
+        "featured_blog_pos": 2
       }
     }
   },
   "order": [
+    "blog-header",
     "main"
   ]
 }

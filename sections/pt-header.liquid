@@ -1,0 +1,140 @@
+{% comment %} pt-header {% endcomment %}
+
+{% assign _s = section.settings %}
+
+
+<div class="header-main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-5">
+        <div class="header-nav-area">
+          <button type="button" class="nav-link-header nav-toggle button-unstyled" aria-label="Shop">
+            {% render 'icon', icon: "menu" %}
+            Shop
+          </button>
+          <button type="button" class="button-unstyled nav-link-header search-toggle" aria-label="Search">
+            {% render 'icon', icon: "search" %}
+            Search
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-2">
+        <div class="text-center logo">
+          <a href="{{ routes.root_url }}" aria-label="Home">
+            {% unless _s.header_logo == blank %}
+            {% render 'image-tag', 
+              image: _s.header_logo, 
+              image_alt: _s.header_logo.alt
+            %}
+            {% else %}
+            <svg width="24" height="36" fill="none" viewBox="0 0 24 36">
+              <path fill="#F7F7F2" d="m.418 26.167 4.801.037c4.357.034 6.61 5.236 3.663 8.457-3.21 2.958-8.393.697-8.426-3.676l-.038-4.818Z" />
+              <path fill="#F7F7F2" fill-rule="evenodd" d="M.507 11.817.418 23.273l11.308-.088c10.348-.08 15.708-12.381 8.722-20.015C12.865-3.821.586 1.503.507 11.817Zm4 .15-.057 7.26 7.167-.055c6.558-.051 9.956-7.847 5.528-12.686-4.806-4.43-12.588-1.056-12.639 5.48Z" clip-rule="evenodd" />
+            </svg>
+            {% endunless %}
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-5">
+        <div class="header-cart-area">
+          {%- if shop.customer_accounts_enabled -%}
+          <a href="{{ routes.account_url }}" class="nav-link-header" aria-label="Account">
+            {% if customer %}
+              {{ customer.name }}
+            {% else %}
+            Account
+            {% endif %}
+            {% render 'icon', icon: "account" %}
+          </a>
+          {%- endif -%}
+          <button type="button" class="nav-link-header button-unstyled cart-toggle" aria-label="Cart">
+            Cart <span class="cart-item-value" id="cart_count">{{ cart.item_count }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-main openable">
+  <button class="nav-toggle button-unstyled close-overlay-button" type="button" aria-label="Close navigation"></button>
+  <div class="nav-wrapper black-bg">
+    <div class="container">
+      <button type="button" class="close-nav nav-toggle" id="nav-close" aria-label="Close navigation">
+        {% render 'icon', icon: "close" %}
+        Close
+      </button>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="nav-block">
+            {%- for link in _s.menu.links -%}
+              <div class="single-nav-block">
+                <h2>
+                  {%- unless link.url == blank or link.url == "#" -%}
+                  <a href="{{ link.url }}" aria-label="{{- link.title -}}">{{- link.title -}}</a>
+                  {% else %}
+                  {{- link.title -}}
+                  {%- endunless -%}
+                </h2>
+                <div class="nav-links">
+                {%- for childlink in link.links -%}
+                  <a href="{{ childlink.url }}" class=""{% if childlink.current %} aria-current="page"{% endif %} aria-label="{{- childlink.title | escape -}}">
+                    {{- childlink.title | escape -}}
+                  </a>
+                {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% unless _s.featured_product == blank %}
+      <a href="{{ _s.featured_product.url }}" class="nav-featured d-none d-md-block" aria-label="Go to {{ _s.featured_product.title }}">
+        {% render 'image-tag', 
+          image: _s.featured_product.featured_image, 
+          image_alt: _s.featured_product.featured_image.alt, 
+          class_list: "d-none d-md-block" 
+        %}
+  
+        <div class="featured-prod-desc">
+          <p>Featured Product</p>
+          <h3>{{ _s.featured_product.title }}</h3>
+        </div>
+      </a>
+    {% endunless %}
+  </div>
+</div>
+
+{% render 'searchbar' %}
+{% unless template.name == "cart" %}
+  {% render 'sidecart' %}
+{% endunless %}
+
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "header_logo",
+      "label": "Logo"
+    },
+    {
+      "type": "product",
+      "id": "featured_product",
+      "label": "Featured product"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu",
+      "info": "This location supports menu up to 2nd level. 3rd level links will be ignored."
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,192 @@
+{% comment %} pt-contact-form {% endcomment %}
+
+{% assign _s = section.settings %}
+
+{% capture heading %}
+  {% if _s.heading_h1 %}
+    <h1>{{ _s.heading | default: page.title }}</h1>
+  {% else %}
+    <h2>{{ _s.heading | default: page.title }}</h2>
+  {% endif %}
+{% endcapture %}
+
+{% comment %} breadcrum {% endcomment %}
+{% render 'breadcrumb' %}
+
+<section class="inner-banner-main">
+  <div class="container">
+    {{ heading }}
+  </div>
+</section>
+
+<section class="contact-us-main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        {%- form 'contact', id: 'ContactForm', class: 'isolate' -%}
+          {%- if form.errors -%}
+            <div class="form__message">
+              <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>Please adjust the following:</h2>
+            </div>
+            <ul class="form-status-list caption-large" role="list">
+              <li>
+                <a href="#ContactForm-email" class="link">
+                  {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+                </a>
+              </li>
+            </ul>
+          {%- endif -%}
+          
+          <div class="contact-form-block">
+            <div class="mb-4">
+              <input type="text" 
+                class="form-control" 
+                placeholder="Full name" 
+                autocomplete="name" 
+                id="ContactForm-name" 
+                name="contact[Name]" 
+                value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              />
+            </div>
+            <div class="mb-4">
+              <input type="email" 
+                class="form-control" 
+                placeholder="Email" 
+                autocomplete="email"
+                id="ContactForm-email"
+                name="contact[email]"
+                spellcheck="false"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                {% if form.errors contains 'email' %}
+                  aria-invalid="true"
+                  aria-describedby="ContactForm-email-error"
+                {% endif %}
+              />
+
+              {%- if form.errors contains 'email' -%}
+                <small class="contact__field-error" id="ContactForm-email-error">
+                  <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+                  <span class="form__message">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+                </small>
+              {%- endif -%}
+            </div>
+            <div class="mb-4">
+              <input type="tel" 
+                class="form-control" 
+                placeholder="Phone" 
+                id="ContactForm-phone"
+                name="contact[Phone number]"
+                pattern="[0-9\-]*" 
+                value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" 
+              />
+            </div>
+            <div class="mb-4">
+              <textarea
+                rows="4"
+                class="form-control"
+                placeholder="Your message"
+                id="ContactForm-body"
+                name="contact[Comment]"
+              >
+                {{- form.body -}}
+              </textarea>
+            </div>
+
+            
+            {%- if form.posted_successfully? -%}
+              <div class="mb-4 text-success form-status form-status-list form__message" tabindex="-1" autofocus>Thanks for contacting us. We'll get back to you as soon as possible.</div>
+            {%- endif -%}
+
+            <div class="mb-4">
+              <button class="button button-full" type="submit">
+                <span>
+                  <span class="link-text" data-text="Send message">
+                    Send message
+                  </span>
+                </span>
+              </button>
+            </div>
+          </div>
+        {%- endform -%}
+      </div>
+
+      <div class="col-md-5 offset-md-1">
+        <div class="contact-details">
+          {% unless _s.contact_heading == blank %}
+            <h3>{{ _s.contact_heading }}</h3>
+          {% endunless %}
+          {% unless _s.contact_subheading == blank %}
+            <p>{{ _s.contact_subheading }}</p>
+          {% endunless %}
+
+          {% unless _s.contact_mail == blank %}
+            <div class="single-contact-detail">
+              <h4>Email</h4>
+              <a href="mailto:{{ _s.contact_mail }}">{{ _s.contact_mail }}</a>
+            </div>
+          {% endunless %}
+          {% unless _s.contact_phone == blank %}
+            <div class="single-contact-detail">
+              <h4>Contact</h4>
+              <a href="mailto:{{ _s.contact_phone }}">{{ _s.contact_phone }}</a>
+            </div>
+          {% endunless %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Contact form",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Contact Us",
+      "label": "Section heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_h1",
+      "label": "Make section heading page heading",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Contact details"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Contact heading"
+    },
+    {
+      "type": "text",
+      "id": "contact_subheading",
+      "label": "Contact sub-heading"
+    },
+    {
+      "type": "text",
+      "id": "contact_mail",
+      "label": "Email"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Phone"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact form"
+    }
+  ]
+}
+{% endschema %}

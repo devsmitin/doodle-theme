@@ -1,18 +1,18 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "settings": {
-      }
-    },
     "form": {
-      "type": "contact-form",
+      "type": "pt-contact-form",
       "settings": {
+        "heading": "Contact Us",
+        "heading_h1": true,
+        "contact_heading": "Get in touch with us via",
+        "contact_subheading": "Available Mondays to Saturdays From 9:00 am to 6:00 pm",
+        "contact_mail": "store.plantastic@gmail.com",
+        "contact_phone": "+91 9304352470"
       }
     }
   },
   "order": [
-    "main",
     "form"
   ]
 }

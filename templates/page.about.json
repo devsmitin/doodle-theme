@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "main": {
+      "type": "pt-main-page",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "content": {
+      "type": "pt-only-content",
+      "settings": {
+      }
+    },
+    "showcase-image": {
+      "type": "pt-showcase-image",
+      "blocks": {
+        "80fdaf8a-2e56-41bb-a572-995799e1286f": {
+          "type": "product",
+          "settings": {
+            "title": "Doge glass vase",
+            "description": "starting price ₹2499"
+          }
+        },
+        "32eabff8-08f7-42c9-b616-a8ada7bb191e": {
+          "type": "product",
+          "settings": {
+            "title": "Basic planter",
+            "description": "starting price ₹1499"
+          }
+        }
+      },
+      "block_order": [
+        "80fdaf8a-2e56-41bb-a572-995799e1286f",
+        "32eabff8-08f7-42c9-b616-a8ada7bb191e"
+      ],
+      "settings": {
+        "showcase_image": "shopify:\/\/shop_images\/home-bg.jpg"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "content",
+    "showcase-image"
+  ]
+}

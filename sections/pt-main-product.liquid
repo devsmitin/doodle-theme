@@ -1,0 +1,400 @@
+{% comment %} pt-main-product {% endcomment %}
+
+{% assign _s = section.settings %}
+
+{% assign active_variant = product.selected_or_first_available_variant %}
+
+{% comment %} breadcrum {% endcomment %}
+{% render 'breadcrumb' %}
+
+<section class="product-main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="product-images-slider">
+          <div class="product-slider">
+            {% for media in product.media %}
+              {% if media.media_type == "image" %}
+                <div class="item">
+                  <div class="single-product-thumbnail cover-image mb-4">
+                    {% render 'image-tag',
+                      image: media.src,
+                      image_alt: media.alt,
+                    %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 offset-lg-1 col-md-6">
+        <div class="product-description-wrapper">
+          {% for block in section.blocks %}
+            {%- case block.type -%}
+              {%- when '@app' -%}
+                {%- liquid
+                  capture app_block
+                    render block
+                  endcapture
+
+                  unless app_block contains 'id="shopify-product-reviews"'
+                    echo app_block
+                  endunless
+                -%}
+
+
+              {%- when 'title' -%}
+                <h1>{{ product.title }}</h1>
+
+              {%- when 'text' -%}
+                <p>{{ product.description }}</p>
+
+              {%- when 'price' -%}
+                <h3 class="price">
+                  <span class="original-price">{{ active_variant.price | money_with_currency }}</span>
+                    <small class="ms-2 text-muted"><s class="compare-price">{{ active_variant.compare_at_price | money_with_currency }}</s></small>
+                </h3>
+
+              {%- when 'form' -%}
+                <div class="row mb-5 option-selector">
+                  {% for product_option in product.options_with_values %}
+                    {% liquid
+                      assign is_color = false
+                      assign option_name = product_option.name | downcase
+                      if option_name == 'color' or option_name == 'colour'
+                        assign is_color = true
+                      endif
+                    %}
+                    <div class="col-sm-6">
+                      <p class="fw-medium">Select {{ product_option.name }}</p>
+
+                      <div class="flex flex-wrap option-select-gap {{ option_name }}-selectors">
+                        {% for value in product_option.values %}
+                          <div class="single-option-select">
+                            <input type="radio" data-position="{{ product_option.position }}" name="options[{{ product_option.name }}]"
+                              id="{{ option_name | append: '_' | append: value | downcase }}" value="{{ value }}"
+                              {% if product_option.selected_value == value %}checked{% endif %} />
+                            <label for="{{ option_name | append: '_' | append: value | downcase }}">
+                              <span {% if is_color %}style="--bg-color: {{ value | downcase }}" data-color="{{ value | downcase }}"{% endif %}></span>
+                              {{ value }}
+                            </label>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+
+                  {% endfor %}
+
+                  {%- comment -%}
+                  <div class="col-sm-12">
+                    <p class="text-danger unavailable_message" style="display: none;">Sorry, this item is out of stock</p>
+                  </div>
+                  {%- endcomment -%}
+
+                </div>
+                {% assign form_id = "product_form_" | append: section.id | append: '--' | append: product.id %}
+                {%- form 'product', product, id: form_id, class: 'product-form mb-5' -%}
+                <input type="hidden" name="id" id="product_id" value="{{ product.selected_or_first_available_variant.id }}">
+                <button class="button button-full" type="submit">
+                  <span>
+                    <span class="link-text" data-text="Add to cart" data-working="Adding..." data-done="Added!">Add to cart</span>
+                  </span>
+                </button>
+                {%- endform -%}
+
+              {%- when 'offers' -%}
+                <div class="product-offers mb-5">
+                  <p class="h4 text-success mb-3">Offers:</p>
+                  <div class="offers-list">
+
+                    {% assign _b = block.settings %}
+
+                    {% for i in (1..3) %}
+                      {% assign offer = "offer" | append: i %}
+                      <p>{{ _b[offer] }}</p>
+                    {% endfor %}
+
+                    {% for item in product.metafields.my_fields.offers.value %}
+                      <p>{{ item }}</p>
+                    {% endfor %}
+                  </div>
+                </div>
+
+              {%- when 'tabs' -%}
+                <ul class="product-detail-tabs nav nav-tabs" id="productDetails" role="tablist">
+                  <li role="presentation">
+                    <button class="nav-link h-100 active" id="product-details-tab" data-bs-toggle="tab" data-bs-target="#product-details" type="button" role="tab" aria-controls="product-details" aria-selected="true">Product details</button>
+                  </li>
+                  <li role="presentation">
+                    <button class="nav-link h-100" id="product-description-tab" data-bs-toggle="tab" data-bs-target="#product-description" type="button" role="tab" aria-controls="product-description" aria-selected="false">Product Description</button>
+                  </li>
+                  <li role="presentation">
+                    <button class="nav-link h-100" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
+                  </li>
+                </ul>
+                <div class="tab-content" id="productDetailsContent">
+                  <div class="tab-pane fade show active" id="product-details" role="tabpanel" aria-labelledby="product-details-tab">
+                    <div class="product-details-block">
+                      <table class="table table-borderless">
+                        {% if product.metafields.my_fields.dimensions %}
+                          <tr>
+                            <td class="semibold">Dimensions</td>
+                            <td>{{ product.metafields.my_fields.dimensions }}</td>
+                          </tr>
+                        {% endif %}
+                        {% if product.metafields.my_fields.material %}
+                          <tr>
+                            <td class="semibold">Material</td>
+                            <td>{{ product.metafields.my_fields.material }}</td>
+                          </tr>
+                        {% endif %}
+                        {% if product.metafields.my_fields.in_box %}
+                          <tr>
+                            <td class="semibold">In box</td>
+                            <td>{{ product.metafields.my_fields.in_box }}</td>
+                          </tr>
+                        {% endif %}
+                      </table>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="product-description" role="tabpanel" aria-labelledby="product-description-tab">
+                    <div class="product-description-box">
+                      {% if product.metafields.my_fields.description %}
+                        {{- product.metafields.my_fields.description | newline_to_br -}}
+                      {% endif %}
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                    <div class="reviews-tab">
+
+                      {%- for block in section.blocks -%}
+                        {%- if block.type == '@app' -%}
+
+                          {%- liquid
+                            capture app_block
+                              render block
+                            endcapture
+
+                            if app_block contains 'id="shopify-product-reviews"'
+                              echo app_block
+                            endif
+                          -%}
+
+                        {%- endif -%}
+                      {%- endfor -%}
+
+                      {%- comment -%}
+                      <h3 class="font-body">Latest Reviews</h3>
+
+                      <div class="single-review">
+                        <div class="rating-tag">
+                          4.5 {% render 'icon', icon: "star" %}
+                        </div>
+                        <p>
+                          Developed the concept of exclusivity, a Sol’ace features
+                          timeless furniture, with natural fabrics, curved lines,
+                          plenty of mirrors and classic design.
+                        </p>
+
+                        <p class="semibodl">Deep Wagle | 20 Jan 2022</p>
+                      </div>
+                      {%- endcomment -%}
+                    </div>
+                  </div>
+                </div>
+
+              {%- when 'wishlist' -%}
+                <div class="mb-5 wishlist-wrapper">
+                  <button class="button button-full button-wishlist" id="custom-wishlist-btn" type="button">
+                    <span>
+                      <span class="link-text" data-text="♡ Add to wishlist" data-working="Adding..." data-done="Added!">♡ Add to wishlist</span>
+                    </span>
+                  </button>
+
+                  {% render 'wishlisthero-custom-button.liquid' %}
+
+                  <style type="text/css">
+                    {% assign _b = block.settings %}
+                    {{ _b.custom_css }}
+                  </style>
+                </div>
+
+            {%- endcase -%}
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "url": {{ request.origin | append: product.url | json }},
+      {% if seo_media -%}
+        "image": [
+          {{ seo_media | image_url: width: seo_media.preview_image.width | prepend: "https:" | json }}
+        ],
+      {%- endif %}
+      "description": {{ product.description | strip_html | json }},
+      {% if product.selected_or_first_available_variant.sku != blank -%}
+        "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      {%- endif %}
+      "brand": {
+        "@type": "Thing",
+        "name": {{ product.vendor | json }}
+      },
+      "offers": [
+        {%- for variant in product.variants -%}
+          {
+            "@type" : "Offer",
+            {%- if variant.sku != blank -%}
+              "sku": {{ variant.sku | json }},
+            {%- endif -%}
+            "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+            "price" : {{ variant.price | divided_by: 100.00 | json }},
+            "priceCurrency" : {{ cart.currency.iso_code | json }},
+            "url" : {{ request.origin | append: variant.url | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+</section>
+
+
+<script>
+  window.plantastic.product_data = {{ product | json }}
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let arrowLeft = `{%- render 'icon', icon: "arrowLeft" -%}`;
+    let arrowRight = `{%- render 'icon', icon: "arrowRight" -%}`;
+    plantastic.slider_{{ section.id | replace: '-', '_' }} = tns({
+      container: '.product-slider',
+      preventScrollOnTouch: 'force',
+      items: 1.2,
+      gutter: 10,
+      loop: false,
+      controls: false,
+      controlsText: [arrowLeft, arrowRight],
+      nav: true,
+      navPosition: 'bottom',
+      responsive: {
+        640: {
+          items: 1.2,
+          disable: false,
+        },
+        700: {
+          disable: true,
+        },
+      },
+    });
+  });
+</script>
+
+
+{% schema %}
+{
+  "name": "Product details",
+  "settings": [
+
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "text",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "form",
+      "name": "Buy button",
+      "limit": 1
+    },
+    {
+      "type": "offers",
+      "name": "Offers",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "offer1",
+          "label": "Offer 1"
+        },
+        {
+          "type": "text",
+          "id": "offer2",
+          "label": "Offer 2"
+        },
+        {
+          "type": "text",
+          "id": "offer3",
+          "label": "Offer 3"
+        }
+      ]
+    },
+    {
+      "type": "tabs",
+      "name": "Details",
+      "limit": 1
+    },
+    {
+      "type": "wishlist",
+      "name": "Wishlist app",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "custom_css",
+          "label": "Custom CSS"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product details",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "form"
+        },
+        {
+          "type": "tabs"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

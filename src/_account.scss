@@ -1,0 +1,157 @@
+@import 'variables';
+
+.order-nav-links {
+  border: none;
+  button,
+  a {
+    color: $black;
+    margin-right: 40px;
+    display: inline-flex;
+    align-items: center;
+    opacity: 0.4;
+    padding: 0;
+    border: none !important;
+    background-color: transparent;
+    transition: 0.3s ease-out;
+
+    &.active,
+    &:hover {
+      opacity: 1;
+      color: $black;
+    }
+  }
+
+  &.justify-content-end {
+    a {
+      opacity: 1;
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    &:not(.justify-content-end) {
+      button {
+        padding-left: 10px;
+        margin: 0 0 5px;
+        width: 50%;
+      }
+    }
+
+    button,
+    a {
+      font-size: 14px;
+    }
+  }
+}
+
+#profiletabcontent {
+  margin: 32px 0 0;
+}
+
+.order-table {
+  .table-default {
+    .button {
+      font-size: 14px;
+      padding: 10px;
+      min-width: 130px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    tbody {
+      td:last-child {
+        text-align: right;
+      }
+    }
+  }
+
+  .failed-payment {
+    td,
+    a:not(.button) {
+      color: #c45555;
+    }
+  }
+}
+
+.order-detail-head {
+  h3 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+}
+
+.order-detail-product {
+  .cover-image {
+    width: 180px;
+    height: 180px;
+    max-width: 35%;
+  }
+
+  p {
+    font-size: 16px;
+    white-space: normal;
+  }
+
+  @media (max-width: 767px) {
+    .cover-image {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.address-block {
+  background-color: $lightGrey;
+  padding: 20px;
+  border: 1px solid transparent;
+  transition: 0.3s ease-in-out;
+  position: relative;
+  margin-bottom: 50px;
+
+  &.active,
+  &:hover {
+    border: 1px solid $darkGreen;
+    background-color: #f7f7f2;
+
+    .default-address {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: none;
+    }
+  }
+
+  p {
+    line-height: 25px;
+  }
+}
+
+.default-address {
+  display: inline-flex;
+  padding: 5px 15px;
+  position: absolute;
+  bottom: -15px;
+  left: 10px;
+  margin: 0;
+  background-color: #f7f7f2;
+  color: #000;
+  border-radius: 30px;
+  border: 1px solid $darkGreen;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease-out;
+  font-weight: 400;
+  font-size: 14px;
+
+  &:hover {
+    background-color: $darkGreen;
+    color: #fff;
+  }
+
+  @media (max-width: 1200px) {
+    opacity: 1;
+    visibility: visible;
+  }
+}

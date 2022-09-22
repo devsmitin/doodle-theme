@@ -1,8 +1,10 @@
 {
   "sections": {
     "main": {
-      "type": "main-404",
-      "settings": {}
+      "type": "pt-main-404",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/jojo-home.jpg"
+      }
     }
   },
   "order": [

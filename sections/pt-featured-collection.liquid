@@ -1,0 +1,61 @@
+{% comment %} pt-featured-collection {% endcomment %}
+
+{% assign _s = section.settings %}
+
+{% assign f_collection = collections[_s.collection] %}
+
+
+<section class="featured-products section-pad">
+  <div class="container">
+    <div class="col-lg-6 p-0">
+      <h2 class="heading">{{ _s.title }}</h2>
+
+      <a class="line-button" href="{{ f_collection.url }}">
+        <span class="link-text" data-text="{{ _s.collection_link_text }}">{{ _s.collection_link_text }}</span>
+      </a>
+    </div>
+
+    <div class="row section-content-gap">
+
+      {% for product in f_collection.products %}
+        <div class="col-md-6 col-lg-3 col-6">
+          {% render 'product-card', product: product %}
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Explore our featured products"
+    },
+    {
+      "type": "text",
+      "id": "collection_link_text",
+      "label": "Collection link text",
+      "default": "Explore our products"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Featured collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured products"
+    }
+  ]
+}
+{% endschema %}
+

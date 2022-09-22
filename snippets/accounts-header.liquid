@@ -1,0 +1,41 @@
+{% comment %} accounts-header {% endcomment %}
+
+<section class="inner-banner-main">
+  <div class="container">
+    <h1>My Profile</h1>
+  </div>
+</section>
+
+<section class="my-orders-nav py-3 top-bottom-border">
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <ul class="order-nav-links nav">
+          <li>
+            <a href="{{ routes.account_url }}" class="nav-link account-header-link">
+              Orders
+            </a>
+          </li>
+          <li>
+            <a href="#!" class="nav-link account-header-link">
+              Wishlist
+            </a>
+          </li>
+          <li>
+            <a href="{{ routes.account_addresses_url }}" class="nav-link account-header-link">
+              Address
+            </a>
+          </li>
+        </ul>
+      </div>
+    
+      <div class="col-4">
+        <div class="flex order-nav-links flex-wrap justify-content-end">
+          <a href="{{ routes.account_logout_url }}" class="bold">Logout
+            {% render 'icon', icon: "logout" %}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

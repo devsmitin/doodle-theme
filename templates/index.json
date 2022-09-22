@@ -1,47 +1,221 @@
 {
   "sections": {
-    "hero": {
-      "type": "hero-banner",
+    "main-hero": {
+      "type": "pt-hero-banner",
       "settings": {
-        "image": "shopify:\/\/shop_images\/stacked-bracelets.jpg",
-        "img_stacked": false,
-        "img_pos": "below",
-        "title": "About Your Brand",
-        "text": "Give customers details about the banner image(s) or content on the template.",
-        "link_text": "Shop all",
-        "link_url": "",
-        "box_alignment": "left"
+        "title": "Aesthetic Decor for Functional Living",
+        "link_text": "Explore our products",
+        "link_url": "shopify:\/\/collections\/all",
+        "animated_text": "Plantastic",
+        "image_desktop": "shopify:\/\/shop_images\/cabinet-Hero2tv-modern-living-room-with-armchair-lamp-table-flower-plant-concrete-wall-background-3d-rendering_1.jpg",
+        "image_mobile": "shopify:\/\/shop_images\/Mobile_hero_1.jpg",
+        "video_url": "https:\/\/cdn.shopify.com\/s\/files\/1\/0586\/4407\/0594\/files\/hero-video-overlay.mp4?v=1652265809"
       }
     },
-    "categories": {
-      "type": "section-list-categories",
+    "text-content": {
+      "type": "pt-text-content",
+      "settings": {
+        "title": "For the little things in life",
+        "text": "We at Plantastic curating modern, minimal and nordic decor products which will make your house a Home so you can live your spaces. We hope we can help create the ideal home environment for you. We strived to craft a modern and composed Scandinavian collection that is truly unique.",
+        "link_text": "Read more about us",
+        "link_url": "shopify:\/\/pages\/about",
+        "image_1": "shopify:\/\/shop_images\/Orbit_Vase_10.jpg",
+        "image_2": "shopify:\/\/shop_images\/Mobile_hero_1.jpg",
+        "image_3": "shopify:\/\/shop_images\/Pitcher_glass_vase_2.jpg",
+        "image_4": "shopify:\/\/shop_images\/Sec_2img-5.jpg",
+        "image_5": "shopify:\/\/shop_images\/Marv_5.jpg"
+      }
+    },
+    "featured-collection": {
+      "type": "pt-featured-collection",
+      "settings": {
+        "title": "Explore our featured products",
+        "collection_link_text": "Check All Featured Products",
+        "collection": "featured"
+      }
+    },
+    "text-with-image": {
+      "type": "pt-text-with-image",
+      "settings": {
+        "section_layout": "layout1",
+        "title": "Marvellous Planter",
+        "text": "concrete planters are not only practical but they are beautiful. The concrete is textured on the top to keep the soil and water in place with a drainage area at the bottom.",
+        "link_text": "Shop now",
+        "link_url": "shopify:\/\/products\/marvellous-planter",
+        "image": "shopify:\/\/shop_images\/Marvellous_planter_2.jpg"
+      }
+    },
+    "products-mosiac": {
+      "type": "pt-products-mosiac",
       "blocks": {
-        "block-1": {
-          "type": "collection"
+        "90e73f1f-37dc-4be5-b4ae-30a8100fc5a2": {
+          "type": "left_products",
+          "settings": {
+            "product": "concrete-face-planter"
+          }
         },
-        "block-2": {
-          "type": "collection"
+        "686e1c73-f2a0-4a37-b9c1-551d08cb1c81": {
+          "type": "left_products",
+          "settings": {
+            "product": "minimalist-ceramic-vase"
+          }
         },
-        "block-3": {
-          "type": "collection"
+        "f07d3656-c541-4b35-b9f9-6ab3aae48e97": {
+          "type": "left_products",
+          "settings": {
+            "product": "pitcher-glass-vase"
+          }
+        },
+        "6cc6743e-5ca2-47d1-abea-728a2c5c2fa7": {
+          "type": "left_products",
+          "settings": {
+            "product": "blaze-grow-light"
+          }
+        },
+        "399090fc-ec2c-4f46-92c7-bf0a750549d9": {
+          "type": "right_products",
+          "settings": {
+            "product": "orbit-ceramic-vase"
+          }
+        },
+        "bcbdc1cf-314d-44ca-a8d5-ea07d72ee0bd": {
+          "type": "right_products",
+          "settings": {
+            "product": "jojo-ceramic-planter"
+          }
+        },
+        "1b3fa7e2-c52a-4a5e-935d-1f93ef3004e4": {
+          "type": "right_products",
+          "settings": {
+            "product": "marvellous-planter"
+          }
+        },
+        "0a89b5af-7265-4ce3-89e9-dd405089088c": {
+          "type": "right_products",
+          "settings": {
+            "product": "diamond-planter"
+          }
+        },
+        "4c65e36f-04a1-4fb1-8c5e-2ed07a9759d4": {
+          "type": "center_product",
+          "settings": {
+            "product": "moon-ceramic-vase"
+          }
         }
       },
       "block_order": [
-        "block-1",
-        "block-2",
-        "block-3"
+        "90e73f1f-37dc-4be5-b4ae-30a8100fc5a2",
+        "686e1c73-f2a0-4a37-b9c1-551d08cb1c81",
+        "f07d3656-c541-4b35-b9f9-6ab3aae48e97",
+        "6cc6743e-5ca2-47d1-abea-728a2c5c2fa7",
+        "399090fc-ec2c-4f46-92c7-bf0a750549d9",
+        "bcbdc1cf-314d-44ca-a8d5-ea07d72ee0bd",
+        "1b3fa7e2-c52a-4a5e-935d-1f93ef3004e4",
+        "0a89b5af-7265-4ce3-89e9-dd405089088c",
+        "4c65e36f-04a1-4fb1-8c5e-2ed07a9759d4"
       ],
       "settings": {
-        "title": "Collections"
       }
     },
-    "products": {
-      "type": "section-list-products"
+    "text-with-image-left": {
+      "type": "pt-text-with-image",
+      "settings": {
+        "section_layout": "layout2",
+        "title": "Pitcher Glass Vase",
+        "text": "Pitcher Glass Vase features an elegant, slim design. It is non-porous and durable with a delicately smooth surface.",
+        "link_text": "Shop now",
+        "link_url": "shopify:\/\/products\/pitcher-glass-vase",
+        "image": "shopify:\/\/shop_images\/Pitcher_glass_vase_2.jpg"
+      }
+    },
+    "home-faq": {
+      "type": "pt-home-faq-section",
+      "blocks": {
+        "12b48888-8380-4335-bab4-34aea99dbdee": {
+          "type": "faq",
+          "settings": {
+            "title": "How to style your plants?",
+            "answer": "<p><strong>This is the first item's accordion body.<\/strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the.accordion-body, though the transition does limit overflow.<\/p>"
+          }
+        },
+        "9cfe4339-0923-49a4-8fa4-49c7fc2b530e": {
+          "type": "faq",
+          "settings": {
+            "title": "Why watering can design matter?",
+            "answer": "<p><strong>This is the second item's accordion body.<\/strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the.accordion-body, though the transition does limit overflow.<\/p>"
+          }
+        },
+        "4fd955ca-cc02-40d0-93fc-b4b4887cd1c0": {
+          "type": "faq",
+          "settings": {
+            "title": "Which material is better for a vase?",
+            "answer": ""
+          }
+        },
+        "10e865ed-274e-4068-a341-2bc18f564054": {
+          "type": "faq",
+          "settings": {
+            "title": "What is Nordic Decor?",
+            "answer": ""
+          }
+        }
+      },
+      "block_order": [
+        "12b48888-8380-4335-bab4-34aea99dbdee",
+        "9cfe4339-0923-49a4-8fa4-49c7fc2b530e",
+        "4fd955ca-cc02-40d0-93fc-b4b4887cd1c0",
+        "10e865ed-274e-4068-a341-2bc18f564054"
+      ],
+      "settings": {
+        "title": "Your questions, answered"
+      }
+    },
+    "blogs-slider": {
+      "type": "pt-blogs-slider",
+      "settings": {
+        "title": "Learn from experts",
+        "blog": "news",
+        "blog_link_text": "Read our blog",
+        "article_link_text": "Read full article",
+        "post_limit": 5
+      }
+    },
+    "showcase-image": {
+      "type": "pt-showcase-image",
+      "blocks": {
+        "80fdaf8a-2e56-41bb-a572-995799e1286f": {
+          "type": "product",
+          "settings": {
+            "title": "Doge glass vase",
+            "description": "Coming soon"
+          }
+        },
+        "32eabff8-08f7-42c9-b616-a8ada7bb191e": {
+          "type": "product",
+          "settings": {
+            "title": "Basic planter",
+            "description": "Coming soon"
+          }
+        }
+      },
+      "block_order": [
+        "80fdaf8a-2e56-41bb-a572-995799e1286f",
+        "32eabff8-08f7-42c9-b616-a8ada7bb191e"
+      ],
+      "settings": {
+        "showcase_image": "shopify:\/\/shop_images\/home-bg.jpg"
+      }
     }
   },
   "order": [
-    "hero",
-    "categories",
-    "products"
+    "main-hero",
+    "text-content",
+    "featured-collection",
+    "text-with-image",
+    "products-mosiac",
+    "text-with-image-left",
+    "home-faq",
+    "blogs-slider",
+    "showcase-image"
   ]
 }

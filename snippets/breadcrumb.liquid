@@ -1,11 +1,27 @@
 {% comment %} breadcrumb {% endcomment %}
 
-<p class="mb-5">
-  {{ "Home" | link_to: routes.root_url }} /
-  {% if collection.url %}
-    {{ collection.title | link_to: collection.url }} /
-  {%- else -%}
-    {{ "All products" | link_to: routes.all_products_collection_url }} /
-  {% endif %}
-  <span class="text-theme">{{ product.title }}</span>
-</p>
+<div class="breadcrum">
+  <div class="container">
+    {{ "Home" | link_to: routes.root_url }}
+    {% if template.name == "collection" or template.name == "product" %}
+      {% if collection.url %}
+        | {{ collection.title | link_to: collection.url }}
+      {%- else -%}
+        | {{ "All products" | link_to: routes.all_products_collection_url }}
+      {% endif %}
+      {% if template.name == "product" %}
+        | <span class="text-theme">{{ product.title }}</span>
+      {% endif %}
+    {% elsif template.name == "list-collections" %}
+      | <span class="text-theme">Collections</span>
+    {% elsif template.name == "cart" %}
+      | <span class="text-theme">Cart</span>
+    {% elsif template.name == "account" or template.name == "addresses" %}
+      | <span class="text-theme">Profile</span>
+    {% elsif template.name == "page" %}
+      | {{ page.title }}
+    {% endif %}
+
+    {% comment %} || {{ template.name }} {% endcomment %}
+  </div>
+</div>

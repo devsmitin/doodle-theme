@@ -1,66 +1,113 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Doodle",
-    "theme_version": "0.01.220428",
+    "theme_name": "Plantastic",
+    "theme_version": "1.0.0",
     "theme_author": "Smit",
     "theme_documentation_url": "https:\/\/devsmit.in\/",
     "theme_support_url": "https:\/\/devsmit.in\/"
   },
   {
-    "name": "Colors",
+    "name": "Media",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "lazy_images",
+        "label": "Lazyload images",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
     "settings": [
       {
         "type": "header",
-        "content": "Theme color"
+        "content": "Social accounts"
       },
-      {
-        "type": "color",
-        "id": "theme_color",
-        "default": "#121212",
-        "label": "Primary theme color"
-      }
-    ]
-  },
-  {
-    "name": "Typography",
-    "settings": [
-      {
-        "type": "font_picker",
-        "id": "type_header_font",
-        "label": "Heading font",
-        "default": "assistant_n4"
-      },
-      {
-        "type": "font_picker",
-        "id": "type_body_font",
-        "label": "Body font",
-        "default": "assistant_n4"
-      }
-    ]
-  },
-  {
-    "name": "Social",
-    "settings": [
       {
         "type": "text",
         "id": "social_twitter_link",
-        "label": "Twitter"
+        "label": "Twitter",
+        "info": "https://twitter.com/shopify"
       },
       {
         "type": "text",
         "id": "social_facebook_link",
-        "label": "Facebook"
+        "label": "Facebook",
+        "info": "https://facebook.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest",
+        "info": "https://pinterest.com/shopify"
       },
       {
         "type": "text",
         "id": "social_instagram_link",
-        "label": "Instagram"
+        "label": "Instagram",
+        "info": "http://instagram.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "TikTok",
+        "info": "https://tiktok.com/@shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "Tumblr",
+        "info": "https://shopify.tumblr.com"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat_link",
+        "label": "Snapchat",
+        "info": "https://www.snapchat.com/add/shopify"
       },
       {
         "type": "text",
         "id": "social_youtube_link",
-        "label": "Youtube"
+        "label": "Youtube",
+        "info": "https://www.youtube.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo_link",
+        "label": "Vimeo",
+        "info": "https://vimeo.com/shopify"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  },
+  {
+    "name": "Currency format",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Currency codes"
+      },
+      {
+        "type": "paragraph",
+        "content": "Cart and checkout prices always show currency codes. Example: $1.00 USD."
+      },
+      {
+        "type": "checkbox",
+        "id": "currency_code_enabled",
+        "label": "Show currency codes",
+        "default": true
       }
     ]
   }

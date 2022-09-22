@@ -1,0 +1,90 @@
+{% comment %} pt-product-recommendations {% endcomment %}
+
+{% assign _s = section.settings %}
+
+{% liquid 
+  assign f_collection = collections[_s.collection]
+  if collection
+    assign f_collection = collection
+  endif 
+%}
+
+{% if recommendations.products_count > 0 or _s.collection != blank or collection != blank %}
+
+  <section class="featured-products product-recommendations section-pad"
+    data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4"
+  >
+    <div class="container">
+      {%- if recommendations.performed and recommendations.products_count > 0 -%}
+      <!--recommendations performed-->
+      <div class="row">
+        {%- for product in recommendations.products -%}
+        <div class="col-md-6 col-lg-3 col-6">
+          {% render 'product-card', product: product %}
+        </div>
+        {%- endfor -%}
+      </div>
+
+      {% else %}
+      <!--recommendations not performed-->
+      <div class="row">
+        {% for product in f_collection.products %}
+          <div class="col-md-6 col-lg-3 col-6">
+            {% render 'product-card', product: product %}
+          </div>
+        {% endfor %}
+      </div>
+        
+      {%- endif -%}
+    </div>
+  </section>
+
+{% endif %}
+
+{% javascript %}
+  const handleIntersection = (entries, observer) => {
+    if (!entries[0].isIntersecting) return;
+
+    observer.unobserve(productRecommendationsSection);
+
+    const url = productRecommendationsSection.dataset.url;
+
+    fetch(url)
+      .then(response => response.text())
+      .then(text => {
+        const html = document.createElement('div');
+        html.innerHTML = text;
+        const recommendations = html.querySelector('.product-recommendations');
+
+        if (recommendations && recommendations.innerHTML.trim().length) {
+          productRecommendationsSection.innerHTML = recommendations.innerHTML;
+        }
+      })
+      .catch(e => {
+        console.error(e);
+      });
+  };
+
+  const productRecommendationsSection = document.querySelector('.product-recommendations');
+
+  if (productRecommendationsSection) {
+    const observer = new IntersectionObserver(handleIntersection, {rootMargin: '0px 0px 200px 0px'});
+    observer.observe(productRecommendationsSection);
+  }
+
+{% endjavascript %}
+
+
+{% schema %}
+{
+  "name": "Product recommendations",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Fallback collection"
+    }
+  ]
+}
+{% endschema %}
+

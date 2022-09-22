@@ -1,0 +1,101 @@
+{% comment %} pt-main-article {% endcomment %}
+
+<article class="article-template" itemscope itemtype="http://schema.org/BlogPosting">
+  <section class="blog-single-hero">
+    <div class="blog-single-banner cover-image" itemprop="image">
+      {% render 'image-tag', 
+        image: article, 
+        image_alt: article.title, 
+      %}
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="blog-hero-content">
+            <h4 class="font-body">{{ blog.title }}</h4>
+            <h1 itemprop="headline">{{ article.title | escape }}</h1>
+            <h5 class="font-body" itemprop="author">By <span itemprop="name">{{ article.author }}</span></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog-content-main section-pad">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-1">
+          <div class="article-template__content rte" itemprop="articleBody">
+            {{ article.content }}
+          </div>
+        </div>
+
+        <div class="col-md-3">
+
+          {% assign page_url = shop.url | append: article.url %}
+
+          <div class="blog-social-share">
+            <a href="//www.facebook.com/sharer.php?u={{ page_url }}" target="_blank" rel="noopener noreferrer">
+              {% render 'icon', icon: "facebook-share" %}
+            </a>
+            <a href="//twitter.com/share?url={{ page_url }}" target="_blank" rel="noopener noreferrer">
+              {% render 'icon', icon: "twitter-share" %}
+            </a>
+            <a href="//www.linkedin.com/sharing/share-offsite/?url={{ page_url }}" target="_blank" rel="noopener noreferrer">
+              {% render 'icon', icon: "linkedin-share" %}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</article>
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "articleBody": {{ article.content | strip_html | json }},
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ request.origin | append: page.url | json }}
+    },
+    "headline": {{ article.title | json }},
+    {% if article.excerpt != blank %}
+      "description": {{ article.excerpt | strip_html | json }},
+    {% endif %}
+    {% if article.image %}
+      "image": [
+        {{ article | image_url: width: article.image.width | prepend: "https:" | json }}
+      ],
+    {% endif %}
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "author": {
+      "@type": "Person",
+      "name": {{ article.author | json }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      {% if settings.share_image %}
+        "logo": {
+          "@type": "ImageObject",
+          "height": {{ settings.share_image.height | json }},
+          "url": {{ settings.share_image | image_url: width: settings.share_image.width | prepend: "https:" | json }},
+          "width": {{ settings.share_image.width | json }}
+        },
+      {% endif %}
+      "name": {{ shop.name | json }}
+    }
+  }
+</script>
+
+
+
+{% schema %}
+{
+  "name": "Main article",
+  "tag": "section",
+  "class": "section"
+}
+{% endschema %}

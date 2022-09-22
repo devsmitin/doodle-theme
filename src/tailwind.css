@@ -1,0 +1,9 @@
+/* tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+ * Do not write any css / scss here
+ * Cteate section wise sass / scss and @import that to styles.scss
+ */

@@ -1,0 +1,121 @@
+{% comment %} pt-blogs-slider {% endcomment %}
+
+{% assign _s = section.settings %}
+
+<section class="section-pad pt-0" style="overflow-x: hidden" id="{{ section.id }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-11 offset-md-1">
+        <h2 class="heading">{{ _s.title }}</h2>
+        
+        <a class="line-button" href="{{ _s.blog.url }}">
+          <span class="link-text" data-text="{{ _s.blog_link_text }}">{{ _s.blog_link_text }}</span>
+        </a>
+        
+        <div class="tns-overflow-visible home-blog-listing relative">
+          <div class="three-half-carousel">
+            {% for article in _s.blog.articles limit: _s.post_limit %}
+              <div class="item">
+                <div class="single-blog-item">
+                  <a href="{{ article.url }}" class="long-product-img">
+                    {% render 'image-tag', 
+                      image: article.image.src, 
+                      image_alt: article.image.alt
+                    %}
+                  </a>
+  
+                  <h3 class="single-blog-item-title font-body">{{ article.title }}</h3>
+                  <p>{{ article.excerpt }}</p>
+  
+                  <a class="line-button" href="{{ article.url }}">
+                    <span class="link-text" data-text="{{ _s.article_link_text }}">{{ _s.article_link_text }}</span>
+                  </a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let arrowLeft = `{%- render 'icon', icon: "arrowLeft" -%}`;
+    let arrowRight = `{%- render 'icon', icon: "arrowRight" -%}`;
+    plantastic.slider_{{ section.id | replace: '-', '_' }} = tns({
+      container: '#shopify-section-{{ section.id }} .three-half-carousel',
+      preventScrollOnTouch: 'force',
+      items: 2,
+      gutter: 10,
+      loop: false,
+      controls: false,
+      controlsText: [arrowLeft, arrowRight],
+      nav: true,
+      navPosition: 'bottom',
+      responsive: {
+        640: {
+          items: 2,
+        },
+        700: {
+          nav: false,
+          controls: true,
+          items: 2.5,
+        },
+        900: {
+          items: 3.5,
+        },
+      },
+    });
+  });
+</script>
+
+
+{% schema %}
+{
+  "name": "Blogs slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog",
+      "info": "Select blog to show it's articles."
+    },
+    {
+      "type": "text",
+      "id": "blog_link_text",
+      "label": "Blog link text",
+      "default": "Read our blog"
+    },
+    {
+      "type": "text",
+      "id": "article_link_text",
+      "label": "Article link text",
+      "default": "Read full article"
+    },
+    {
+      "type": "range",
+      "id": "post_limit",
+      "min": 4,
+      "max": 10,
+      "default": 5,
+      "step": 1,
+      "label": "Post limit"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blogs slider"
+    }
+  ]
+}
+{% endschema %}
+

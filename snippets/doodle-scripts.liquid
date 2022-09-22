@@ -1,0 +1,163 @@
+<script>
+window.doodle = window.doodle || {};
+
+doodle.cn = function (o) {
+  return "undefined" == typeof o || null == o || "" == o.toString().trim();
+};
+
+doodle.setCookie = function (t, e, s) {
+  const i = new Date();
+  i.setTime(i.getTime() + 24 * s * 60 * 60 * 1e3);
+  let o = "expires=" + i.toUTCString();
+  document.cookie = t + "=" + e + ";" + o + ";path=/";
+};
+
+doodle.getCookie = function (t) {
+  let e = t + "=",
+    s = document.cookie.split(";");
+  for (let t = 0; t < s.length; t++) {
+    let i = s[t];
+    for (; " " == i.charAt(0); ) i = i.substring(1);
+    if (0 == i.indexOf(e)) return i.substring(e.length, i.length);
+  }
+  return "";
+};
+
+doodle.money_format = "{{ shop.money_format }}";
+
+doodle.formatMoney = function (t, e) {
+  function o(t, e) {
+    return void 0 === t ? e : t;
+  }
+  function i(t, e, i, r) {
+    if (
+      ((e = o(e, 2)), (i = o(i, ",")), (r = o(r, ".")), isNaN(t) || null == t)
+    )
+      return 0;
+    t = (t / 100).toFixed(e);
+    var n = t.split(".");
+    return (
+      n[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + i) +
+      (n[1] ? r + n[1] : "")
+    );
+  }
+  "string" == typeof t && (t = t.replace(".", ""));
+  var r = "",
+    n = /\{\{\s*(\w+)\s*\}\}/,
+    a = e || this.money_format;
+  switch (a.match(n)[1]) {
+    case "amount":
+      r = i(t, 2);
+      break;
+    case "amount_no_decimals":
+      r = i(t, 0);
+      break;
+    case "amount_with_comma_separator":
+      r = i(t, 2, ".", ",");
+      break;
+    case "amount_with_space_separator":
+      r = i(t, 2, " ", ",");
+      break;
+    case "amount_with_period_and_space_separator":
+      r = i(t, 2, " ", ".");
+      break;
+    case "amount_no_decimals_with_comma_separator":
+      r = i(t, 0, ".", ",");
+      break;
+    case "amount_no_decimals_with_space_separator":
+      r = i(t, 0, " ");
+      break;
+    case "amount_with_apostrophe_separator":
+      r = i(t, 2, "'", ".");
+  }
+  return a.replace(n, r);
+};
+
+doodle.randomizer = function (t, e) {
+  let s = Math.floor(Math.random() * e);
+  return Math.random() > 0.5 ? (t -= s) : (t += s), t;
+};
+
+Shopify.bind = function(fn, scope) {
+  return function() {
+    return fn.apply(scope, arguments);
+  }
+};
+
+Shopify.addListener = function(target, eventName, callback) {
+  target.addEventListener ? target.addEventListener(eventName, callback, false) : target.attachEvent('on'+eventName, callback);
+};
+
+Shopify.setSelectorByValue = function(selector, value) {
+  for (var i = 0, count = selector.options.length; i < count; i++) {
+    var option = selector.options[i];
+    if (value == option.value || value == option.innerHTML) {
+      selector.selectedIndex = i;
+      return i;
+    }
+  }
+};
+
+
+Shopify.CountryProvinceSelector = function(country_domid, province_domid, options) {
+  this.countryEl         = document.getElementById(country_domid);
+  this.provinceEl        = document.getElementById(province_domid);
+  this.provinceContainer = document.getElementById(options['hideElement'] || province_domid);
+
+  Shopify.addListener(this.countryEl, 'change', Shopify.bind(this.countryHandler,this));
+
+  this.initCountry();
+  this.initProvince();
+};
+
+Shopify.CountryProvinceSelector.prototype = {
+  initCountry: function() {
+    var value = this.countryEl.getAttribute('data-default');
+    Shopify.setSelectorByValue(this.countryEl, value);
+    this.countryHandler();
+  },
+
+  initProvince: function() {
+    var value = this.provinceEl.getAttribute('data-default');
+    if (value && this.provinceEl.options.length > 0) {
+      Shopify.setSelectorByValue(this.provinceEl, value);
+    }
+  },
+
+  countryHandler: function(e) {
+    var opt       = this.countryEl.options[this.countryEl.selectedIndex];
+    var raw       = opt.getAttribute('data-provinces');
+    var provinces = JSON.parse(raw);
+
+    this.clearOptions(this.provinceEl);
+    if (provinces && provinces.length == 0) {
+      this.provinceContainer.style.display = 'none';
+    } else {
+      for (var i = 0; i < provinces.length; i++) {
+        var opt = document.createElement('option');
+        opt.value = provinces[i][0];
+        opt.innerHTML = provinces[i][1];
+        this.provinceEl.appendChild(opt);
+      }
+
+      this.provinceContainer.style.display = "";
+    }
+  },
+
+  clearOptions: function(selector) {
+    while (selector.firstChild) {
+      selector.removeChild(selector.firstChild);
+    }
+  },
+
+  setOptions: function(selector, values) {
+    for (var i = 0, count = values.length; i < values.length; i++) {
+      var opt = document.createElement('option');
+      opt.value = values[i];
+      opt.innerHTML = values[i];
+      selector.appendChild(opt);
+    }
+  }
+};
+
+</script>

@@ -1,0 +1,120 @@
+@import 'variables';
+
+.footer-main {
+  .single-footer-block {
+    margin-bottom: 50px;
+  }
+
+  @media (max-width: 990px) {
+    .footer-logo {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+  }
+  .footer-contact-area {
+    display: flex;
+    flex-wrap: wrap;
+
+    .single-footer-contact {
+      h3 {
+        font-size: 14px;
+        line-height: 16px;
+        margin-bottom: 35px;
+      }
+
+      p,
+      a {
+        font-size: 14px;
+        line-height: 17px;
+      }
+
+      @media (max-width: 990px) {
+        width: 100%;
+        flex: auto;
+        text-align: center;
+        margin-bottom: 30px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .footer-nav-links {
+    padding: 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-top: 1px solid rgba(247, 247, 242, 0.4);
+    border-bottom: 1px solid rgba(247, 247, 242, 0.4);
+
+    a {
+      font-size: 14px;
+      line-height: 17px;
+      opacity: 0.5;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 767px) {
+      padding: 15px 0;
+      a {
+        width: 50%;
+        margin: 8px 0;
+      }
+    }
+  }
+
+  .footer-head {
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 16px;
+  }
+  .popular-searches-links {
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(255, 255, 255, 0.6);
+    a {
+      font-size: 14px;
+      line-height: 17px;
+      opacity: 0.6;
+      display: inline-block;
+      margin: 0 5px;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .footer-store-feature {
+    padding-top: 45px;
+    border-top: 1px solid rgba(247, 247, 242, 0.4);
+    display: flex;
+    flex-wrap: wrap;
+
+    p {
+      flex: 1;
+    }
+    svg {
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 8px;
+    }
+
+    @media (max-width: 767px) {
+      p {
+        width: 50%;
+        flex: auto;
+        margin: 0 0 10px;
+      }
+    }
+  }
+}

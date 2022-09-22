@@ -1,0 +1,29 @@
+{% comment %} pt-featured-article {% endcomment %}
+
+{% assign article_blog = article.handle | split: '/' | first %}
+{% assign article_blog_title = blogs[article_blog].title %}
+
+<section class="featured-blog bg-lightgrey section-pad">
+  <div class="featured-blog-img cover-image">
+    {% render 'image-tag', 
+      image: article, 
+      image_alt: article.title, 
+    %}
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="featured-blog-desc">
+          <h4 class="font-body">{{ article_blog_title }}</h4>
+
+          <a href="{{ article.url }}">
+            <h2 class="heading-small">{{ article.title }}</h2>
+          </a>
+
+          <p>By {{ article.author }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
