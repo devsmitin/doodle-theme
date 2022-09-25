@@ -124,7 +124,7 @@ button {
 }
 
 .container {
-  @media (max-width: 990px) {
+  @media (max-width: 991px) {
     max-width: 100%;
   }
 }
@@ -434,7 +434,7 @@ button {
       line-height: 140%;
     }
   }
-  @media (max-width: 990px) {
+  @media (max-width: 991px) {
     margin: 12px 0;
   }
   @media (max-width: 767px) {
@@ -754,7 +754,7 @@ button {
     line-height: 120%;
   }
 
-  @media (max-width: 990px) {
+  @media (max-width: 991px) {
     h3 {
       font-size: 24px;
     }
@@ -1029,9 +1029,9 @@ button {
   }
 }
 
-img {
-  width: 100%;
-}
+// img {
+//   width: 100%;
+// }
 
 .product-action-button {
   .wishlisthero-floating {

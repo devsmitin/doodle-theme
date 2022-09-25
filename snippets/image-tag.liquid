@@ -17,13 +17,14 @@
     endif
   endfor
 
+  if class_list != nil
+    assign class_list = class_list | append: ' img-fluid'
+  else
+    assign class_list = 'img-fluid'
+  endif
+
   if settings.lazy_images 
-    assign lazyclass = ' zload'
-    if class_list == nil
-      assign lazyclass = 'zload'
-    endif
-    
-    assign class_list = class_list | append: lazyclass
+    assign class_list = class_list | append: ' zload'
   endif
 
   assign widths = widths | remove_first: ','
@@ -45,21 +46,22 @@
     data-test="{{ image.id }}"
   > {% endcomment %}
 
-  {% assign media_width = 0.65 %}
-
-  <img data-t="{{ image.width }}" srcset="
-    {% if image.width >= 54 %}{{ image | image_url: width: 54 }} 54w,{% endif %}
-    {% if image.width >= 74 %}{{ image | image_url: width: 74 }} 74w,{% endif %}
-    {% if image.width >= 104 %}{{ image | image_url: width: 104 }} 104w,{% endif %}
-    {% if image.width >= 162 %}{{ image | image_url: width: 162 }} 162w,{% endif %}
-    {% if image.width >= 208 %}{{ image | image_url: width: 208 }} 208w,{% endif %}
-    {% if image.width >= 324 %}{{ image | image_url: width: 324 }} 324w,{% endif %}
-    {% if image.width >= 416 %}{{ image | image_url: width: 416 }} 416w,{% endif %},
-    {{ image | image_url }} {{ image.width }}w"
-    src="{{ image | image_url: width: 416 }}"
+  <img data-width="{{ image.width }}" srcset="{% if image.width >= 493 %}{{ image | image_url: width: 493 }} 493w,{% endif %}
+      {% if image.width >= 600 %}{{ image | image_url: width: 600 }} 600w,{% endif %}
+      {% if image.width >= 713 %}{{ image | image_url: width: 713 }} 713w,{% endif %}
+      {% if image.width >= 823 %}{{ image | image_url: width: 823 }} 823w,{% endif %}
+      {% if image.width >= 990 %}{{ image | image_url: width: 990 }} 990w,{% endif %}
+      {% if image.width >= 1100 %}{{ image | image_url: width: 1100 }} 1100w,{% endif %}
+      {% if image.width >= 1206 %}{{ image | image_url: width: 1206 }} 1206w,{% endif %}
+      {% if image.width >= 1346 %}{{ image | image_url: width: 1346 }} 1346w,{% endif %}
+      {% if image.width >= 1426 %}{{ image | image_url: width: 1426 }} 1426w,{% endif %}
+      {% if image.width >= 1646 %}{{ image | image_url: width: 1646 }} 1646w,{% endif %}
+      {% if image.width >= 1946 %}{{ image | image_url: width: 1946 }} 1946w,{% endif %}
+      {{ image | image_url }} {{ image.width }}w"
+    src="{{ media | image_url: width: 1946 }}"
     class="{{ class_list }}" alt="{{ image_alt | escape }}"
-    height="208"
-    width="208"
+    width="auto"
+    height="auto"
     loading="lazy"
   >
 {% endif %}

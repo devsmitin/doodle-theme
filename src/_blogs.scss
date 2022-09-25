@@ -24,7 +24,7 @@
     @media (max-width: 1200px) {
       width: calc((100vw - 930px) / 2);
     }
-    @media (max-width: 990px) {
+    @media (max-width: 991px) {
       width: 50px;
     }
   }
@@ -170,7 +170,7 @@
     width: 53%;
     height: calc(100% + 80px);
   }
-  @media (max-width: 990px) {
+  @media (max-width: 991px) {
     padding: 0 0 80px;
     margin-bottom: 0;
     .blog-single-banner {
@@ -190,7 +190,7 @@
       line-height: 130%;
       font-weight: 600;
       margin-bottom: 30px;
-      @media (max-width: 990px) {
+      @media (max-width: 991px) {
         font-size: 28px;
       }
     }

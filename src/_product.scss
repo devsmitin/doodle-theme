@@ -136,7 +136,7 @@
       }
     }
 
-    @media (max-width: 990px) {
+    @media (max-width: 991px) {
       li {
         button {
           height: 100%;
@@ -184,6 +184,7 @@
 .wishlist-wrapper {
   position: relative;
   .button-wishlist {
+    color: #5f6237 !important;
     background-color: #fff;
     border: 1px solid currentColor;
     .link-text::before,

@@ -58,7 +58,7 @@
                 </h3>
 
               {%- when 'form' -%}
-                <div class="row mb-5 option-selector">
+                <div class="row option-selector mt-5">
                   {% for product_option in product.options_with_values %}
                     {% liquid
                       assign is_color = false
@@ -95,17 +95,17 @@
 
                 </div>
                 {% assign form_id = "product_form_" | append: section.id | append: '--' | append: product.id %}
-                {%- form 'product', product, id: form_id, class: 'product-form mb-5' -%}
-                <input type="hidden" name="id" id="product_id" value="{{ product.selected_or_first_available_variant.id }}">
-                <button class="button button-full" type="submit">
-                  <span>
-                    <span class="link-text" data-text="Add to cart" data-working="Adding..." data-done="Added!">Add to cart</span>
-                  </span>
-                </button>
+                {%- form 'product', product, id: form_id, class: 'product-form mt-5' -%}
+                  <input type="hidden" name="id" id="product_id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <button class="button button-full" type="submit">
+                    <span>
+                      <span class="link-text" data-text="Add to cart" data-working="Adding..." data-done="Added!">Add to cart</span>
+                    </span>
+                  </button>
                 {%- endform -%}
 
               {%- when 'offers' -%}
-                <div class="product-offers mb-5">
+                <div class="product-offers mt-5">
                   <p class="h4 text-success mb-3">Offers:</p>
                   <div class="offers-list">
 
@@ -123,92 +123,94 @@
                 </div>
 
               {%- when 'tabs' -%}
-                <ul class="product-detail-tabs nav nav-tabs" id="productDetails" role="tablist">
-                  <li role="presentation">
-                    <button class="nav-link h-100 active" id="product-details-tab" data-bs-toggle="tab" data-bs-target="#product-details" type="button" role="tab" aria-controls="product-details" aria-selected="true">Product details</button>
-                  </li>
-                  <li role="presentation">
-                    <button class="nav-link h-100" id="product-description-tab" data-bs-toggle="tab" data-bs-target="#product-description" type="button" role="tab" aria-controls="product-description" aria-selected="false">Product Description</button>
-                  </li>
-                  <li role="presentation">
-                    <button class="nav-link h-100" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
-                  </li>
-                </ul>
-                <div class="tab-content" id="productDetailsContent">
-                  <div class="tab-pane fade show active" id="product-details" role="tabpanel" aria-labelledby="product-details-tab">
-                    <div class="product-details-block">
-                      <table class="table table-borderless">
-                        {% if product.metafields.my_fields.dimensions %}
-                          <tr>
-                            <td class="semibold">Dimensions</td>
-                            <td>{{ product.metafields.my_fields.dimensions }}</td>
-                          </tr>
-                        {% endif %}
-                        {% if product.metafields.my_fields.material %}
-                          <tr>
-                            <td class="semibold">Material</td>
-                            <td>{{ product.metafields.my_fields.material }}</td>
-                          </tr>
-                        {% endif %}
-                        {% if product.metafields.my_fields.in_box %}
-                          <tr>
-                            <td class="semibold">In box</td>
-                            <td>{{ product.metafields.my_fields.in_box }}</td>
-                          </tr>
-                        {% endif %}
-                      </table>
-                    </div>
-                  </div>
-
-                  <div class="tab-pane fade" id="product-description" role="tabpanel" aria-labelledby="product-description-tab">
-                    <div class="product-description-box">
-                      {% if product.metafields.my_fields.description %}
-                        {{- product.metafields.my_fields.description | newline_to_br -}}
-                      {% endif %}
-                    </div>
-                  </div>
-
-                  <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                    <div class="reviews-tab">
-
-                      {%- for block in section.blocks -%}
-                        {%- if block.type == '@app' -%}
-
-                          {%- liquid
-                            capture app_block
-                              render block
-                            endcapture
-
-                            if app_block contains 'id="shopify-product-reviews"'
-                              echo app_block
-                            endif
-                          -%}
-
-                        {%- endif -%}
-                      {%- endfor -%}
-
-                      {%- comment -%}
-                      <h3 class="font-body">Latest Reviews</h3>
-
-                      <div class="single-review">
-                        <div class="rating-tag">
-                          4.5 {% render 'icon', icon: "star" %}
-                        </div>
-                        <p>
-                          Developed the concept of exclusivity, a Sol’ace features
-                          timeless furniture, with natural fabrics, curved lines,
-                          plenty of mirrors and classic design.
-                        </p>
-
-                        <p class="semibodl">Deep Wagle | 20 Jan 2022</p>
+                <div class="mt-5">
+                  <ul class="product-detail-tabs nav nav-tabs" id="productDetails" role="tablist">
+                    <li role="presentation">
+                      <button class="nav-link h-100 active" id="product-details-tab" data-bs-toggle="tab" data-bs-target="#product-details" type="button" role="tab" aria-controls="product-details" aria-selected="true">Product details</button>
+                    </li>
+                    <li role="presentation">
+                      <button class="nav-link h-100" id="product-description-tab" data-bs-toggle="tab" data-bs-target="#product-description" type="button" role="tab" aria-controls="product-description" aria-selected="false">Product Description</button>
+                    </li>
+                    <li role="presentation">
+                      <button class="nav-link h-100" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="productDetailsContent">
+                    <div class="tab-pane fade show active" id="product-details" role="tabpanel" aria-labelledby="product-details-tab">
+                      <div class="product-details-block">
+                        <table class="table table-borderless">
+                          {% if product.metafields.my_fields.dimensions %}
+                            <tr>
+                              <td class="semibold">Dimensions</td>
+                              <td>{{ product.metafields.my_fields.dimensions }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if product.metafields.my_fields.material %}
+                            <tr>
+                              <td class="semibold">Material</td>
+                              <td>{{ product.metafields.my_fields.material }}</td>
+                            </tr>
+                          {% endif %}
+                          {% if product.metafields.my_fields.in_box %}
+                            <tr>
+                              <td class="semibold">In box</td>
+                              <td>{{ product.metafields.my_fields.in_box }}</td>
+                            </tr>
+                          {% endif %}
+                        </table>
                       </div>
-                      {%- endcomment -%}
+                    </div>
+  
+                    <div class="tab-pane fade" id="product-description" role="tabpanel" aria-labelledby="product-description-tab">
+                      <div class="product-description-box">
+                        {% if product.metafields.my_fields.description %}
+                          {{- product.metafields.my_fields.description | newline_to_br -}}
+                        {% endif %}
+                      </div>
+                    </div>
+  
+                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                      <div class="reviews-tab">
+  
+                        {%- for block in section.blocks -%}
+                          {%- if block.type == '@app' -%}
+  
+                            {%- liquid
+                              capture app_block
+                                render block
+                              endcapture
+  
+                              if app_block contains 'id="shopify-product-reviews"'
+                                echo app_block
+                              endif
+                            -%}
+  
+                          {%- endif -%}
+                        {%- endfor -%}
+  
+                        {%- comment -%}
+                        <h3 class="font-body">Latest Reviews</h3>
+  
+                        <div class="single-review">
+                          <div class="rating-tag">
+                            4.5 {% render 'icon', icon: "star" %}
+                          </div>
+                          <p>
+                            Developed the concept of exclusivity, a Sol’ace features
+                            timeless furniture, with natural fabrics, curved lines,
+                            plenty of mirrors and classic design.
+                          </p>
+  
+                          <p class="semibodl">Deep Wagle | 20 Jan 2022</p>
+                        </div>
+                        {%- endcomment -%}
+                      </div>
                     </div>
                   </div>
                 </div>
 
               {%- when 'wishlist' -%}
-                <div class="mb-5 wishlist-wrapper">
+                <div class="wishlist-wrapper mt-3">
                   <button class="button button-full button-wishlist" id="custom-wishlist-btn" type="button">
                     <span>
                       <span class="link-text" data-text="♡ Add to wishlist" data-working="Adding..." data-done="Added!">♡ Add to wishlist</span>
