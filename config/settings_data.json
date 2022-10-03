@@ -1,6 +1,6 @@
 {
   "current": {
-    "lazy_images": true,
+    "lazy_images": false,
     "social_twitter_link": "#",
     "social_facebook_link": "",
     "social_pinterest_link": "",
@@ -122,9 +122,8 @@
       "pt-footer": {
         "type": "pt-footer",
         "settings": {
-          "footer_logo": "shopify:\/\/shop_images\/Logo.png",
           "menu": "footer",
-          "search_menu": "popular-searches",
+          "search_menu": "",
           "footer_title": "In our opinion, the nordic style is about feeling at home wherever you are.",
           "footer_text": "We hope we can help create the ideal home environment for you. We strived to craft a modern and composed Scandinavian collection that is truly unique.",
           "email": "store.plantastic@gmail.com",
