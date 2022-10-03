@@ -3,11 +3,11 @@
     "main-hero": {
       "type": "pt-hero-banner",
       "settings": {
-        "title": "Aesthetic Decor for Functional Living",
+        "title": "Aesthetic Watches for Functional Living",
         "link_text": "Explore our products",
         "link_url": "shopify:\/\/collections\/all",
         "animated_text": "Plantastic",
-        "image_desktop": "shopify:\/\/shop_images\/wooden-watch.jpg",
+        "image_desktop": "shopify:\/\/shop_images\/mens-suit-watch.jpg",
         "video_url": "https:\/\/cdn.shopify.com\/s\/files\/1\/0586\/4407\/0594\/files\/hero-video-overlay.mp4?v=1652265809"
       }
     },
