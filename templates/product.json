@@ -41,11 +41,6 @@
           "type": "tabs",
           "settings": {
           }
-        },
-        "4ffd614b-a408-42ab-af16-e0ba4994462e": {
-          "type": "shopify:\/\/apps\/product-reviews\/blocks\/reviews\/bae150af-8da8-48b2-9867-398188115e5f",
-          "settings": {
-          }
         }
       },
       "block_order": [
@@ -55,8 +50,7 @@
         "ba71d120-21e8-43b9-a8e3-45db328c8c54",
         "91386ac5-9eb0-4909-8163-4cb74e89024f",
         "315c216c-376f-46f7-8e4d-04e1326a649b",
-        "8f95b68a-12cb-4fe7-b412-d6eae8b740e6",
-        "4ffd614b-a408-42ab-af16-e0ba4994462e"
+        "8f95b68a-12cb-4fe7-b412-d6eae8b740e6"
       ],
       "settings": {
       }

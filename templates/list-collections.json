@@ -3,8 +3,7 @@
     "main": {
       "type": "pt-collection-list",
       "settings": {
-        "title": "Collections",
-        "image_ratio": "square"
+        "title": "Collections"
       }
     }
   },

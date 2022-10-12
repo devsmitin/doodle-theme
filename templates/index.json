@@ -3,12 +3,11 @@
     "main-hero": {
       "type": "pt-hero-banner",
       "settings": {
-        "title": "Aesthetic Decor for Functional Living",
+        "title": "Aesthetic Watches for Functional Living",
         "link_text": "Explore our products",
         "link_url": "shopify:\/\/collections\/all",
         "animated_text": "Plantastic",
-        "image_desktop": "shopify:\/\/shop_images\/cabinet-Hero2tv-modern-living-room-with-armchair-lamp-table-flower-plant-concrete-wall-background-3d-rendering_1.jpg",
-        "image_mobile": "shopify:\/\/shop_images\/Mobile_hero_1.jpg",
+        "image_desktop": "shopify:\/\/shop_images\/mens-suit-watch.jpg",
         "video_url": "https:\/\/cdn.shopify.com\/s\/files\/1\/0586\/4407\/0594\/files\/hero-video-overlay.mp4?v=1652265809"
       }
     },
@@ -18,12 +17,7 @@
         "title": "For the little things in life",
         "text": "We at Plantastic curating modern, minimal and nordic decor products which will make your house a Home so you can live your spaces. We hope we can help create the ideal home environment for you. We strived to craft a modern and composed Scandinavian collection that is truly unique.",
         "link_text": "Read more about us",
-        "link_url": "shopify:\/\/pages\/about",
-        "image_1": "shopify:\/\/shop_images\/Orbit_Vase_10.jpg",
-        "image_2": "shopify:\/\/shop_images\/Mobile_hero_1.jpg",
-        "image_3": "shopify:\/\/shop_images\/Pitcher_glass_vase_2.jpg",
-        "image_4": "shopify:\/\/shop_images\/Sec_2img-5.jpg",
-        "image_5": "shopify:\/\/shop_images\/Marv_5.jpg"
+        "link_url": "shopify:\/\/pages\/about"
       }
     },
     "featured-collection": {
@@ -41,8 +35,7 @@
         "title": "Marvellous Planter",
         "text": "concrete planters are not only practical but they are beautiful. The concrete is textured on the top to keep the soil and water in place with a drainage area at the bottom.",
         "link_text": "Shop now",
-        "link_url": "shopify:\/\/products\/marvellous-planter",
-        "image": "shopify:\/\/shop_images\/Marvellous_planter_2.jpg"
+        "link_url": "shopify:\/\/products\/marvellous-planter"
       }
     },
     "products-mosiac": {
@@ -124,8 +117,7 @@
         "title": "Pitcher Glass Vase",
         "text": "Pitcher Glass Vase features an elegant, slim design. It is non-porous and durable with a delicately smooth surface.",
         "link_text": "Shop now",
-        "link_url": "shopify:\/\/products\/pitcher-glass-vase",
-        "image": "shopify:\/\/shop_images\/Pitcher_glass_vase_2.jpg"
+        "link_url": "shopify:\/\/products\/pitcher-glass-vase"
       }
     },
     "home-faq": {
@@ -203,7 +195,6 @@
         "32eabff8-08f7-42c9-b616-a8ada7bb191e"
       ],
       "settings": {
-        "showcase_image": "shopify:\/\/shop_images\/home-bg.jpg"
       }
     }
   },
