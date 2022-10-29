@@ -36,6 +36,7 @@
     },
     "text-with-image": {
       "type": "pt-text-with-image",
+      "disabled": true,
       "settings": {
         "section_layout": "layout1",
         "title": "Marvellous Planter",
