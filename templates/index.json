@@ -18,7 +18,12 @@
         "title": "For the little things in life",
         "text": "At Pigeon, we curate modern, minimal and nordic watches which will make you stand out. We strive to craft a modern and composed collection of watches that is truly unique.",
         "link_text": "Read more",
-        "link_url": "shopify:\/\/pages\/about"
+        "link_url": "shopify:\/\/pages\/about",
+        "image_1": "shopify:\/\/shop_images\/mens-suit-watch.jpg",
+        "image_2": "shopify:\/\/shop_images\/wooden-watch.jpg",
+        "image_3": "shopify:\/\/shop_images\/a-close-up-of-luxury-watch.jpg",
+        "image_4": "shopify:\/\/shop_images\/mens-watch-in-sun.jpg",
+        "image_5": "shopify:\/\/shop_images\/white-faced-watch.jpg"
       }
     },
     "featured-collection": {
