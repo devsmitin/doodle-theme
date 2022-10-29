@@ -47,6 +47,7 @@
     },
     "products-mosiac": {
       "type": "pt-products-mosiac",
+      "disabled": true,
       "blocks": {
         "90e73f1f-37dc-4be5-b4ae-30a8100fc5a2": {
           "type": "left_products",
@@ -119,6 +120,7 @@
     },
     "text-with-image-left": {
       "type": "pt-text-with-image",
+      "disabled": true,
       "settings": {
         "section_layout": "layout2",
         "title": "Pitcher Glass Vase",
@@ -133,37 +135,21 @@
         "12b48888-8380-4335-bab4-34aea99dbdee": {
           "type": "faq",
           "settings": {
-            "title": "Which vase is good for plant propagation?",
-            "answer": "<p>We'll suggest a <a href=\"\/products\/pitcher-glass-vase\" target=\"_blank\" title=\"Pitcher Glass Vase\"><strong>glass vase<\/strong><\/a><strong> <\/strong>because Glass is the best material to propagate plants in because its non-porous and eliminates air-borne bacteria that could damage new roots and yes you can see the water level easily and  watch baby roots growing in it :)<\/p>"
+            "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente hic facilis?",
+            "answer": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente hic facilis, ab ipsum corrupti ipsa sit dolorem harum. Quam ipsum doloremque veritatis voluptatibus dolor libero aut tenetur voluptatum iste illo.<\/p>"
           }
         },
         "9cfe4339-0923-49a4-8fa4-49c7fc2b530e": {
           "type": "faq",
           "settings": {
-            "title": "Is watering can design matter?",
-            "answer": "<p>Of course it matters a lot. Wider spout can pour maximum water so it's good for outdoor plants and bigger plants same time if you're growing plants indoor then we'll suggest to use narrow spout watering can <a href=\"\/products\/nozzle-watering-can\" target=\"_blank\" title=\"Nozzle Watering can\">(Nozzle watering can)<\/a> so it'll prevent overwatering and also prevent spilling water on your valuble furnitures and carpet :)<\/p>"
-          }
-        },
-        "4fd955ca-cc02-40d0-93fc-b4b4887cd1c0": {
-          "type": "faq",
-          "settings": {
-            "title": "How to use decorative pots?",
-            "answer": "<p>Before buying decorative pots & Planters check the size of your nursery pots or plants and purchase accordingly. Decorative pot should be at least 1 inch larger than your nursery pot, Now just put your nursery pot into it. If the decorative pot don't have any drainge hole in it then make sure after watering through the drained water and clean the pot. <a href=\"\/collections\/plant-care-styling\" target=\"_blank\" title=\"Plant care & Styling\">Check some of our beautifull Pots and Planters collection here<\/a><\/p>"
-          }
-        },
-        "10e865ed-274e-4068-a341-2bc18f564054": {
-          "type": "faq",
-          "settings": {
-            "title": "What is Nordic Style?",
-            "answer": "<p>Emerging in the 1950s alongside the modernist movement in Europe and America, Scandinavian modern style <strong>prioritized democratic, affordable, and sleek furnishings and interiors<\/strong>. Clean lines, functional furnishings, and a neutral palette were hallmarks of modernist style everywhere.<\/p>"
+            "title": "Lorem ipsum, Beatae iste temporibus eius?",
+            "answer": "<p>Lorem ipsum, Beatae iste temporibus eius. Laudantium natus, ducimus reiciendis quisquam eligendi distinctio modi sequi veritatis fugit temporibus odio tempore est quae et eveniet?<\/p>"
           }
         }
       },
       "block_order": [
         "12b48888-8380-4335-bab4-34aea99dbdee",
-        "9cfe4339-0923-49a4-8fa4-49c7fc2b530e",
-        "4fd955ca-cc02-40d0-93fc-b4b4887cd1c0",
-        "10e865ed-274e-4068-a341-2bc18f564054"
+        "9cfe4339-0923-49a4-8fa4-49c7fc2b530e"
       ],
       "settings": {
         "title": "Your questions, answered"
