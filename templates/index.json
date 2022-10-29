@@ -34,6 +34,9 @@
         "collection": "frontpage"
       }
     },
+    "collection-filter": {
+      "type": "pt-collection-filter"
+    },
     "text-with-image": {
       "type": "pt-text-with-image",
       "settings": {
@@ -197,6 +200,7 @@
   "order": [
     "main-hero",
     "text-content",
+    "collection-filter",
     "featured-collection",
     "text-with-image",
     "products-mosiac",
