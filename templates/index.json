@@ -31,7 +31,7 @@
       "settings": {
         "title": "Explore our featured products",
         "collection_link_text": "Check All Featured Products",
-        "collection": "featured"
+        "collection": "frontpage"
       }
     },
     "text-with-image": {
