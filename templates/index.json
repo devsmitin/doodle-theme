@@ -36,13 +36,13 @@
     },
     "text-with-image": {
       "type": "pt-text-with-image",
-      "disabled": true,
       "settings": {
         "section_layout": "layout1",
-        "title": "Marvellous Planter",
-        "text": "concrete planters are not only practical but they are beautiful. The concrete is textured on the top to keep the soil and water in place with a drainage area at the bottom.",
+        "title": "Marvellous Impression",
+        "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta fuga harum veritatis voluptates incidunt sit eaque rem, quis hic earum iste obcaecati numquam veniam tempora sequi doloribus aperiam, reprehenderit in!",
         "link_text": "Shop now",
-        "link_url": ""
+        "link_url": "",
+        "image": "shopify:\/\/shop_images\/mens-watch-in-sun.jpg"
       }
     },
     "products-mosiac": {
