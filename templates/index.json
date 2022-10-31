@@ -35,7 +35,9 @@
       }
     },
     "collection-filter": {
-      "type": "pt-collection-filter"
+      "type": "pt-collection-filter",
+      "settings": {
+      }
     },
     "text-with-image": {
       "type": "pt-text-with-image",
