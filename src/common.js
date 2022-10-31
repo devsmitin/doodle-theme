@@ -9,6 +9,7 @@ class PTtheme {
     this.clickEvents();
     this.zload();
     this.observe_cart();
+    this.collection_filter();
   }
 
   header() {
@@ -104,11 +105,15 @@ class PTtheme {
     });
 
     this.eventBinder("click", "body", "#custom-wishlist-btn", (e) => {
-      if (document.getElementById("wishlisthero-product-page-button-container")) {
-        let button = document.querySelector("#wishlisthero-product-page-button-container button");
+      if (
+        document.getElementById("wishlisthero-product-page-button-container")
+      ) {
+        let button = document.querySelector(
+          "#wishlisthero-product-page-button-container button"
+        );
         button.click();
       } else {
-        console.warn("Wishlist element not found!")
+        console.warn("Wishlist element not found!");
       }
     });
 
@@ -232,6 +237,7 @@ class PTtheme {
   async updateCartContent() {
     try {
       const response = await fetch(Shopify.routes.root + "cart?view=ajax");
+      j;
       return await response.text();
     } catch (error) {
       console.log("Error:", error);
@@ -291,6 +297,29 @@ class PTtheme {
 
     // Later, you can stop observing
     // mo.disconnect();
+  }
+
+  collection_filter() {
+    // let collection_link = document.querySelectorAll(".collections-list a");
+    // if (!collection_link.length) return false;
+
+    this.eventBinder("click", "body", ".collections-list a", async (e) => {
+      e.preventDefault();
+      let collection = new URL(e.target.href).pathname;
+      document
+        .querySelector(".collections-list a.active")
+        .classList.remove("active");
+      try {
+        await fetch(collection + "?view=ajax")
+          .then((res) => res.text())
+          .then((data) => {
+            document.getElementById("filtered_products").innerHTML = data;
+            e.target.classList.add("active");
+          });
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    });
   }
 
   clo(message) {

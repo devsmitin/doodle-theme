@@ -155,3 +155,16 @@ button,
     height: 100%;
   }
 }
+
+.list-group.collections-list {
+  margin-top: 30px;
+  font-weight: 700;
+  border-radius: 0;
+  @media (max-width: 991px) {
+    margin-top: 12px;
+  }
+  .list-group-item.active {
+    background-color: #92a908;
+    border-color: #92a908;
+  }
+}

@@ -7,7 +7,7 @@ import "./styles.scss";
 // and make bootstrap global
 // window.bootstrap = bootstrap;
 
-import PTtheme from "./common";
+import PTtheme from "./common.js";
 import Cart from "./cart.js";
 import Collection from "./collection.js";
 import Product from "./product.js";
