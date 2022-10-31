@@ -1,6 +1,6 @@
 {
   "current": {
-    "lazy_images": false,
+    "lazy_images": true,
     "social_twitter_link": "#",
     "social_facebook_link": "",
     "social_pinterest_link": "",
@@ -126,9 +126,9 @@
           "search_menu": "",
           "footer_title": "In our opinion, the nordic style is about feeling at home wherever you are.",
           "footer_text": "We hope we can help create the ideal home environment for you. We strived to craft a modern and composed Scandinavian collection that is truly unique.",
-          "email": "store.plantastic@gmail.com",
-          "mobile": "+91 9304352470",
-          "address": "Mumbai, India"
+          "email": "pigeon@xmail.com",
+          "mobile": "+91 999xx xxxxx",
+          "address": "Ahmedabad, India"
         }
       }
     },
