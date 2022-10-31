@@ -1,0 +1,59 @@
+{% comment %} pt-collection-filter {% endcomment %}
+
+{% assign _s = section.settings %}
+
+{% comment %} {% assign f_collection = collections[_s.collection] %} {% endcomment %}
+
+
+<section class="featured-products section-pad">
+  <div class="container">
+    <div class="col-lg-6 p-0">
+      <h2 class="heading">{{ _s.title }}</h2>
+    </div>
+
+    <div class="row section-content-gap">
+      <div class="col-md-3">
+        <div class="list-group collections-list">
+          <a href="#" class="list-group-item list-group-item-action active" aria-current="true">All</a>
+          {% for collection in collections %}
+            <a href="{{ collection.url }}" class="list-group-item list-group-item-action">{{ collection.title }}</a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <div class="row">
+          {% for product in collections.all.products %}
+            <div class="col-md-6 col-lg-4 col-6">
+              {% render 'product-card', product: product %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": "Collection Filter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Shop by"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Filter"
+    }
+  ]
+}
+{% endschema %}
+
