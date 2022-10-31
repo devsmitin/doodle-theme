@@ -5,7 +5,7 @@
 {% comment %} {% assign f_collection = collections[_s.collection] %} {% endcomment %}
 
 
-<section class="featured-products section-pad">
+<section class="featured-products section-pad" id="featured-products-filter">
   <div class="container">
     <div class="col-lg-6 p-0">
       <h2 class="heading">{{ _s.title }}</h2>
@@ -14,7 +14,7 @@
     <div class="row section-content-gap">
       <div class="col-md-3">
         <div class="list-group collections-list">
-          <a href="#" class="list-group-item list-group-item-action active" aria-current="true">All</a>
+          <a href="{{ routes.all_products_collection_url }}" class="list-group-item list-group-item-action active" aria-current="true">All</a>
           {% for collection in collections %}
             <a href="{{ collection.url }}" class="list-group-item list-group-item-action">{{ collection.title }}</a>
           {% endfor %}
@@ -22,7 +22,7 @@
       </div>
 
       <div class="col-md-9">
-        <div class="row">
+        <div class="row" id="filtered_products">
           {% for product in collections.all.products %}
             <div class="col-md-6 col-lg-4 col-6">
               {% render 'product-card', product: product %}
