@@ -63,13 +63,13 @@
           <div class="col-lg-3">
             <div class="footer-logo">
               <a href="{{ routes.root_url }}" aria-label="Home">
-                {% unless _s.footer_logo == blank %}
+                {% unless settings.footer_logo == blank %}
                 {% render 'image-tag', 
-                  image: _s.footer_logo, 
-                  image_alt: _s.footer_logo.alt
+                  image: settings.footer_logo, 
+                  image_alt: settings.footer_logo.alt
                 %}
                 {% else %}
-                <img src="{{ 'plantastic-logo-white-full.svg' | asset_url }}" alt="Plantastic" loading="lazy" height="200" width="200" class="img-fluid" />
+                  <h2>{{ shop.name }}</h2>
                 {% endunless %}
               </a>
             </div>

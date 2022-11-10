@@ -82,13 +82,25 @@
     ]
   },
   {
-    "name": "Favicon",
+    "name": "Logo and favicon",
     "settings": [
       {
         "type": "image_picker",
         "id": "favicon",
         "label": "Favicon image",
         "info": "Will be scaled down to 32 x 32px"
+      },
+      {
+        "type": "image_picker",
+        "id": "header_logo",
+        "label": "Header logo",
+        "info": "Logo will be scaled down to fit height or width"
+      },
+      {
+        "type": "image_picker",
+        "id": "footer_logo",
+        "label": "Footer logo",
+        "info": "Logo will be scaled down to fit height or width"
       }
     ]
   },

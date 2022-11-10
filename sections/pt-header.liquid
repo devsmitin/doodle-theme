@@ -22,17 +22,16 @@
       <div class="col-md-4 col-2">
         <div class="text-center logo">
           <a href="{{ routes.root_url }}" aria-label="Home">
-            {% unless _s.header_logo == blank %}
-            {% render 'image-tag', 
-              image: _s.header_logo, 
-              image_alt: _s.header_logo.alt
-            %}
-            {% else %}
-            <svg width="24" height="36" fill="none" viewBox="0 0 24 36">
-              <path fill="#F7F7F2" d="m.418 26.167 4.801.037c4.357.034 6.61 5.236 3.663 8.457-3.21 2.958-8.393.697-8.426-3.676l-.038-4.818Z" />
-              <path fill="#F7F7F2" fill-rule="evenodd" d="M.507 11.817.418 23.273l11.308-.088c10.348-.08 15.708-12.381 8.722-20.015C12.865-3.821.586 1.503.507 11.817Zm4 .15-.057 7.26 7.167-.055c6.558-.051 9.956-7.847 5.528-12.686-4.806-4.43-12.588-1.056-12.639 5.48Z" clip-rule="evenodd" />
-            </svg>
-            {% endunless %}
+            <h1 class="logo-wrapper">
+              {% unless settings.header_logo == blank %}
+              {% render 'image-tag', 
+                image: settings.header_logo, 
+                image_alt: settings.header_logo.alt
+              %}
+              {% else %}
+                <span>{{ shop.name }}</span>
+              {% endunless %}
+            </h1>
           </a>
         </div>
       </div>
