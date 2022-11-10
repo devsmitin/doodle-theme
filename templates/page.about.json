@@ -17,15 +17,16 @@
         "80fdaf8a-2e56-41bb-a572-995799e1286f": {
           "type": "product",
           "settings": {
-            "title": "Doge glass vase",
-            "description": "starting price ₹2499"
+            "title": "Minimal Mondo",
+            "description": "Coming soon"
           }
         },
         "32eabff8-08f7-42c9-b616-a8ada7bb191e": {
           "type": "product",
+          "disabled": true,
           "settings": {
             "title": "Basic planter",
-            "description": "starting price ₹1499"
+            "description": "Coming soon"
           }
         }
       },
@@ -34,7 +35,7 @@
         "32eabff8-08f7-42c9-b616-a8ada7bb191e"
       ],
       "settings": {
-        "showcase_image": "shopify:\/\/shop_images\/home-bg.jpg"
+        "showcase_image": "shopify:\/\/shop_images\/white-faced-watch.jpg"
       }
     }
   },
