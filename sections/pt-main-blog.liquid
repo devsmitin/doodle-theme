@@ -1,4 +1,4 @@
-{% comment %} pt-blog-header {% endcomment %}
+{% comment %} pt-main-blog {% endcomment %}
 
 {% assign _s = section.settings %}
 
@@ -18,7 +18,7 @@
             <a href="{{ article.url }}" class="blog-listing-single">
               <div class="blog-listing-thumb cover-image">
                 {% render 'image-tag', 
-                  image: article, 
+                  image: article.image, 
                   image_alt: article.title, 
                 %}
               </div>

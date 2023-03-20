@@ -46,9 +46,11 @@
       </button>
     </div>
 
-    <div class="product-rating rating-tag">
-      4.5 {% render 'icon', icon: "star" %}
-    </div>
+    {% if product.metafields.reviews.rating.value.rating %}
+      <div class="product-rating rating-tag">
+        {{ product.metafields.reviews.rating.value.rating }} {% render 'icon', icon: "star" %}
+      </div>
+    {% endif %}
   </div>
 
   <div class="product-listing-desc">

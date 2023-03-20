@@ -193,7 +193,7 @@
   
                         <div class="single-review">
                           <div class="rating-tag">
-                            4.5 {% render 'icon', icon: "star" %}
+                            {{ product.metafields.reviews.rating.value.rating }} {% render 'icon', icon: "star" %}
                           </div>
                           <p>
                             Developed the concept of exclusivity, a Sol’ace features
