@@ -70,6 +70,7 @@
           <div class="nav-block">
             {%- for link in _s.menu.links -%}
               <div class="single-nav-block">
+                {% comment %} 
                 <h2>
                   {%- unless link.url == blank or link.url == "#" -%}
                   <a href="{{ link.url }}" aria-label="{{- link.title -}}">{{- link.title -}}</a>
@@ -77,6 +78,12 @@
                   {{- link.title -}}
                   {%- endunless -%}
                 </h2>
+                {% endcomment %}
+
+                <button type="button" class="button-unstyled">
+                  {{- link.title -}}
+                </button>
+
                 <div class="nav-links">
                 {%- for childlink in link.links -%}
                   <a href="{{ childlink.url }}" class=""{% if childlink.current %} aria-current="page"{% endif %} aria-label="{{- childlink.title | escape -}}">
