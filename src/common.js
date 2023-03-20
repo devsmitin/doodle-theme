@@ -134,6 +134,28 @@ class PTtheme {
         .classList.remove("filters-active");
     });
 
+    this.eventBinder(
+      "click",
+      "body",
+      ".single-nav-block > button",
+      function (e) {
+        if (window.innerWidth < 1200) {
+          let btn = e.target;
+          let btn_parent = btn.parentElement;
+
+          document
+            .querySelectorAll(".nav-block .single-nav-block")
+            .forEach((elm) => {
+              if (elm !== btn_parent) elm.classList.remove("open");
+            });
+
+          btn_parent.classList.contains("open")
+            ? btn_parent.classList.remove("open")
+            : btn_parent.classList.add("open");
+        }
+      }
+    );
+
     // for closing all openables trigger
     document.onkeydown = function (evt) {
       evt = evt || window.event;

@@ -16,7 +16,7 @@
     "dev": "webpack --mode=development",
     "build": "webpack --mode=production",
     "download": "shopify theme pull",
-    "start": "webpack --mode=development & shopify theme serve",
+    "start": "webpack --mode=development & shopify theme dev",
     "publish": "webpack --mode=production && shopify theme push"
   },
   "dependencies": {
