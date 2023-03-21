@@ -46,6 +46,16 @@
       </svg>
     </div>
   </div>
+  
+  <style>
+    {% unless _s.text_color == blank or _s.text_color == 'rgba(0,0,0,0)' %}
+      .home-hero-main .single-home-slide .home-slide-content .home-slide-title { color: {{ _s.text_color }} }
+    {% endunless %}
+    {% unless _s.link_color == blank or _s.link_color == 'rgba(0,0,0,0)' %}
+    .home-hero-main .single-home-slide .home-slide-content .line-button .link-text:after, 
+    .home-hero-main .single-home-slide .home-slide-content .line-button .link-text:before { color: {{ _s.link_color }}; }
+    {% endunless %}
+  </style>
 </section>
 
 
@@ -60,6 +70,12 @@
       "default": "Title"
     },
     {
+      "type": "color",
+      "id": "text_color",
+      "label": "Title color",
+      "info": "Change this to match title color with background"
+    },
+    {
       "type": "text",
       "id": "link_text",
       "label": "Link title",
@@ -69,6 +85,12 @@
       "type": "url",
       "id": "link_url",
       "label": "Link url"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "info": "Change this to match link color with background"
     },
     {
       "type": "text",
