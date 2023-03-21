@@ -65,9 +65,9 @@ class PTtheme {
           text,
         })
         .then(() => console.log("Successful share"))
-        .catch((error) => console.log("Error sharing", error));
+        .catch((error) => console.error("Error sharing", error));
     } else {
-      console.log("Share not supported on this browser, do it the old way.");
+      console.log("Share not supported/enabled on this browser, do it the old way.");
     }
   }
 
