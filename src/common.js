@@ -55,25 +55,52 @@ class PTtheme {
     });
   }
 
-  sharer(url, title = "", text = "") {
+  sharer(url, title = "", text = "", target) {
     if (navigator.share) {
-      console.log("first");
       navigator
         .share({
           url,
           title,
           text,
         })
-        .then(() => console.log("Successful share"))
-        .catch((error) => console.error("Error sharing", error));
+        .then(() => Theme.log("Successful share"))
+        .catch((error) => Theme.log("Error::", "Error in sharing", error));
     } else {
-      console.log("Share not supported/enabled on this browser, do it the old way.");
+      Theme.log(
+        "Share not supported/enabled on this browser, trying it the old way."
+      );
+      return false
+      if (!target) {
+        Theme.log("Error::", "Oops! no target provided... Aborting.");
+      }
+
+      let shareContent = `<span>${url}</span><button>Copy</button><button>Close</button>`;
+      let shareElm = document.createElement("div");
+      shareElm.className = "share-applet";
+      shareElm.innerHTML = shareContent;
+      this.insertAfter(shareElm, target);
+
+      // this.mainDetailsToggle.addEventListener(
+      //   "toggle",
+      //   this.toggleDetails.bind(this)
+      // );
+      // this.mainDetailsToggle
+      //   .querySelector(".share-button__copy")
+      //   .addEventListener("click", this.copyToClipboard.bind(this));
+      // this.mainDetailsToggle
+      //   .querySelector(".share-button__close")
+      //   .addEventListener("click", this.close.bind(this));
     }
   }
 
   clickEvents() {
     this.eventBinder("click", "body", ".share_button", (e) => {
-      this.sharer(e.target.dataset.productlink, e.target.dataset.product);
+      this.sharer(
+        e.target.dataset.productlink,
+        e.target.dataset.product,
+        "",
+        e.target.parentElement
+      );
     });
 
     // for navbar trigger
@@ -113,7 +140,7 @@ class PTtheme {
         );
         button.click();
       } else {
-        console.warn("Wishlist element not found!");
+        Theme.log("Warn::", "Wishlist element not found!");
       }
     });
 
@@ -209,6 +236,10 @@ class PTtheme {
   }
 
   // global APIs
+  insertAfter(newNode, existingNode) {
+    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+  }
+
   eventBinder(
     event_type,
     ancestor_element,
@@ -252,17 +283,16 @@ class PTtheme {
         alert(response.message);
       }
     } catch (error) {
-      console.log("Error:", error);
+      Theme.log("Error:", error);
     }
   }
 
   async updateCartContent() {
     try {
       const response = await fetch(Shopify.routes.root + "cart?view=ajax");
-      j;
       return await response.text();
     } catch (error) {
-      console.log("Error:", error);
+      Theme.log("Error:", error);
     }
   }
 
@@ -339,13 +369,20 @@ class PTtheme {
             e.target.classList.add("active");
           });
       } catch (error) {
-        console.log("Error:", error);
+        Theme.log("Error:", error);
       }
     });
   }
 
-  clo(message) {
-    console.log(message);
+  log(str, ...x) {
+    const logStyle =
+      "color: #92a908; font-size: 14px; font-style: italic; font-weight: 900";
+    // return false;
+    if (typeof str === "object") {
+      console.log(str, ...x);
+    } else {
+      console.log("%c" + str, logStyle, ...x);
+    }
   }
 }
 

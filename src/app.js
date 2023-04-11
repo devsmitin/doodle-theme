@@ -13,9 +13,10 @@ import Collection from "./collection.js";
 import Product from "./product.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("document is ready. Events will work now.");
   window.Theme = new PTtheme();
   window.Cart = new Cart();
+  
+  Theme.log("document is ready. Events will work now.");
 
   if (document.body.classList.contains("template-collection")) {
     new Collection();
